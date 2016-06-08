@@ -30,17 +30,9 @@ static const int cfq_back_penalty = 2;
 static const u64 cfq_slice_sync = NSEC_PER_SEC / 10;
 static u64 cfq_slice_async = NSEC_PER_SEC / 25;
 static const int cfq_slice_async_rq = 2;
-<<<<<<< HEAD
-/* Explicitly set cfq_slice_idle to 0 */
-static int cfq_slice_idle = 0;
-/* static int cfq_slice_idle = HZ / 125; */
-static int cfq_group_idle = HZ / 125;
-static const int cfq_target_latency = HZ * 3/10; /* 300 ms */
-=======
 static u64 cfq_slice_idle = NSEC_PER_SEC / 125;
 static u64 cfq_group_idle = NSEC_PER_SEC / 125;
 static const u64 cfq_target_latency = (u64)NSEC_PER_SEC * 3/10; /* 300 ms */
->>>>>>> e7d5b3f78a27... cfq-iosched: Convert from jiffies to nanoseconds
 static const int cfq_hist_divisor = 4;
 static int cfq_max_async_dispatch = 4;
 static int cfq_throttle_async = 1;
@@ -48,18 +40,7 @@ static int cfq_throttle_async = 1;
 /*
  * offset from end of queue service tree for idle class
  */
-<<<<<<< HEAD
-// added CFQ_IDLE_DELAY
-#define CFQ_IDLE_DELAY		(HZ / 5)
 #define CFQ_IDLE_DELAY		(NSEC_PER_SEC / 5)
-/* offset from end of group service tree under time slice mode */
-#define CFQ_SLICE_MODE_GROUP_DELAY (NSEC_PER_SEC / 5)
-/* offset from end of group service under IOPS mode */
-#define CFQ_IOPS_MODE_GROUP_DELAY (HZ / 5)
-// end
-=======
-#define CFQ_IDLE_DELAY		(NSEC_PER_SEC / 5)
->>>>>>> e7d5b3f78a27... cfq-iosched: Convert from jiffies to nanoseconds
 
 /*
  * below this threshold, we consider thinktime immediate
@@ -392,13 +373,6 @@ struct cfq_data {
 	unsigned int cfq_back_penalty;
 	unsigned int cfq_back_max;
 	unsigned int cfq_slice_async_rq;
-<<<<<<< HEAD
-	unsigned int cfq_slice_idle;
-	unsigned int cfq_max_async_dispatch;
-	unsigned int cfq_throttle_async;
-	unsigned int cfq_group_idle;
-=======
->>>>>>> e7d5b3f78a27... cfq-iosched: Convert from jiffies to nanoseconds
 	unsigned int cfq_latency;
 	u64 cfq_fifo_expire[2];
 	u64 cfq_slice[2];
@@ -4609,6 +4583,21 @@ SHOW_FUNCTION(cfq_low_latency_show, cfqd->cfq_latency, 0);
 SHOW_FUNCTION(cfq_target_latency_show, cfqd->cfq_target_latency, 1);
 #undef SHOW_FUNCTION
 
+#define USEC_SHOW_FUNCTION(__FUNC, __VAR)				\
+static ssize_t __FUNC(struct elevator_queue *e, char *page)		\
+{									\
+	struct cfq_data *cfqd = e->elevator_data;			\
+	u64 __data = __VAR;						\
+	__data = div_u64(__data, NSEC_PER_USEC);			\
+	return cfq_var_show(__data, (page));				\
+}
+USEC_SHOW_FUNCTION(cfq_slice_idle_us_show, cfqd->cfq_slice_idle);
+USEC_SHOW_FUNCTION(cfq_group_idle_us_show, cfqd->cfq_group_idle);
+USEC_SHOW_FUNCTION(cfq_slice_sync_us_show, cfqd->cfq_slice[1]);
+USEC_SHOW_FUNCTION(cfq_slice_async_us_show, cfqd->cfq_slice[0]);
+USEC_SHOW_FUNCTION(cfq_target_latency_us_show, cfqd->cfq_target_latency);
+#undef USEC_SHOW_FUNCTION
+
 #define STORE_FUNCTION(__FUNC, __PTR, MIN, MAX, __CONV)			\
 static ssize_t __FUNC(struct elevator_queue *e, const char *page, size_t count)	\
 {									\
@@ -4645,6 +4634,26 @@ STORE_FUNCTION(cfq_low_latency_store, &cfqd->cfq_latency, 0, 1, 0);
 STORE_FUNCTION(cfq_target_latency_store, &cfqd->cfq_target_latency, 1, UINT_MAX, 1);
 #undef STORE_FUNCTION
 
+#define USEC_STORE_FUNCTION(__FUNC, __PTR, MIN, MAX)			\
+static ssize_t __FUNC(struct elevator_queue *e, const char *page, size_t count)	\
+{									\
+	struct cfq_data *cfqd = e->elevator_data;			\
+	unsigned int __data;						\
+	int ret = cfq_var_store(&__data, (page), count);		\
+	if (__data < (MIN))						\
+		__data = (MIN);						\
+	else if (__data > (MAX))					\
+		__data = (MAX);						\
+	*(__PTR) = (u64)__data * NSEC_PER_USEC;				\
+	return ret;							\
+}
+USEC_STORE_FUNCTION(cfq_slice_idle_us_store, &cfqd->cfq_slice_idle, 0, UINT_MAX);
+USEC_STORE_FUNCTION(cfq_group_idle_us_store, &cfqd->cfq_group_idle, 0, UINT_MAX);
+USEC_STORE_FUNCTION(cfq_slice_sync_us_store, &cfqd->cfq_slice[1], 1, UINT_MAX);
+USEC_STORE_FUNCTION(cfq_slice_async_us_store, &cfqd->cfq_slice[0], 1, UINT_MAX);
+USEC_STORE_FUNCTION(cfq_target_latency_us_store, &cfqd->cfq_target_latency, 1, UINT_MAX);
+#undef USEC_STORE_FUNCTION
+
 #define CFQ_ATTR(name) \
 	__ATTR(name, S_IRUGO|S_IWUSR, cfq_##name##_show, cfq_##name##_store)
 
@@ -4655,14 +4664,17 @@ static struct elv_fs_entry cfq_attrs[] = {
 	CFQ_ATTR(back_seek_max),
 	CFQ_ATTR(back_seek_penalty),
 	CFQ_ATTR(slice_sync),
+	CFQ_ATTR(slice_sync_us),
 	CFQ_ATTR(slice_async),
+	CFQ_ATTR(slice_async_us),
 	CFQ_ATTR(slice_async_rq),
 	CFQ_ATTR(slice_idle),
-	CFQ_ATTR(max_async_dispatch),
-	CFQ_ATTR(throttle_async),
+	CFQ_ATTR(slice_idle_us),
 	CFQ_ATTR(group_idle),
+	CFQ_ATTR(group_idle_us),
 	CFQ_ATTR(low_latency),
 	CFQ_ATTR(target_latency),
+	CFQ_ATTR(target_latency_us),
 	__ATTR_NULL
 };
 
