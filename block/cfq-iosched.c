@@ -40,9 +40,16 @@ static int cfq_max_async_dispatch = 4;
 static int cfq_throttle_async = 1;
 
 /*
- * offset from end of service tree
+ * offset from end of queue service tree for idle class
  */
+// added CFQ_IDLE_DELAY
 #define CFQ_IDLE_DELAY		(HZ / 5)
+#define CFQ_IDLE_DELAY		(NSEC_PER_SEC / 5)
+/* offset from end of group service tree under time slice mode */
+#define CFQ_SLICE_MODE_GROUP_DELAY (NSEC_PER_SEC / 5)
+/* offset from end of group service under IOPS mode */
+#define CFQ_IOPS_MODE_GROUP_DELAY (HZ / 5)
+// end
 
 /*
  * below this threshold, we consider thinktime immediate
@@ -1351,7 +1358,15 @@ cfq_group_service_tree_add(struct cfq_rb_root *st, struct cfq_group *cfqg)
 
 	cfqg->vfraction = max_t(unsigned, vfr, 1);
 }
-
+// added CFQ_IDLE_DELAY
+static inline u64 cfq_get_cfqg_vdisktime_delay(struct cfq_data *cfqd)
+{
+	if (!iops_mode(cfqd))
+		return CFQ_SLICE_MODE_GROUP_DELAY;
+	else
+		return CFQ_IOPS_MODE_GROUP_DELAY;
+}
+// end
 static void
 cfq_group_notify_queue_add(struct cfq_data *cfqd, struct cfq_group *cfqg)
 {
@@ -1371,7 +1386,9 @@ cfq_group_notify_queue_add(struct cfq_data *cfqd, struct cfq_group *cfqg)
 	n = rb_last(&st->rb);
 	if (n) {
 		__cfqg = rb_entry_cfqg(n);
-		cfqg->vdisktime = __cfqg->vdisktime + CFQ_IDLE_DELAY;
+/* was		cfqg->vdisktime = __cfqg->vdisktime + CFQ_IDLE_DELAY; */
+		cfqg->vdisktime = __cfqg->vdisktime +		// added CFQ_IDLE_DELAY
+			cfq_get_cfqg_vdisktime_delay(cfqd);	// added CFQ_IDLE_DELAY
 	} else
 		cfqg->vdisktime = st->min_vdisktime;
 	cfq_group_service_tree_add(st, cfqg);
