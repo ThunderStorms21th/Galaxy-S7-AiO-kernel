@@ -719,3 +719,11 @@ config RBIN
 	  __GFP_RBIN can be allocated in the RBIN memory. (In this way,
 	  we can differentiate the pages going to CMA and RBIN.) Currently,
 	  there is only one user of RBIN memory, ION RBIN heap.
+
+config VM_MAX_READAHEAD
+	int "default max readahead window size"
+	default 128
+	help
+	 This sets the VM_MAX_READAHEAD value to allow the readahead window
+	 to grow to a maximum size of configured. This will benefit sequential
+	 read throughput and thus early boot performance.
