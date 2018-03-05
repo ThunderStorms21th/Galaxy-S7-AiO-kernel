@@ -1906,7 +1906,7 @@ static int android_bind(struct usb_composite_dev *cdev)
 
 	/* Default strings - should be updated by userspace */
 	strncpy(manufacturer_string, "Android", sizeof(manufacturer_string)-1);
-	strncpy(product_string, "Android", sizeof(product_string) - 1);
+	strncpy(product_string, "Samsung", sizeof(product_string) - 1);
 	snprintf(serial_string, CHIPID_SIZE + 1, "%016lx", (long)exynos_soc_info.unique_id);
 
 	id = usb_string_id(cdev);
