@@ -657,8 +657,6 @@ KBUILD_CFLAGS   += -Ofast -ffast-math -funsafe-math-optimizations
 KBUILD_CFLAGS   += -mtune=exynos-m1.cortex-a53 -mcpu=exynos-m1.cortex-a53
 endif
 
-endif
-
 # Tell gcc to never replace conditional load with a non-conditional one
 KBUILD_CFLAGS	+= $(call cc-option,--param=allow-store-data-races=0)
 ifdef CONFIG_READABLE_ASM

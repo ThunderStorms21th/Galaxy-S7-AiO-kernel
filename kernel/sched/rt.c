@@ -1436,6 +1436,33 @@ static struct task_struct *_pick_next_task_rt(struct rq *rq)
 
 	return p;
 }
+	int best_cpu = -1, cpu, cpu_prio, max_prio = -1, prefer_cpu;
+	u64 cpu_load = ULLONG_MAX, min_load = ULLONG_MAX;
+	struct cpumask candidate_cpus;
+
+	cpumask_and(&candidate_cpus, &task->cpus_allowed, cpu_active_mask);
+	prefer_cpu = frt_find_prefer_cpu(task);
+
+	while (!cpumask_empty(&candidate_cpus)) {
+		const struct cpumask* grp_mask = cpu_coregroup_mask(prefer_cpu);
+
+		for_each_cpu(cpu, grp_mask) {
+			cpumask_clear_cpu(cpu, &candidate_cpus);
+
+			if (!idle_cpu(cpu))
+				continue;
+			cpu_prio = cpu_rq(cpu)->rt.highest_prio.curr;
+			if (cpu_prio < max_prio)
+				continue;
+
+			cpu_load = frt_cpu_util_wake(cpu, task) + task_util(task);
+			if ((cpu_prio > max_prio) || (cpu_load < min_load) ||
+					(cpu_load == min_load && task_cpu(task) == cpu)) {
+				min_load = cpu_load;
+				max_prio = cpu_prio;
+				best_cpu = cpu;
+			}
+		}
 
 static struct task_struct *
 pick_next_task_rt(struct rq *rq, struct task_struct *prev)
@@ -1453,6 +1480,26 @@ pick_next_task_rt(struct rq *rq, struct task_struct *prev)
 		if (unlikely((rq->stop && task_on_rq_queued(rq->stop)) ||
 			     rq->dl.dl_nr_running))
 			return RETRY_TASK;
+		prefer_cpu = cpumask_first(grp_mask);
+		prefer_cpu += cpumask_weight(grp_mask);
+		if (prefer_cpu >= NR_CPUS)
+			prefer_cpu = 0;
+	}
+
+	return best_cpu;
+}
+
+static int find_recessive_cpu(struct task_struct *task)
+{
+	int best_cpu = -1, cpu, prefer_cpu;
+	struct cpumask *lowest_mask;
+	u64 cpu_load = ULLONG_MAX, min_load = ULLONG_MAX;
+	struct cpumask candidate_cpus;
+	lowest_mask = this_cpu_cpumask_var_ptr(local_cpu_mask);
+	/* Make sure the mask is initialized first */
+	if (unlikely(!lowest_mask)) {
+		trace_sched_fluid_stat(task, &task->rt.avg, best_cpu, "NA LOWESTMSK");
+		return best_cpu;
 	}
 
 	/*
@@ -1473,6 +1520,39 @@ pick_next_task_rt(struct rq *rq, struct task_struct *prev)
 	dequeue_pushable_task(rq, p);
 
 	set_post_schedule(rq);
+	cpumask_and(&candidate_cpus, &task->cpus_allowed, lowest_mask);
+	prefer_cpu = frt_find_prefer_cpu(task);
+
+	while (!cpumask_empty(&candidate_cpus)) {
+		const struct cpumask* grp_mask = cpu_coregroup_mask(prefer_cpu);
+
+		for_each_cpu(cpu, grp_mask) {
+			cpumask_clear_cpu(cpu, &candidate_cpus);
+			cpu_load = frt_cpu_util_wake(cpu, task) + task_util(task);
+
+			if (cpu_load < min_load ||
+				(cpu_load == min_load && cpu == prefer_cpu)) {
+				min_load = cpu_load;
+				best_cpu = cpu;
+			}
+		}
+
+		if (cpu_selected(best_cpu) &&
+			((capacity_orig_of(best_cpu) >= min_load) || (best_cpu == prefer_cpu))) {
+			trace_sched_fluid_stat(task, &task->rt.avg, best_cpu,
+				rt_task(cpu_rq(best_cpu)->curr) ? "RT-RECESS" : "FAIR-RECESS");
+			return best_cpu;
+		}
+
+		/*
+		 * If heavy util rt task, search higher performance sched group.
+		 * In the opposite case, search lower performance sched group
+		 */
+		prefer_cpu = cpumask_first(grp_mask);
+		prefer_cpu += cpumask_weight(grp_mask);
+		if (prefer_cpu >= NR_CPUS)
+			prefer_cpu = 0;
+	}
 
 	return p;
 }
