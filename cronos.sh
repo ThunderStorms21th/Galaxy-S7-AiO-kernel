@@ -35,7 +35,7 @@ CR_KERNEL=$CR_DIR/arch/arm64/boot/Image
 CR_DTB=$CR_DIR/boot.img-dtb
 # Kernel Name and Version
 CR_VERSION=V1.0
-CR_NAME=HeliosKernel
+CR_NAME=HeliosTreble
 # Thread count
 CR_JOBS=$((`nproc`-1))
 # Target Android version
@@ -137,8 +137,8 @@ PACK_BOOT_IMG()
 	# Remove red warning at boot
 	echo -n "SEANDROIDENFORCE" » $CR_AIK/image-new.img
 	# Move boot.img to out dir
-	mv $CR_AIK/image-new.img $CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT.img
-	du -k "$CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT.img" | cut -f1 >sizkT
+	mv $CR_AIK/image-new.img $CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT-Treble.img
+	du -k "$CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT-Treble.img" | cut -f1 >sizkT
 	sizkT=$(head -n 1 sizkT)
 	rm -rf sizkT
 	echo " "
@@ -160,7 +160,11 @@ PACK_BOOT_IMG_TREBLE()
 	# Remove red warning at boot
 	echo -n "SEANDROIDENFORCE" » $CR_AIK/image-new.img
 	# Move boot.img to out dir
-	mv $CR_AIK/image-new.img $CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT.img
+	mv $CR_AIK/image-new.img $CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT-Treble.img
+	du -k "$CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT-Treble.img" | cut -f1 >sizkT
+	sizkT=$(head -n 1 sizkT)
+	rm -rf sizkT
+	echo " "
 	$CR_AIK/cleanup.sh
 }
 # Main Menu
@@ -181,14 +185,14 @@ do
             CR_DTSFILES=$CR_DTSFILES_G930
             BUILD_ZIMAGE
             BUILD_DTB
-            PACK_BOOT_IMG
+            PACK_BOOT_IMG_TREBLE
             echo " "
             echo "----------------------------------------------"
             echo "$CR_VARIANT kernel build finished."
             echo "Compiled DTB Size = $sizdT Kb"
             echo "Kernel Image Size = $sizT Kb"
             echo "Boot Image   Size = $sizkT Kb"
-            echo "$CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT.img Ready"                         
+            echo "$CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT-Treble.img Ready"                         
             echo "Press Any key to end the script"
             echo "----------------------------------------------"
             read -n1 -r key
@@ -202,14 +206,14 @@ do
             CR_DTSFILES=$CR_DTSFILES_G935
             BUILD_ZIMAGE
             BUILD_DTB
-            PACK_BOOT_IMG
+            PACK_BOOT_IMG_TREBLE
             echo " "
             echo "----------------------------------------------"
             echo "$CR_VARIANT kernel build finished."
             echo "Compiled DTB Size = $sizdT Kb"
             echo "Kernel Image Size = $sizT Kb"
             echo "Boot Image   Size = $sizkT Kb"
-            echo "$CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT.img Ready"                         
+            echo "$CR_OUT/$CR_NAME-$CR_VERSION-$CR_DATE-$CR_VARIANT-Treble.img Ready"                         
             echo "Press Any key to end the script"
             echo "----------------------------------------------"
             read -n1 -r key
