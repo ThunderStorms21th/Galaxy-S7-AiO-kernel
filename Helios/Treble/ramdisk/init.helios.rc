@@ -12,6 +12,8 @@ on early-init
 on boot
 
 on property:sys.boot_completed=1
+	# Force cinema mode
+    write /sys/class/mdnie/mdnie/mode 4
 
 on fs
 
