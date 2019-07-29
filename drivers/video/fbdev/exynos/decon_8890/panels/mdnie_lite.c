@@ -541,7 +541,14 @@ static ssize_t sensorRGB_store(struct device *dev,
 	if (ret < 0)
 		return ret;
 
-	if (mdnie->enable) {
+	if (mdnie->enable
+		&& mdnie->accessibility == ACCESSIBILITY_OFF
+		&& mdnie->mode == AUTO
+		&& mdnie->hdr == HDR_OFF
+		&& mdnie->hmt_mode == HMT_MDNIE_OFF
+		&& mdnie->night_mode == NIGHT_MODE_OFF
+		&& mdnie->hbm == HBM_OFF
+		&& (mdnie->scenario == BROWSER_MODE || mdnie->scenario == EBOOK_MODE)) {
 		dev_info(dev, "%s: %d, %d, %d\n", __func__, white_r, white_g, white_b);
 
 		table = mdnie_find_table(mdnie);
