@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 # ThundeRStormS "Galaxy S7 (SM-G930F/FD) Treble kernel from Pie and Oreo source"
 =======
 # ThundeRStormS "Galaxy S7 (SM-G930F/FD) Treble kernel from Pie (NFE) and Oreo (S7) source"
->>>>>>> 08dea868634a29a81503a8429507ac3784a49229
 
 # Kernel for Samsung Galaxy S7
 Helping you compile kernels
