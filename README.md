@@ -1,40 +1,47 @@
-        Linux kernel release 3.x <http://kernel.org/>
+# ThundeRStormS "Galaxy S7 (SM-G930F/FD) Pie kernel"
 
-These are the release notes for Linux version 3.  Read them carefully,
-as they tell you what this is all about, explain how to install the
-kernel, and what to do if something goes wrong. 
+# Kernel for Samsung Galaxy S7
+Helping you compile kernels
 
-WHAT IS LINUX?
+Kernel Project by Team ThunderStorms
+
+# Credits & Thanksgiving :
+
+- The Linux Kernel Archive for the Linux Patches <https://www.kernel.org/>
+- Samsung Open Source Release Center for the Source code <http://opensource.samsung.com/>
+- @ananjaser1211 for a Treble kernel source
+- @Arianoxx for a PIE kernel source
+- @morogoku, @Tkkg1994, @Noxxxious, @farovitus, and @mwilky for help, codes and commits
+- Project: Exynos-Linux-Stable for updated ELS Linux source codes <https://github.com/exynos-linux-stable>
+- @osm0sis for Android Image Kitchen and anykernel2 <https://forum.xda-developers.com/showthread.php?t=2073775>
+
+# WHAT IS LINUX:
 
   Linux is a clone of the operating system Unix, written from scratch by
   Linus Torvalds with assistance from a loosely-knit team of hackers across
   the Net. It aims towards POSIX and Single UNIX Specification compliance.
 
   It has all the features you would expect in a modern fully-fledged Unix,
-  including true multitasking, virtual memory, shared libraries, demand
-  loading, shared copy-on-write executables, proper memory management,
-  and multistack networking including IPv4 and IPv6.
+  and becomes the base of your Smart Phone or Tablet's OS
 
   It is distributed under the GNU General Public License - see the
   accompanying COPYING file for more details. 
 
-ON WHAT HARDWARE DOES IT RUN?
+# WHAT IS LINUX KERNEL:
+
+Best Overview can be found interviewing the chef who cooked the dish!
+Linux kernel release notes are linked for refernce <http://kernel.org/>
+
+# WHAT HARDWARE SUPPORTS LINUX:
 
   Although originally developed first for 32-bit x86-based PCs (386 or higher),
-  today Linux also runs on (at least) the Compaq Alpha AXP, Sun SPARC and
-  UltraSPARC, Motorola 68000, PowerPC, PowerPC64, ARM, Hitachi SuperH, Cell,
-  IBM S/390, MIPS, HP PA-RISC, Intel IA-64, DEC VAX, AMD x86-64, AXIS CRIS,
-  Xtensa, Tilera TILE, AVR32 and Renesas M32R architectures.
+  today Linux also runs on devices with very least of hardware
 
   Linux is easily portable to most general-purpose 32- or 64-bit architectures
   as long as they have a paged memory management unit (PMMU) and a port of the
-  GNU C compiler (gcc) (part of The GNU Compiler Collection, GCC). Linux has
-  also been ported to a number of architectures without a PMMU, although
-  functionality is then obviously somewhat limited.
-  Linux has also been ported to itself. You can now run the kernel as a
-  userspace application - this is called UserMode Linux (UML).
+  GNU C compiler (gcc) (part of The GNU Compiler Collection, GCC)
 
-DOCUMENTATION:
+# DOCUMENTATION:
 
  - There is a lot of documentation available both in electronic form on
    the Internet and in books, both Linux-specific and pertaining to
@@ -56,7 +63,7 @@ DOCUMENTATION:
    After installation, "make psdocs", "make pdfdocs", "make htmldocs",
    or "make mandocs" will render the documentation in the requested format.
 
-INSTALLING the kernel source:
+# INSTALLING SOURCES:
 
  - If you install the full sources, put the kernel tarball in a
    directory where you have permissions (eg. your home directory) and
@@ -118,18 +125,16 @@ INSTALLING the kernel source:
 
    You should now have the sources correctly installed.
 
-SOFTWARE REQUIREMENTS
+# SOFT REQUIREMENTS:
 
    Compiling and running the 3.x kernels requires up-to-date
-   versions of various software packages.  Consult
-   Documentation/Changes for the minimum version numbers required
-   and how to get updates for these packages.  Beware that using
+   versions of various software packages.Beware that using
    excessively old versions of these packages can cause indirect
    errors that are very difficult to track down, so don't assume that
    you can just update packages when obvious problems arise during
    build or operation.
 
-BUILD directory for the kernel:
+# SET UP LOCALS:
 
    When compiling the kernel, all output files will per default be
    stored together with the kernel source code.
@@ -150,7 +155,7 @@ BUILD directory for the kernel:
    Please note: If the 'O=output/dir' option is used, then it must be
    used for all invocations of make.
 
-CONFIGURING the kernel:
+# CONFIGURING THE KERNEL:
 
    Do not skip this step even if you are only upgrading one minor
    version.  New configuration options are added in each release, and
@@ -159,58 +164,50 @@ CONFIGURING the kernel:
    new version with minimal work, use "make oldconfig", which will
    only ask you for the answers to new questions.
 
- - Alternative configuration commands are:
+ # CONFIGURATION COMMANDS:
 
-     "make config"      Plain text interface.
+     make config :     Plain text interface.
 
-     "make menuconfig"  Text based color menus, radiolists & dialogs.
+     make menuconfig :  Text based color menus, radiolists & dialogs.
 
-     "make nconfig"     Enhanced text based color menus.
+     make nconfig :     Enhanced text based color menus.
 
-     "make xconfig"     X windows (Qt) based configuration tool.
+     make xconfig :     X windows (Qt) based configuration tool.
 
-     "make gconfig"     X windows (Gtk) based configuration tool.
+     make gconfig :     X windows (Gtk) based configuration tool.
 
-     "make oldconfig"   Default all questions based on the contents of
+     make oldconfig :   Default all questions based on the contents of
                         your existing ./.config file and asking about
                         new config symbols.
 
-     "make silentoldconfig"
-                        Like above, but avoids cluttering the screen
-                        with questions already answered.
-                        Additionally updates the dependencies.
+     make silentoldconfig : Like above, but avoids cluttering the screen
+                            with questions already answered. Additionally updates the dependencies.
 
-     "make olddefconfig"
-                        Like above, but sets new symbols to their default
-                        values without prompting.
+     make olddefconfig : Like above, but sets new symbols to their default
+                         values without prompting.
 
-     "make defconfig"   Create a ./.config file by using the default
+     make defconfig :   Create a ./.config file by using the default
                         symbol values from either arch/$ARCH/defconfig
                         or arch/$ARCH/configs/${PLATFORM}_defconfig,
                         depending on the architecture.
 
-     "make ${PLATFORM}_defconfig"
-                        Create a ./.config file by using the default
-                        symbol values from
-                        arch/$ARCH/configs/${PLATFORM}_defconfig.
-                        Use "make help" to get a list of all available
-                        platforms of your architecture.
+     make ${PLATFORM}_defconfig : Create a ./.config file by using the default
+                        symbol values from arch/$ARCH/configs/${PLATFORM}_defconfig.
+                        symbol values from Use "make help" to get a list of all available platforms of your architecture.
 
-     "make allyesconfig"
-                        Create a ./.config file by setting symbol
-                        values to 'y' as much as possible.
+     make allyesconfig : Create a ./.config file by setting symbol
+                         values to 'y' as much as possible.
 
-     "make allmodconfig"
-                        Create a ./.config file by setting symbol
-                        values to 'm' as much as possible.
+     make allmodconfig : Create a ./.config file by setting symbol
+                         values to 'm' as much as possible.
 
-     "make allnoconfig" Create a ./.config file by setting symbol
+     make allnoconfig : Create a ./.config file by setting symbol
                         values to 'n' as much as possible.
 
-     "make randconfig"  Create a ./.config file by setting symbol
+     make randconfig :  Create a ./.config file by setting symbol
                         values to random values.
 
-     "make localmodconfig" Create a config based on current config and
+     make localmodconfig : Create a config based on current config and
                            loaded modules (lsmod). Disables any module
                            option that is not needed for the loaded modules.
 
@@ -218,20 +215,20 @@ CONFIGURING the kernel:
                            store the lsmod of that machine into a file
                            and pass it in as a LSMOD parameter.
 
-                   target$ lsmod > /tmp/mylsmod
-                   target$ scp /tmp/mylsmod host:/tmp
+                           target$ lsmod > /tmp/mylsmod
+                           target$ scp /tmp/mylsmod host:/tmp
 
-                   host$ make LSMOD=/tmp/mylsmod localmodconfig
+                           host$ make LSMOD=/tmp/mylsmod localmodconfig
 
                            The above also works when cross compiling.
 
-     "make localyesconfig" Similar to localmodconfig, except it will convert
+     make localyesconfig : Similar to localmodconfig, except it will convert
                            all module options to built in (=y) options.
 
    You can find more information on using the Linux kernel config tools
    in Documentation/kbuild/kconfig.txt.
 
- - NOTES on "make config":
+# CAUTIOUS CONFIGURATION:
 
     - Having unnecessary drivers will make the kernel bigger, and can
       under some circumstances lead to problems: probing for a
@@ -254,7 +251,7 @@ CONFIGURING the kernel:
       should probably answer 'n' to the questions for "development",
       "experimental", or "debugging" features.
 
-COMPILING the kernel:
+# COMPILING THE KERNEL:
 
  - Make sure you have at least gcc 3.2 available.
    For more information, refer to Documentation/Changes.
@@ -326,7 +323,7 @@ COMPILING the kernel:
 
  - Reboot with the new kernel and enjoy. 
 
-IF SOMETHING GOES WRONG:
+# TROUBLESHOOTING THE BUILD PROCESS:
 
  - If you have problems that seem to be due to kernel bugs, please check
    the file MAINTAINERS to see if there is a particular person associated
@@ -409,4 +406,4 @@ IF SOMETHING GOES WRONG:
 
    gdb'ing a non-running kernel currently fails because gdb (wrongly)
    disregards the starting offset for which the kernel is compiled.
- 
+   
