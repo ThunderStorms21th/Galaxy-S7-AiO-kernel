@@ -5,7 +5,7 @@ Helping you compile kernels
 
 Kernel Project by Team ThunderStorms
 
-# Credits & Thanksgiving :
+# Credits & Thanks:
 
 - The Linux Kernel Archive for the Linux Patches <https://www.kernel.org/>
 - Samsung Open Source Release Center for the Source code <http://opensource.samsung.com/>
