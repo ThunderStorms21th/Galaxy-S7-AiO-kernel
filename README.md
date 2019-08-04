@@ -1,5 +1,5 @@
 # ThundeRStormS "Galaxy S7 (SM-G930F/FD) Treble kernel from Pie and Oreo source"
-=======
+
 # ThundeRStormS "Galaxy S7 (SM-G930F/FD) Treble kernel from Pie (NFE) and Oreo (S7) source"
 
 # Kernel for Samsung Galaxy S7
