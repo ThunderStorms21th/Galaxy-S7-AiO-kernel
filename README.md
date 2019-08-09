@@ -1,11 +1,11 @@
-# ThundeRStormS "Galaxy S7 (SM-G930F/FD) Treble kernel from Pie (NFE) and Oreo (S7) source"
+# ThundeRStormS "Galaxy S7 (SM-G930F/FD) Pie kernel"
 
 # Kernel for Samsung Galaxy S7
 Helping you compile kernels
 
 Kernel Project by Team ThunderStorms
 
-# Credits & Thanks:
+# Credits & Thanksgiving :
 
 - The Linux Kernel Archive for the Linux Patches <https://www.kernel.org/>
 - Samsung Open Source Release Center for the Source code <http://opensource.samsung.com/>
