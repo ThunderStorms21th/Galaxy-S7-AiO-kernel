@@ -61,6 +61,31 @@ core-$(CONFIG_NET) += arch/arm64/net/
 core-$(CONFIG_KVM) += arch/arm64/kvm/
 core-$(CONFIG_XEN) += arch/arm64/xen/
 core-$(CONFIG_CRYPTO) += arch/arm64/crypto/
+# HotPlugs #
+obj-y		:= intelli_hotplug.o autosmp.o cluster_plug.o lazyplug.o aio_hotplug.o msm_zen_decision.o msm_sleeper.o 
+core-$(CONFIG_INTELLI_HOTPLUG)	+= arch/arm64/hotplug/INTELLIPLUG/
+core-$(CONFIG_ALUCARD_HOTPLUG)	+= arch/arm64/hotplug/ALUCARD/
+core-$(CONFIG_BLU_HOTPLUG)	+= arch/arm64/hotplug/BLUPLUG/
+core-$(CONFIG_BRICKED_HOTPLUG)	+= arch/arm64/hotplug/BRICKED/
+core-$(CONFIG_CLUSTER_HOTPLUG)	+= arch/arm64/hotplug/CLUSTER/
+core-$(CONFIG_FAST_HOTPLUG)	+= arch/arm64/hotplug/FASTPLUG/
+core-$(CONFIG_MSM_HOTPLUG)	+= arch/arm64/hotplug/MSMHOTPLUG/
+core-$(CONFIG_MSM_SLEEPER)	+= arch/arm64/hotplug/MSMSLEEPER/
+core-$(CONFIG_THUNDERPLUG_CONTROL)	+= arch/arm64/hotplug/THUNDERPLUG/
+core-$(CONFIG_MAKO_HOTPLUG)	+= arch/arm64/hotplug/MAKO/
+core-$(CONFIG_ZEN_DECISION)	+= arch/arm64/hotplug/ZENDECISION/
+core-$(CONFIG_ASMP)	+= arch/arm64/hotplug/AUTOSMP/
+core-$(CONFIG_ASMPTS)	+= arch/arm64/hotplug/AUTOSMPTS/
+core-$(CONFIG_AIO_HOTPLUG)	+= arch/arm64/hotplug/AIO_PLUG/
+core-$(CONFIG_HIMA_HOTPLUG)	+= arch/arm64/hotplug/HIMA_PLUG/
+core-$(CONFIG_LAZYPLUG)		+= arch/arm64/hotplug/LAZYPLUG/
+core-$(CONFIG_ARM_AUTO_HOTPLUG)		+= arch/arm64/hotplug/KTAUTO/
+
+CFLAGS_intelli_plug.o := -Wno-implicit-function-declaration
+CFLAGS_msm_sleeper.o := -Wno-implicit-function-declaration
+CFLAGS_lazyplug.o := -Wno-implicit-function-declaration
+CFLAGS_auto_hotplug.o := -Wno-implicit-function-declaration
+
 libs-y		:= arch/arm64/lib/ $(libs-y)
 libs-y		+= $(LIBGCC)
 libs-$(CONFIG_EFI_STUB) += drivers/firmware/efi/libstub/

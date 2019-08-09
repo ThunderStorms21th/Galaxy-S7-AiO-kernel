@@ -46,8 +46,8 @@ static const unsigned long vmpressure_win = SWAP_CLUSTER_MAX * 16;
  * essence, they are percents: the higher the value, the more number
  * unsuccessful reclaims there were.
  */
-static const unsigned int vmpressure_level_med = 60;
-static const unsigned int vmpressure_level_critical = 95;
+static const unsigned int vmpressure_level_med = 65; 		// was 60
+static const unsigned int vmpressure_level_critical = 95; 	// was 95 + line 90
 
 /*
  * When there are too little pages left to scan, vmpressure() may miss the

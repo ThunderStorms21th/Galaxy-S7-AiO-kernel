@@ -627,6 +627,7 @@ static const struct dev_pm_ops nhi_pm_ops = {
 					    * we just disable hotplug, the
 					    * pci-tunnels stay alive.
 					    */
+	.thaw_noirq = nhi_resume_noirq, // added
 	.restore_noirq = nhi_resume_noirq,
 };
 

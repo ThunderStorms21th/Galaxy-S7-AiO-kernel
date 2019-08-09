@@ -18,7 +18,6 @@
 #include <linux/device.h>
 #include <linux/kernel.h>
 #include <linux/kthread.h>
-#include <linux/smc.h>
 
 #include "mobicore_driver_api.h"
 #include "tui_ioctl.h"
@@ -45,8 +44,6 @@ static uint32_t g_cmd_id = TLC_TUI_CMD_NONE;
 static struct mc_session_handle dr_session_handle = {0, 0};
 static struct tlc_tui_response_t g_user_rsp = {
 	TLC_TUI_CMD_NONE, TLC_TUI_ERR_UNKNOWN_CMD};
-static struct tlc_tui_display_t g_display;
-
 /* Functions */
 
 /* ------------------------------------------------------------- */
@@ -440,28 +437,4 @@ int tlc_ack_cmd(struct tlc_tui_response_t *rsp_id)
 	return 0;
 }
 
-int tlc_display_cmd(struct tlc_tui_display_t *rsp_id)
-{
-    g_display = *rsp_id;
-    uint32_t r0, r1, r2, r3;
-    bool ret = 0;
-
-    if (g_display.width == 0 || g_display.height == 0) {
-        pr_err(KERN_ERR "Invalid display arguments, w=%d, h=%d\n", g_display.width, g_display.height);
-        return -44;
-    }
-    pr_info("display w=%d, h=%d\n", g_display.width, g_display.height);
-    
-    r0 = (0x8300004A);
-    r1 = g_display.width;
-    r2 = g_display.height;
-    
-    ret = exynos_smc(r0, r1, r2, r3);
-    if(ret != 0){
-        pr_info("smc for display_cmd is failed, ret = %d\n", ret);
-        return -45;
-    }   
-
-    return 0;
-}
 /** @} */

@@ -126,6 +126,7 @@ static void *get_cpu_dbs_info_s(int cpu)				\
  * cdbs: common dbs
  * od_*: On-demand governor
  * cs_*: Conservative governor
+ * zz_*: ZZMoove governor TS
  */
 
 /* Per cpu structures */
@@ -168,11 +169,19 @@ struct cs_cpu_dbs_info_s {
 	unsigned int requested_freq;
 	unsigned int enable:1;
 };
+/* added ZZ */
+struct zz_cpu_dbs_info_s {
+	struct cpu_dbs_common_info cdbs;
+	unsigned int down_skip;
+	unsigned int requested_freq;
+	unsigned int enable:1;
+};
 
 /* Per policy Governors sysfs tunables */
 struct od_dbs_tuners {
 	unsigned int ignore_nice_load;
 	unsigned int sampling_rate;
+	unsigned int sampling_rate_min; // added pegasusq
 	unsigned int sampling_down_factor;
 	unsigned int up_threshold;
 	unsigned int powersave_bias;
@@ -182,10 +191,49 @@ struct od_dbs_tuners {
 struct cs_dbs_tuners {
 	unsigned int ignore_nice_load;
 	unsigned int sampling_rate;
+	unsigned int sampling_rate_min; // added pegasusq
 	unsigned int sampling_down_factor;
 	unsigned int up_threshold;
 	unsigned int down_threshold;
+	unsigned int down_threshold_suspended;
 	unsigned int freq_step;
+	unsigned int sleep_depth;
+	unsigned int boost_enabled;
+	unsigned int boost_count;
+	unsigned int boost_ceiling;
+	unsigned int input_boost_freq;
+	unsigned int input_boost_duration;
+	unsigned int twostep_threshold;
+	unsigned int min_load;
+	unsigned int twostep_counter;
+	u64 twostep_time;
+};
+/* added ElementalX */
+struct ex_dbs_tuners {
+	unsigned int ignore_nice_load;
+	unsigned int sampling_rate;
+	unsigned int up_threshold;
+	unsigned int down_differential;
+	unsigned int active_floor_freq;
+	unsigned int sampling_down_factor;
+	unsigned int powersave;
+};
+
+/* added zz */
+struct zz_dbs_tuners {
+	unsigned int ignore_nice_load;
+	unsigned int sampling_rate;
+	unsigned int sampling_down_factor;
+	unsigned int up_threshold;
+	unsigned int down_threshold;
+	unsigned int smooth_up;
+	unsigned int scaling_proportional;
+	unsigned int fast_scaling_up;
+	unsigned int fast_scaling_down;
+	unsigned int afs_threshold1;
+	unsigned int afs_threshold2;
+	unsigned int afs_threshold3;
+	unsigned int afs_threshold4;
 };
 
 /* Common Governor data across policies */
@@ -194,6 +242,9 @@ struct common_dbs_data {
 	/* Common across governors */
 	#define GOV_ONDEMAND		0
 	#define GOV_CONSERVATIVE	1
+	#define GOV_ELEMENTALX		2
+	#define GOV_ZZMOOVE		3
+
 	int governor;
 	struct attribute_group *attr_group_gov_sys; /* one governor - system */
 	struct attribute_group *attr_group_gov_pol; /* one governor - policy */
@@ -219,6 +270,21 @@ struct common_dbs_data {
 struct dbs_data {
 	struct common_dbs_data *cdata;
 	unsigned int min_sampling_rate;
+	struct cpufreq_frequency_table *freq_table;	// added
+	/* following is only used by zzmoove governor */
+	bool freq_table_desc;                           // table order ascending or descending (true)
+	unsigned int freq_table_size;                   // size of freq table (index count)
+	unsigned int zz_prev_load;                      // previous load saved by governor for afs calculation
+	unsigned int pol_min;                           // saved actual max policy for range detection
+	unsigned int pol_max;                           // saved actual min policy for range detection
+	unsigned int min_scaling_freq;                  // saved min freq for range detection
+	unsigned int limit_table_start;                 // table start index for range detection
+	unsigned int limit_table_end;                   // table end index for range detection
+	unsigned int max_scaling_freq_hard;             // hard limit table index
+	unsigned int max_scaling_freq_soft;             // soft limit table index
+	unsigned int scaling_mode_up;                   // fast up scaling steps
+	unsigned int scaling_mode_down;                 // fast down scaling steps
+	/* used by zzmoove governor end */
 	int usage_count;
 	void *tuners;
 
@@ -235,6 +301,11 @@ struct od_ops {
 };
 
 struct cs_ops {
+	struct notifier_block *notifier_block;
+};
+
+// added ZZ
+struct zz_ops {
 	struct notifier_block *notifier_block;
 };
 

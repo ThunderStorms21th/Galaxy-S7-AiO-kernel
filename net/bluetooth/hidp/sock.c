@@ -77,6 +77,8 @@ static int hidp_sock_ioctl(struct socket *sock, unsigned int cmd, unsigned long 
 			return err;
 		}
 
+		ca.name[sizeof(ca.name)-1] = 0; // added fix for BT buffer overflow
+
 		err = hidp_connection_add(&ca, csock, isock);
 		if (!err && copy_to_user(argp, &ca, sizeof(ca)))
 			err = -EFAULT;

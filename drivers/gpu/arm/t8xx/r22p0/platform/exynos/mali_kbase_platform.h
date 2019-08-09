@@ -103,6 +103,7 @@ typedef enum {
 	GPU_MAX_CLOCK = 0,
 	GPU_MAX_CLOCK_LIMIT,
 	GPU_MIN_CLOCK,
+	GPU_MIN_CLOCK_LIMIT,
 	GPU_DVFS_START_CLOCK,
 	GPU_DVFS_BL_CONFIG_CLOCK,
 	GPU_GOVERNOR_TYPE,
@@ -316,6 +317,7 @@ struct exynos_context {
 	int gpu_max_clock;
 	int gpu_max_clock_limit;
 	int gpu_min_clock;
+	int gpu_min_clock_limit;
 	int gpu_dvfs_start_clock;
 	int gpu_dvfs_config_clock;
 	int user_max_lock_input;
@@ -353,8 +355,6 @@ struct exynos_context {
 	bool dvs_is_enabled;
 
 	bool power_status;
-	int power_runtime_suspend_ret;
-	int power_runtime_resume_ret;
 
 	bool perf_gathering_status;
 #ifdef CONFIG_MALI_SEC_HWCNT

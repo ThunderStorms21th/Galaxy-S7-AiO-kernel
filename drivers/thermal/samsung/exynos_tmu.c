@@ -1266,6 +1266,13 @@ static int exynos_tmu_ect_set_information(struct platform_device *pdev)
 		else
 			pdata->trigger_type[i] = (i == function->num_of_range - 1 ? HW_TRIP : THROTTLE_ACTIVE);
 
+	/* added abitities for OC big and LITTLE clusters */
+//		if (function->range_list[i].max_frequency == 2700000)
+//			function->range_list[i].max_frequency = 2800000;
+//		if (function->range_list[i].max_frequency == 1586000)
+//			function->range_list[i].max_frequency = 1690000;
+	/* end */
+
 		pdata->freq_tab[i].temp_level = function->range_list[i].lower_bound_temperature;
 		pdata->freq_tab[i].freq_clip_max = function->range_list[i].max_frequency;
 		dev_info(&pdev->dev, "[%d] Temp_level : %d, freq_clip_max: %d \n",
