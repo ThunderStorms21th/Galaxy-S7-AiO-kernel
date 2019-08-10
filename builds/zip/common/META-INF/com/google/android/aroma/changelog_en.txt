@@ -3,7 +3,7 @@
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Pie</#></b>	
 	VERSION	: <b><#selectbg_g>v1.0</#></b>
-	DATE	: <b><#selectbg_g>05/08/2019</#></b>
+	DATE	: <b><#selectbg_g>11/08/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 <#53a6f4><b> ONLY FOR Galaxy S7/S7Edge | TREBLE roms |</b></#>
@@ -12,7 +12,7 @@
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
-<u><b><#selectbg_g>FBT-Kernel-T-v1.0 : 05.08.2019</#></b></u>
+<u><b><#selectbg_g>FBT-Kernel-T-v1.0 : 11.08.2019</#></b></u>
 <*>Samsung sources G930FXXS5CSF1</*>
 <*>Samsung ramdisk G930FXXS5CSF1</*>
 <*>Support Treble roms</*>
