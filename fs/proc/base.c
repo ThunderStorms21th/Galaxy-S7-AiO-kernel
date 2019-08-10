@@ -94,20 +94,6 @@
 #include "internal.h"
 #include "fd.h"
 
-// added proc: Don't let Google Camera and Settings run in the background
-static struct task_struct *task_to_kill;
-
-static void proc_kill_task(struct work_struct *work)
-{
-	struct task_struct *task = task_to_kill;
-
-	send_sig(SIGKILL, task, 0);
-	put_task_struct(task);
-}
-
-static DECLARE_WORK(task_kill_work, proc_kill_task);
-// end
-
 /* NOTE:
  *	Implementing inode permission operations in /proc is almost
  *	certainly an error.  Permission checks need to happen during
@@ -997,20 +983,6 @@ static ssize_t oom_score_adj_write(struct file *file, const char __user *buf,
 		err = -EACCES;
 		goto err_sighand;
 	}
-// added proc: Don't let Google Camera and Settings run in the background
-
-	/* These apps burn through CPU in the background. Don't let them. */
-	if (oom_score_adj >= 700) {
-		if (!strcmp(task->comm, "id.GoogleCamera") ||
-		    !strcmp(task->comm, "ndroid.settings")) {
-			if (task != task_to_kill)
-				flush_work(&task_kill_work);
-			task_to_kill = task;
-			get_task_struct(task);
-			schedule_work(&task_kill_work);
-		}
-	}
-// end
 
 	task->signal->oom_score_adj = (short)oom_score_adj;
 	if (has_capability_noaudit(current, CAP_SYS_RESOURCE))

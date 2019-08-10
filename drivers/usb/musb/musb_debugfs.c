@@ -194,30 +194,30 @@ static ssize_t musb_test_mode_write(struct file *file,
 	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
 		return -EFAULT;
 
-	if (strstarts(buf, "force host"))
+	if (!strncmp(buf, "force host", 9))
 		test = MUSB_TEST_FORCE_HOST;
 
-	if (strstarts(buf, "fifo access"))
+	if (!strncmp(buf, "fifo access", 11))
 		test = MUSB_TEST_FIFO_ACCESS;
 
-	if (strstarts(buf, "force full-speed"))
+	if (!strncmp(buf, "force full-speed", 15))
 		test = MUSB_TEST_FORCE_FS;
 
-	if (strstarts(buf, "force high-speed"))
+	if (!strncmp(buf, "force high-speed", 15))
 		test = MUSB_TEST_FORCE_HS;
 
-	if (strstarts(buf, "test packet")) {
+	if (!strncmp(buf, "test packet", 10)) {
 		test = MUSB_TEST_PACKET;
 		musb_load_testpacket(musb);
 	}
 
-	if (strstarts(buf, "test K"))
+	if (!strncmp(buf, "test K", 6))
 		test = MUSB_TEST_K;
 
-	if (strstarts(buf, "test J"))
+	if (!strncmp(buf, "test J", 6))
 		test = MUSB_TEST_J;
 
-	if (strstarts(buf, "test SE0 NAK"))
+	if (!strncmp(buf, "test SE0 NAK", 12))
 		test = MUSB_TEST_SE0_NAK;
 
 	musb_writeb(musb->mregs, MUSB_TESTMODE, test);

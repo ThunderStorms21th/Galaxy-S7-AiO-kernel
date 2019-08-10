@@ -62,9 +62,6 @@ obj-$(CONFIG_SEC_SIPC_MODEM_IF)	+= modem_v1/
 obj-$(CONFIG_UID_SYS_STATS) += uid_sys_stats.o
 obj-$(CONFIG_MEMORY_STATE_TIME) += memory_state_time.o
 
-# Gaming mode
-obj-$(CONFIG_GAMING_CONTROL)	+= gaming_control.o
-
 # Secure OS Mobicore Interface
 obj-$(CONFIG_TRUSTONIC_TEE)	+= tzic64.o
 
