@@ -12,12 +12,13 @@ export ARCH=arm64
 export SUBARCH=arm64
 # NO WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/gcc-linaro-5.5.0-2017.10-i686_aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc
 # export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-master/bin/aarch64-linux-android-
-export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-o-mr1-iot-preview-8/bin/aarch64-linux-android-
+# export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-o-mr1-iot-preview-8/bin/aarch64-linux-android-
+export BUILD_CROSS_COMPILE=~/kernel/toolchain/gcc-linaro-4.9.4-2017.01-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 # export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 # NO WORKS export BUILD_CROSS_COMPILE=~kernel/toolchain/arm-eabi-4.8-master/bin/arm-eabi-
 # NO WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/arm32_arm64_cross_toolchain-master/bin/aarch64-linux-aarch64-linux-
 # BL - export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-gnu-7.3-master/bin/aarch64-linux-gnu-
-# BL export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linaro-linux-android-6.3.1/bin/aarch64-linux-android-
+# BL - export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linaro-linux-android-6.3.1/bin/aarch64-linux-android-
 # WORKS export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-linux-android-4.9-945/bin/aarch64-linux-android-
 #export BUILD_CROSS_COMPILE=~/kernel/toolchain/aarch64-sabermod-7.0/bin/aarch64-
 #export BUILD_CROSS_COMPILE=~/kernel/kernel/toolchain/aarch64-uber-linux-android-4.9.4/bin/aarch64-linux-android-
@@ -31,6 +32,7 @@ export BUILD_JOB_NUMBER=`grep processor /proc/cpuinfo|wc -l`
 export ANDROID_MAJOR_VERSION=p
 export PLATFORM_VERSION=9.0.0
 export ANDROID_VERSION=90000
+export CURRENT_ANDROID_MAJOR_VERSION=p
 
 RDIR=$(pwd)
 OUTDIR=$RDIR/arch/$ARCH/boot
@@ -45,7 +47,7 @@ DEFCONFIG=ts-kernel_defconfig
 DEFCONFIG_S7EDGE=hero2lte_defconfig
 DEFCONFIG_S7FLAT=herolte_defconfig
 
-export K_VERSION="v1.0.1-Treble"
+export K_VERSION="v1.0-Treble"
 export K_BASE="S5CSF1"
 export K_NAME="ThundeRStormS-Kernel"
 export REVISION="RC"
@@ -109,11 +111,14 @@ FUNC_BUILD_DTB()
 	G930)    
 #		DTSFILES="exynos8890-herolte_eur_open_04 exynos8890-herolte_eur_open_08
 #				exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
-		DTSFILES="exynos8890-herolte_eur_open_04 exynos8890-herolte_eur_open_08 exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
+#		DTSFILES="exynos8890-herolte_eur_open_04 exynos8890-herolte_eur_open_08 exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
+		DTSFILES="exynos8890-herolte_eur_open_08 exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
+#		DTSFILES="exynos8890-herolte_eur_open_08.dtb exynos8890-herolte_eur_open_09.dtb exynos8890-herolte_eur_open_10.dtb"
 		;;
 	G935)  
 #		DTSFILES="exynos8890-hero2lte_eur_open_04 exynos8890-hero2lte_eur_open_08"
 		DTSFILES="exynos8890-hero2lte_eur_open_00 exynos8890-hero2lte_eur_open_01 exynos8890-hero2lte_eur_open_03 exynos8890-hero2lte_eur_open_04 exynos8890-hero2lte_eur_open_08"
+#		DTSFILES="exynos8890-hero2lte_eur_open_00.dtb exynos8890-hero2lte_eur_open_01.dtb exynos8890-hero2lte_eur_open_03.dtb exynos8890-hero2lte_eur_open_04.dtb exynos8890-hero2lte_eur_open_08.dtb"
 		;;
 	*)
 
@@ -136,6 +141,9 @@ FUNC_BUILD_DTB()
 	done
 	echo "Generating dtb.img."
 	$RDIR/scripts/dtbtool_exynos/dtbtool -o "$OUTDIR/dtb.img" -d "$DTBDIR/" -s $PAGE_SIZE
+#	make $DTSFILES
+#	./$RDIR/tools/dtbTool -o $OUTDIR/boot.img-dtb -d $DTBDIR/ -s $PAGE_SIZE
+
 	echo "Done."
 }
 
