@@ -112,13 +112,13 @@ FUNC_BUILD_DTB()
 #		DTSFILES="exynos8890-herolte_eur_open_04 exynos8890-herolte_eur_open_08
 #				exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
 #		DTSFILES="exynos8890-herolte_eur_open_04 exynos8890-herolte_eur_open_08 exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
-		DTSFILES="exynos8890-herolte_eur_open_08 exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
-#		DTSFILES="exynos8890-herolte_eur_open_08.dtb exynos8890-herolte_eur_open_09.dtb exynos8890-herolte_eur_open_10.dtb"
+#		DTSFILES="exynos8890-herolte_eur_open_00 exynos8890-herolte_eur_open_01 exynos8890-herolte_eur_open_02 exynos8890-herolte_eur_open_03 exynos8890-herolte_eur_open_04 exynos8890-herolte_eur_open_08 exynos8890-herolte_eur_open_09 exynos8890-herolte_eur_open_10"
+		DTSFILES="exynos8890-herolte_eur_open_04 exynos8890-herolte_eur_open_08"
 		;;
 	G935)  
 #		DTSFILES="exynos8890-hero2lte_eur_open_04 exynos8890-hero2lte_eur_open_08"
-		DTSFILES="exynos8890-hero2lte_eur_open_00 exynos8890-hero2lte_eur_open_01 exynos8890-hero2lte_eur_open_03 exynos8890-hero2lte_eur_open_04 exynos8890-hero2lte_eur_open_08"
-#		DTSFILES="exynos8890-hero2lte_eur_open_00.dtb exynos8890-hero2lte_eur_open_01.dtb exynos8890-hero2lte_eur_open_03.dtb exynos8890-hero2lte_eur_open_04.dtb exynos8890-hero2lte_eur_open_08.dtb"
+#		DTSFILES="exynos8890-hero2lte_eur_open_00 exynos8890-hero2lte_eur_open_01 exynos8890-hero2lte_eur_open_03 exynos8890-hero2lte_eur_open_04 exynos8890-hero2lte_eur_open_08"
+		DTSFILES="exynos8890-hero2lte_eur_open_04 exynos8890-hero2lte_eur_open_08 exynos8890-hero2lte_eur_open_09"
 		;;
 	*)
 
