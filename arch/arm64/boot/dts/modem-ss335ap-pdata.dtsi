@@ -311,7 +311,7 @@
 				iod,ul_buffer_size = <2048>;
 				iod,dl_num_buffers = <128>;
 				iod,dl_buffer_size = <2048>;
-				iod,option_region = "usa_spr";
+				iod,option_region = "usa_att";
 			};
 		}; /* end of iodevs */
 	}; /* end of mif_pdata */

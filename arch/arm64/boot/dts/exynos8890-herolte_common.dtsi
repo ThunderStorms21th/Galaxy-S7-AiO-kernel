@@ -315,7 +315,6 @@
 	};
 
 	serial_1: uart@14C20000 {
-		samsung,uart-logging;
 		status = "okay";
 	};
 
@@ -483,7 +482,7 @@
 				buck2_reg: BUCK2 {
 					regulator-name = "vdd_mngs";
 					regulator-min-microvolt = <500000>;
-					regulator-max-microvolt = <1575000>; /* was 1300000 */
+					regulator-max-microvolt = <1300000>;
 					regulator-always-on;
 					regulator-ramp-delay = <12000>;
 					regulator-initial-mode = <1>;
@@ -492,7 +491,7 @@
 				buck3_reg: BUCK3 {
 					regulator-name = "vdd_apollo";
 					regulator-min-microvolt = <500000>;
-					regulator-max-microvolt = <1475000>; /* was 1200000 */
+					regulator-max-microvolt = <1200000>;
 					regulator-always-on;
 					regulator-ramp-delay = <12000>;
 					regulator-initial-mode = <1>;
@@ -1240,7 +1239,6 @@
 		};
 	};
 
-// added for TREBLE
 	firmware {
 		android {
 			compatible = "android,firmware";
@@ -1263,7 +1261,6 @@
 			};
 		};
 	};
-// end
 
 	gpio_keys {
 		compatible = "gpio-keys";

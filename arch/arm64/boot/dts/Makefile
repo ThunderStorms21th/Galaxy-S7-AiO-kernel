@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0
 dtb-$(CONFIG_WLAN_HERO2) += exynos8890-hero2lte_eur_open_08.dtb
 dtb-$(CONFIG_WLAN_HERO) += \
 	exynos8890-herolte_eur_open_08.dtb \
