@@ -7,6 +7,7 @@
 #include <linux/fs.h>
 #include <linux/slab.h>
 #include <linux/export.h>
+#include <linux/module.h> // FSYNC enable
 #include <linux/namei.h>
 #include <linux/sched.h>
 #include <linux/writeback.h>
@@ -16,6 +17,10 @@
 #include <linux/quotaops.h>
 #include <linux/backing-dev.h>
 #include "internal.h"
+
+// Enable FSYNC
+bool fsync_enabled = true;
+module_param(fsync_enabled, bool, 0755);
 
 #define VALID_FLAGS (SYNC_FILE_RANGE_WAIT_BEFORE|SYNC_FILE_RANGE_WRITE| \
 			SYNC_FILE_RANGE_WAIT_AFTER)

@@ -10,9 +10,6 @@ on early-init
 
 on boot
 
-on property:sys.boot_completed=1
-#    stop irisd
-
 on fs
 
 service zipalign /sbin/zipalign.sh

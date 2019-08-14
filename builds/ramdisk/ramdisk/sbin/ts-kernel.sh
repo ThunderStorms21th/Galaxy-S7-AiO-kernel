@@ -112,7 +112,7 @@ echo "0" > /sys/class/lcd/panel/smart_on
 echo "0" > /proc/sys/kernel/panic
 $bb sysctl -w vm.panic_on_oom=0
 $bb sysctl -w kernel.panic_on_oops=0
-$bb sysctl -w kernel.panic=0
+# $bb sysctl -w kernel.panic=0
 
 # Stock CPU Settings
 # echo 'interactive' > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
