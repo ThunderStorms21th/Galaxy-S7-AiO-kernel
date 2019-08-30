@@ -79,6 +79,9 @@
    # FINGERPRINT BOOST
    write /sys/kernel/fp_boost/enabled 1
 
+   # INPUT BOOST CPU
+   write /sys/module/cpu_boost/parameters/input_boost_enabled 0
+
    # HMP
    chmod 0664 /sys/kernel/hmp/up_threshold
    write /sys/kernel/hmp/up_threshold 524

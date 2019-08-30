@@ -19,33 +19,15 @@ ui_print("@Mounting partitions...");
 
 ifelse(is_mounted("/system"), unmount("/system"));
 ifelse(is_mounted("/data"), unmount("/data"));
-# ifelse(is_mounted("/vendor"), unmount("/vendor"));
 run_program("/sbin/mount", "/system");
 run_program("/sbin/mount", "/data");
-# run_program("/sbin/mount", "/vendor");
-
-# Run delete older ThunderTweaks apps script
-ui_print(" ");
-ui_print("@ThundeRStormS - Deleting older ThunderTweaks app in folder...");
-run_program("/tmp/ts/delttweaks.sh");
 
 # Run install script
 run_program("/tmp/ts/install_script.sh");
 
 ui_print(" ");
-ui_print("@ThundeRStormS - System & Vendor Patching...");
+ui_print("@ThundeRStormS - System Patching...");
 package_extract_dir("ts/system", "/system");
-package_extract_dir("ts/vendor", "/vendor");
-
-ui_print(" ");
-ui_print("@ThundeRStormS - Removing RMM/RLC/KnoxGuard");
-delete("/system/lib/libvkservice.so");
-delete("/system/lib/libvkjni.so");
-delete_recursive("/system/app/Rlc");
-delete_recursive("/system/priv-app/Rlc");
-delete_recursive("/system/priv-app/KnoxCore");
-delete_recursive("/system/priv-app/KnoxGuard");
-delete_recursive("/system/priv-app/EliteTuner");
 
 # TS swap off
 if file_getprop("/tmp/aroma/menu.prop", "chk4") == "1" then
@@ -74,10 +56,6 @@ run_program("/tmp/ts/tskernel.sh");
 
 ui_print(" ");
 ui_print("@Setting Permissions...");
-set_metadata("/system/lib/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-set_metadata("/system/lib64/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-set_metadata("/system/lib/libsecure_storage_jni.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-set_metadata("/system/lib64/libsecure_storage_jni.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata("/system/vendor/lib/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata("/system/vendor/lib64/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 set_metadata_recursive("/system/priv-app/PersonalPageService", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
@@ -92,7 +70,7 @@ run_program("/tmp/ts/fix_permissions.sh");
 #################################################
 # ROOT
 ####################################################
-set_progress(0.65);
+set_progress(0.55);
 
 ui_print(" ");
 ui_print("@Root");
@@ -113,7 +91,7 @@ endif;
 
 # Magisk Root
 if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt2" then
-show_progress(0.85, "-8000");
+show_progress(0.60, "-30000");
 	
 	# Clean opposite kernel
 	run_program("/tmp/ts/clean_supersu.sh");
@@ -142,7 +120,7 @@ delete_recursive("/tmp");
 ifelse(is_mounted("/system"), unmount("/system"));
 
 set_progress(1.00);
-show_progress(1.00, "-3000");
+show_progress(1.00, "-1000");
 ui_print(" ");
 ui_print("*******************************************************************");
 ui_print("***  The ThundeRStormS kernel and mods are installed  ***");

@@ -7,9 +7,9 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1586000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load
-   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load 92
+   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load 93
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay "40000 754000:30000 858000:27000 962000:25000"
+   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay "30000 754000:30000 858000:30000 962000:25000"
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/timer_rate
    write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/timer_rate 30000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/hispeed_freq
@@ -31,7 +31,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/boostpulse_duration
    write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/boostpulse_duration 20000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/down_low_load_threshold
-   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/down_low_load_threshold 8
+   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/down_low_load_threshold 10
 
    # Big CPU
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor
@@ -41,9 +41,9 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2288000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load
-   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 95
+   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 93
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay "60000 832000:30000 1040000:27000 1248000:25000"
+   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay "60000 832000:30000 1040000:30000 1248000:25000"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate 30000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/hispeed_freq
@@ -76,9 +76,12 @@
    # FINGERPRINT BOOST
    write /sys/kernel/fp_boost/enabled 0
 
+   # INPUT BOOST CPU
+   write /sys/module/cpu_boost/parameters/input_boost_enabled 0
+
    # HMP
    chmod 0664 /sys/kernel/hmp/up_threshold
-   write /sys/kernel/hmp/up_threshold 750
+   write /sys/kernel/hmp/up_threshold 700
    chmod 0664 /sys/kernel/hmp/down_threshold
    write /sys/kernel/hmp/down_threshold 250
    chmod 0664 /sys/kernel/hmp/down_compensation_high_freq
@@ -109,7 +112,7 @@
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_clock
    write /sys/devices/14ac0000.mali/highspeed_clock 419
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_load
-   write /sys/devices/14ac0000.mali/highspeed_load 92
+   write /sys/devices/14ac0000.mali/highspeed_load 90
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_delay
    write /sys/devices/14ac0000.mali/highspeed_delay 1
 
@@ -131,7 +134,7 @@
    write /sys/module/wakeup/parameters/enable_bcmdhd4359_wl 0
    write /sys/module/wakeup/parameters/enable_bluedroid_timer_wl 1
    write /sys/module/wakeup/parameters/enable_wlan_wake_wl 1
-   write /sys/module/sec_battery/parameters/wl_polling 5
+   write /sys/module/sec_battery/parameters/wl_polling 3
    write /sys/module/sec_nfc/parameters/wl_nfc 1
 
    # Misc
@@ -139,15 +142,15 @@
    write /sys/kernel/dyn_fsync/Dyn_fsync_active 1
    write /sys/kernel/sched/gentle_fair_sleepers 0
    write /sys/kernel/sched/arch_power 0
-   write /sys/kernel/power_suspend/power_suspend_mode 3
+   write /sys/kernel/power_suspend/power_suspend_mode 2
    #write /sys/kernel/power_suspend/power_suspend_mode 1
    #write /sys/kernel/power_suspend/power_suspend_state 1
 
    write /proc/sys/net/ipv4/tcp_congestion_control bic
 
    # SWAP
-   write /proc/sys/vm/swappiness 90
-   write /proc/sys/vm/vfs_cache_pressure 70
+   write /proc/sys/vm/swappiness 130
+   write /proc/sys/vm/vfs_cache_pressure 50
 
    # LMK
    write /sys/module/lowmemorykiller/parameters/minfree "19432,24040,28648,35256,56064,94152"
@@ -162,19 +165,19 @@
    # range 0 to 100
    echo 60 > /sys/kernel/autosmp/conf/cpufreq_up_bc;
    # range 0 to 100
-   echo 63 > /sys/kernel/autosmp/conf/cpufreq_up_lc;
+   echo 65 > /sys/kernel/autosmp/conf/cpufreq_up_lc;
    # range 0 to 100
    echo 1 > /sys/kernel/autosmp/conf/cycle_down;
    # max cycles 0 to 8
    echo 1 > /sys/kernel/autosmp/conf/cycle_up;
    # max cycyles 0 to 8
-   echo 30 > /sys/kernel/autosmp/conf/delay;
+   echo 60 > /sys/kernel/autosmp/conf/delay;
    # range 0 to 500ms
    echo 4 > /sys/kernel/autosmp/conf/max_cpus_bc;
    # max cores ON  - 1 to 4
    echo 4 > /sys/kernel/autosmp/conf/max_cpus_lc;
    # max cores ON  - 1 to 4
-   echo 2 > /sys/kernel/autosmp/conf/min_cpus_bc;
+   echo 1 > /sys/kernel/autosmp/conf/min_cpus_bc;
    # min cores OFF - 1 to 4
    echo 2 > /sys/kernel/autosmp/conf/min_cpus_lc;
    # min cores OFF - 1 to 4

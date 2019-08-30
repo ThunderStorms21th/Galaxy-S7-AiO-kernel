@@ -58,7 +58,7 @@ welcome.title=Welcome
 welcome.text1=You are about to Install
 welcome.text2=KERNEL INFORMATION
 welcome.text3=ONLY FOR
-welcome.text4=Installation of the <b>ThundeRStormS kernel</b> for <b>Galaxy S7.</b>.
+welcome.text4=Installation of <b>ThundeRStormS kernel</b> for Galaxy S7.
 welcome.version=VERSION
 welcome.codename=CODENAME
 welcome.updated=UPDATED
@@ -68,12 +68,13 @@ welcome.next=Press Next...
 
 terms.title=Terms and Conditions
 terms.desc=Please read carefully The Terms and Conditions Below.
+terms.desc=I'm not responsible for damage Your phone, You are doing this all on Your own risk.
 terms.check=I Agree with this Terms and Conditions...
 terms.confirm=Please check the agreement...
 
 # Changelog
 changelog.title=CHANGELOG
-changelog.desc=Installation of <b>ThundeRStormS Kernel</b> for <b>Galaxy S7.</b>
+changelog.desc=Installation of <b>ThundeRStormS Kernel</b> for Galaxy S7.
 
 # Installation
 menu.title=ThundeRStormS Kernel Installation
@@ -84,10 +85,10 @@ menu.1=Without root
 menu.1desc=Recommended if you are installing another type of root on your own.
 menu.2=Magisk 19.4 Offical
 menu.2desc=Magisk Manager with Root integrated.
-# menu.5=Install GPU libs for Nougat - r12p0
-# menu.5desc=Install Nougat libs into the system.
-# menu.12=Kernel for ported or deodexed rom
-# menu.12desc=Select this if You have ported or deodexed rom
+#menu.5=Install GPU libs for Nougat - r12p0
+#menu.5desc=Install Nougat libs into the system.
+menu.12=Kernel for ported or deodexed rom
+menu.12desc=Select this if You have ported or deodexed rom
 menu.group2=Other options
 menu.3=ThunderTweaks
 menu.3desc=Application for kernel management modified by XDA@nalas. Copy this app to Your Internal SDcard/ThunderTweaks folder. You can manually install it.
@@ -102,8 +103,8 @@ menu.7desc=Data and app will be deleted from the previous root. Recommended for 
 # menu.8desc=Updated by AJ's. Necessary for the kernel.
 # menu.9=Install GPU libs for PIE - r28p0
 # menu.9desc=Install Pie libs into the system
-# menu.10=Patch for deodexed PIE roms
-# menu.10desc=This will patch deodexed PIE roms
+menu.10=Patch for deodexed PIE roms
+menu.10desc=This will patch deodexed PIE roms
 # menu.11=Install GPU libs for OREO - r22p0
 # menu.11desc=Install Oreo libs into the system
 

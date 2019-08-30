@@ -7,9 +7,9 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1586000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load
-   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load 97
+   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load 95
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay "60000 650000:30000 754000:30000 962000:20000"
+   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay "50000 650000:20000 754000:25000 962000:30000"
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/timer_rate
    write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/timer_rate 40000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/hispeed_freq
@@ -41,9 +41,9 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 2288000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load
-   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 97
+   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 95
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay "85000 728000:40000 1040000:30000 1248000:30000"
+   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay "75000 728000:40000 1040000:30000 1248000:30000"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate 40000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/hispeed_freq
@@ -82,11 +82,14 @@
    # FINGERPRINT BOOST
    write /sys/kernel/fp_boost/enabled 0
 
+   # INPUT BOOST CPU
+   write /sys/module/cpu_boost/parameters/input_boost_enabled 0
+
    # HMP
    chmod 0664 /sys/kernel/hmp/up_threshold
-   write /sys/kernel/hmp/up_threshold 740
+   write /sys/kernel/hmp/up_threshold 700
    chmod 0664 /sys/kernel/hmp/down_threshold
-   write /sys/kernel/hmp/down_threshold 260
+   write /sys/kernel/hmp/down_threshold 250
    chmod 0664 /sys/kernel/hmp/down_compensation_high_freq
    write /sys/kernel/hmp/down_compensation_high_freq 962000
    chmod 0664 /sys/kernel/hmp/down_compensation_mid_freq
@@ -137,7 +140,7 @@
    write /sys/module/wakeup/parameters/enable_bcmdhd4359_wl 0
    write /sys/module/wakeup/parameters/enable_bluedroid_timer_wl 1
    write /sys/module/wakeup/parameters/enable_wlan_wake_wl 1
-   write /sys/module/sec_battery/parameters/wl_polling 5
+   write /sys/module/sec_battery/parameters/wl_polling 3
    write /sys/module/sec_nfc/parameters/wl_nfc 1
 
    # Misc
@@ -152,8 +155,8 @@
    write /proc/sys/net/ipv4/tcp_congestion_control westwood
 
    # SWAP
-   write /proc/sys/vm/swappiness 100
-   write /proc/sys/vm/vfs_cache_pressure 70
+   write /proc/sys/vm/swappiness 130
+   write /proc/sys/vm/vfs_cache_pressure 50
 
    # LMK
    write /sys/module/lowmemorykiller/parameters/minfree "18920,23552,32256,42472,65536,102400"

@@ -61,7 +61,7 @@ if [ $MODEL == $MODEL2 ]; then MODEL_DESC=$MODEL2_DESC; fi
 set_progress 0.01
 
 set_progress 0.10
-show_progress 0.25 -4000
+show_progress 0.37 -4000
 
 ## FLASH KERNEL
 ui_print " "
@@ -75,27 +75,8 @@ dd of=/dev/block/platform/155a0000.ufs/by-name/BOOT if=/tmp/ts/$MODEL-boot.img
 ui_print "-- Done"
 
 
-set_progress 0.25
+set_progress 0.37
 
-
-## PATCH SYSTEM
-ui_print " "
-ui_print "@Patching system and libs..."
-
-# ui_print "-- Extracting"
-# $BB tar -Jxf secure_storage.tar.xz
-# ui_print "-- Copying files"
-
-# Copy secure_storage libs
-
-#	ui_print "-- secure_storage libs to /system"
-#	cp -rf secure/. /system/
-#        set_perm 0 2000 0644 /system/lib/libsecure_storage.so u:object_r:system_file:s0
-#        set_perm 0 2000 0644 /system/lib/libsecure_storage_jni.so u:object_r:system_file:s0
-#        set_perm 0 2000 0644 /system/lib64/libsecure_storage.so u:object_r:system_file:s0
-#        set_perm 0 2000 0644 /system/lib64/libsecure_storage_jni.so u:object_r:system_file:s0
-
-# set_progress 0.50
 
 #======================================
 # OPTIONS
@@ -108,6 +89,10 @@ if [ "$(file_getprop /tmp/aroma/menu.prop chk3)" == 1 ]; then
 	ui_print "@Installing ThunderTweaks App..."
 	sh /tmp/ts/ts_clean.sh com.moro.mtweaks -as
         sh /tmp/ts/ts_clean.sh com.thunder.thundertweaks -as
+        sh /tmp/ts/ts_clean.sh com.hades.hKtweaks -as
+        sh /tmp/ts/ts_clean.sh hKtweaks -as
+        sh /tmp/ts/ts_clean.sh mtweaks -as
+        sh /tmp/ts/ts_clean.sh thundertweaks -as
 
 	mkdir -p /data/media/0/ThunderTweaks
 	mkdir -p /sdcard/ThunderTweaks
@@ -126,9 +111,10 @@ if [ "$(file_getprop /tmp/aroma/menu.prop chk3)" == 1 ]; then
 	ui_print " "
 	ui_print "@Install Spectrum Profiles..."
 	mkdir -p /data/media/0/Spectrum/profiles 2>/dev/null;
+	mkdir -p /sdcard/Spectrum/profiles 2>/dev/null;
 	cp -rf /tmp/ts/profiles/. /data/media/0/Spectrum/profiles/
+	cp -rf /tmp/ts/profiles/. /sdcard/Spectrum/profiles/
 fi
-
 
 set_progress 0.50
 
