@@ -1,7 +1,7 @@
-#
-# Defconfig S7 Edge (hero2lte)
-#
 
+#
+# S7 EDGE
+#
 # CONFIG_WLAN_HERO is not set
 CONFIG_WLAN_HERO2=y
 CONFIG_FB_DSU_REG_LOCK=y

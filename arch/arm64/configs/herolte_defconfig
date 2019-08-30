@@ -1,7 +1,7 @@
-#
-# Defconfig Galaxy S7 (herolte)
-#
 
+#
+# S7 FLAT
+#
 CONFIG_WLAN_HERO=y
 # CONFIG_WLAN_HERO2 is not set
 # CONFIG_FB_DSU_REG_LOCK is not set

@@ -92,7 +92,11 @@
 
 		freq_tab_count = <3>;
 
-		freq_clip_max_0 = <1560000>;
+/*		freq_clip_max_0 = <1560000>;
+		freq_clip_max_1 = <1040000>;
+		freq_clip_max_2 = <728000>; */
+
+		freq_clip_max_0 = <1352000>;
 		freq_clip_max_1 = <1040000>;
 		freq_clip_max_2 = <728000>;
 
@@ -142,9 +146,14 @@
 
 		freq_tab_count = <4>;
 
-		freq_clip_max_0 = <1274000>;
+/*		freq_clip_max_0 = <1274000>;
 		freq_clip_max_1 = <1170000>;
 		freq_clip_max_2 = <962000>;
+		freq_clip_max_3 = <442000>; */
+
+		freq_clip_max_0 = <1066000>;
+		freq_clip_max_1 = <962000>;
+		freq_clip_max_2 = <754000>;
 		freq_clip_max_3 = <442000>;
 
 		cooling_level_0 = <66>;
@@ -190,12 +199,19 @@
 
 		freq_tab_count = <6>;
 
-		freq_clip_max_0 = <600000>;
+/*		freq_clip_max_0 = <600000>;
 		freq_clip_max_1 = <600000>;
 		freq_clip_max_2 = <546000>;
 		freq_clip_max_3 = <419000>;
 		freq_clip_max_4 = <260000>;
-		freq_clip_max_5 = <260000>;
+		freq_clip_max_5 = <260000>; */
+
+		freq_clip_max_0 = <600000>;
+		freq_clip_max_1 = <546000>;
+		freq_clip_max_2 = <419000>;
+		freq_clip_max_3 = <338000>;
+		freq_clip_max_4 = <260000>;
+		freq_clip_max_5 = <112000>;
 
 		cooling_level_0 = <66>;
 		cooling_level_1 = <71>;
