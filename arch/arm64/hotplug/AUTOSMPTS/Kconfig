@@ -1,0 +1,24 @@
+config ASMPTS
+    bool "Multi-core automatic hotplug support"
+    depends on SMP && HOTPLUG_CPU
+    default n
+    help
+      Automatically hotplugs the multiple cpu cores on and off
+      based on cpu load and suspend state
+
+# config ASMP2
+#    bool "Multi-core automatic hotplug support"
+#    depends on SMP && HOTPLUG_CPU
+#    default n
+#    help
+#      Automatically hotplugs the multiple cpu cores on and off
+#      based on cpu load and suspend state. v2
+
+# config ASMP2C
+#    bool "Multi-core automatic hotplug support"
+#    depends on SMP && HOTPLUG_CPU
+#    default n
+#    help
+#      Automatically hotplugs the multiple cpu cores on and off
+#      based on cpu load and suspend state. v2 two clusters
+

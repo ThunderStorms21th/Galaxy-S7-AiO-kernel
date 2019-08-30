@@ -1,0 +1,7 @@
+
+config MSM_SLEEPER
+    bool "CPU hotplug driver"
+ 	default y
+ 	help
+	  CPU hotplug driver
+
