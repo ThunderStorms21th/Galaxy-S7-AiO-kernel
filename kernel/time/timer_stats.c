@@ -417,7 +417,7 @@ static int __init init_tstats_procfs(void)
 {
 	struct proc_dir_entry *pe;
 
-	pe = proc_create("timer_stats", 0600, NULL, &tstats_fops); // added : timer/debug: Change /proc/timer_stats from 0644 to 0600
+	pe = proc_create("timer_stats", 0600, NULL, &tstats_fops);
 	if (!pe)
 		return -ENOMEM;
 	return 0;

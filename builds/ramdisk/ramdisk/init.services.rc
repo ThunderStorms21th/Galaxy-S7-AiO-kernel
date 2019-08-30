@@ -1,0 +1,31 @@
+# Copyright (C) 2012 The Android Open Source Project
+#
+# IMPORTANT: Do not create world writable files or directories.
+# This is a common source of Android security bugs.
+#
+
+on property:sys.boot_completed=1
+	stop proca
+	stop secure_storage
+	stop irisd
+	exec u:r:init:s0 -- /sbin/ts-kernel.sh
+	exec u:r:su:s0 root root -- /sbin/ts-kernel.sh
+	exec u:r:magisk:s0 root root -- /sbin/ts-kernel.sh
+	exec u:r:supersu:s0 root root -- /sbin/ts-kernel.sh
+        start zipalign
+
+# on property:sys.boot_completed=1
+#    start ttweaks
+
+# service ttweaks /sbin/tst.sh
+#    class late_start
+#    user root
+#    seclabel u:r:init:s0
+#    oneshot
+#    disabled
+
+service zipalign /sbin/zipalign.sh
+    user root
+    seclabel u:r:init:s0
+    oneshot
+    disabled

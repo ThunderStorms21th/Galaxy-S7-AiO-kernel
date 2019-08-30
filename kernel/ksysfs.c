@@ -210,9 +210,9 @@ static struct attribute_group kernel_attr_group = {
 	.attrs = kernel_attrs,
 };
 
-/* added Archpower support */
-static unsigned int Lgentle_fair_sleepers = 0;
-static unsigned int Larch_power = 1;
+// added ARCHPOWER and GENTLESLEEPERS
+static unsigned int Lgentle_fair_sleepers = 0;	// 1-on, 0-off
+static unsigned int Larch_power = 0;		// 1-on, 0-off
 
 extern void relay_gfs(unsigned int gfs);
 extern void relay_ap(unsigned int ap);
@@ -267,7 +267,8 @@ static struct attribute_group sched_features_attr_group = {
 
 /* Initialize fast charge sysfs folder */
 static struct kobject *sched_features_kobj;
-/* end */
+
+// END
 
 static int __init ksysfs_init(void)
 {
@@ -282,13 +283,13 @@ static int __init ksysfs_init(void)
 	if (error)
 		goto kset_exit;
 
-/* added Archpower */
+// added ARCHPOWER
 	sched_features_kobj = kobject_create_and_add("sched", kernel_kobj);
 		      error = sysfs_create_group(sched_features_kobj, &sched_features_attr_group);
 
 	if (error)
 			    kobject_put(sched_features_kobj);
-/* end */
+// END
 
 	if (notes_size > 0) {
 		notes_attr.size = notes_size;

@@ -104,15 +104,15 @@ static char *zswap_compressor = ZSWAP_COMPRESSOR_DEFAULT;
 module_param_named(compressor, zswap_compressor, charp, 0444);
 
 /* The maximum rate (1/1000) of memory that the compressed pool can occupy */
-static unsigned int zswap_max_pool_percent = 600; // was 500
+static unsigned int zswap_max_pool_percent = 500;
 module_param_named(max_pool_percent,
 			zswap_max_pool_percent, uint, 0644);
 
-static unsigned int zswap_high_pool_percent = 60; // was 30
+static unsigned int zswap_high_pool_percent = 30;
 module_param_named(high_pool_percent,
 			zswap_high_pool_percent, uint, 0644);
 
-static unsigned int zswap_low_pool_percent = 15; // was 25
+static unsigned int zswap_low_pool_percent = 25;
 module_param_named(low_pool_percent,
 			zswap_low_pool_percent, uint, 0644);
 
@@ -920,13 +920,22 @@ static int zswap_frontswap_store(unsigned type, pgoff_t offset,
 	if (zswap_is_full(ZSWAP_POOL_HIGH)) {
 		zswap_wakeup_writebackd();
 	}
+
+		/* A second zswap_is_full() check after
+		 * zswap_shrink() to make sure it's now
+		 * under the max_pool_percent
+		 */
+		if (zswap_is_full()) {
+			ret = -ENOMEM;
+			goto reject;
+		}
 #endif
 
 	if (zswap_is_full(ZSWAP_POOL_MAX)) {
 		zswap_pool_limit_hit++;
 		ret = -ENOMEM;
 		goto reject;
-	}
+}
 
 	/* allocate entry */
 	entry = zswap_entry_cache_alloc(GFP_KERNEL);

@@ -651,14 +651,17 @@ static ssize_t vib_strength_show(struct device *dev,
 	count += sprintf(buf, "%d\n", vib_strength);
 	return count;
 }
+
 static ssize_t vib_strength_dump(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 	sscanf(buf, "%d ",&vib_strength);
 	if (vib_strength < 0 || vib_strength > 90)
 		vib_strength = 20;
+
 	return count;
 }
+
 static DEVICE_ATTR(vib_strength, (S_IWUSR|S_IRUGO),
 	vib_strength_show, vib_strength_dump);
 */
@@ -785,3 +788,4 @@ static void __exit wake_gestures_exit(void)
 
 module_init(wake_gestures_init);
 module_exit(wake_gestures_exit);
+

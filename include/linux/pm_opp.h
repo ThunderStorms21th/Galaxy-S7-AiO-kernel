@@ -17,7 +17,6 @@
 #include <linux/err.h>
 #include <linux/notifier.h>
 
-// struct dev_pm_opp; - added fix for opp devfreq
 struct dev_pm_opp {
 	struct list_head node;
 
@@ -31,14 +30,13 @@ struct dev_pm_opp {
 
 struct device;
 
-/* added fix opp */
 struct device_opp {
 	struct list_head node;
 
 	struct device *dev;
 	struct srcu_notifier_head head;
 	struct list_head opp_list;
-}; /* end */
+};
 
 enum dev_pm_opp_event {
 	OPP_EVENT_ADD, OPP_EVENT_ENABLE, OPP_EVENT_DISABLE,

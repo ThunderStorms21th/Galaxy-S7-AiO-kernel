@@ -87,8 +87,7 @@ static struct kobj_attribute dyn_fsync_version_attribute =
 	__ATTR(Dyn_fsync_version, 0444, dyn_fsync_version_show, NULL);
 
 static struct kobj_attribute dyn_fsync_powersuspend_attribute = 
-//	__ATTR(Dyn_fsync_earlysuspend, 0444, dyn_fsync_powersuspend_show, NULL);
-	__ATTR(Dyn_fsync_earlysuspend, 0660, dyn_fsync_powersuspend_show, NULL); // writeable
+	__ATTR(Dyn_fsync_earlysuspend, 0444, dyn_fsync_powersuspend_show, NULL);
 
 static struct attribute *dyn_fsync_active_attrs[] =
 	{

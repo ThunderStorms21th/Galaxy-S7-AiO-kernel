@@ -775,6 +775,12 @@ config CPU_FREQ_DEFAULT_GOV_ZENX
 	help
 	  Use the CPUFreq governor 'ZenX' as default.
 
+config CPU_FREQ_DEFAULT_GOV_ZENERACTIVE
+	bool "zeneractive"
+	select CPU_FREQ_GOV_ZENERACTIVE
+	help
+	Use the CPUFreq governor 'zeneractive' as default.
+
 config CPU_FREQ_DEFAULT_GOV_THUNDERSTORMS
 	bool "thunderstorms"
 	select CPU_FREQ_GOV_THUNDERSTORMS
@@ -1284,6 +1290,9 @@ config CPU_FREQ_GOV_INTERACTIVE
 config CPU_FREQ_GOV_INTERACTIVEB
 	tristate "'interactiveb' cpufreq policy governor"
 
+config CPU_FREQ_GOV_INTERACTIVEX
+	tristate "'interactivex' cpufreq policy governor"
+
 config CPU_FREQ_GOV_DYNAMIC_INTERACTIVE
 	tristate "'dynamic_interactive' cpufreq policy governor"
 	depends on CPU_FREQ
@@ -1294,6 +1303,10 @@ config CPU_FREQ_GOV_THUNDERSTORMS_INTERACTIVE
 
 config CPU_FREQ_GOV_THUNDERSTORM
 	tristate "'thunderstorm' cpufreq policy governor"
+	depends on CPU_FREQ
+
+config CPU_FREQ_GOV_HOTPLUG
+	tristate "'hotplug' cpufreq policy governor"
 	depends on CPU_FREQ
 
 config CPU_FREQ_GOV_IRONACTIVE
@@ -1332,11 +1345,6 @@ config CPU_FREQ_GOV_HYBRID
 	  For details, take a look at linux/Documentation/cpu-freq.
 
 	  If in doubt, say N.
-
-config CPU_FREQ_GOV_FRANKENSTEIN
-	tristate "'frankenstein' cpufreq policy governor"
-	help
-	  'frankenstein' - Modified version of interactive with sleep+wake code.
 
 config CPU_FREQ_GOV_KTOONSERVATIVEQ
 	tristate "'ktoonservativeq' cpufreq governor"
@@ -1780,11 +1788,41 @@ config CPU_FREQ_GOV_ZENX
 	help
 	  'ZenX' - an interactive-based governor
 
+config CPU_FREQ_GOV_ZENERACTIVE
+	tristate "'zeneractive' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	'zeneractive' - an interactive-based governor
+	This governor provides full CPU hotplugging support
+	based on CPU load per CPU.
+ 	It also provides CPU hotplugging of CPU 1-X on
+	suspend/wake.
+	For details, take a look at linux/Documentation/cpu-freq.
+	If in doubt, say N
+
 config CPU_FREQ_GOV_SKYWALKER
 	tristate "'skywalker' cpufreq governor"
 	depends on CPU_FREQ
 	help
 	  'skywalker' - an interactive-based governor
+
+config CPU_FREQ_GOV_SAMSUNG
+	tristate "'samsung' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'samsung' - an samsung-based governor
+
+config CPU_FREQ_GOV_MINMAX
+	tristate "'minmax' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'minmax' - an min-max freq's governor
+
+config CPU_FREQ_GOV_USERSPACE
+	tristate "'userspace' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'userspace' - an userspace freq's governor
 
 config CPU_FREQ_GOV_THUNDERSTORMS
 	tristate "'thunderstorms' cpufreq policy governor"

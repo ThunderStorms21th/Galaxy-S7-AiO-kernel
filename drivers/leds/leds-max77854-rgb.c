@@ -109,8 +109,8 @@ static unsigned int octa_color = 0x0;
 
 /* added LED fade */
 unsigned int led_enable_fade = 1;
-unsigned int led_fade_time_up = 4000;
-unsigned int led_fade_time_down = 4000;
+unsigned int led_fade_time_up = 1000;
+unsigned int led_fade_time_down = 1000;
 unsigned int led_always_disable = 0;
 unsigned int led_debug_enable = 0;
 int led_block_leds_time_start = -1;
@@ -121,7 +121,7 @@ static struct delayed_work check_led_time;
 static bool is_work_active = false;
 /* end LED fade */
 
-/* added LEDs control */
+/* added LEDs control - old stuff */
 //unsigned int led_enable_fade = 0;
 //unsigned int led_fade_time_up = 800;
 //unsigned int led_fade_time_down = 800;
@@ -166,10 +166,10 @@ static struct leds_control {
 	.current_low = 5,
 	.current_high = 20,
 	.noti_ramp_control = 1,
-	.noti_ramp_up = 3000,
-	.noti_ramp_down = 3000,
-	.noti_delay_on = 3000,
-	.noti_delay_off = 5000,
+	.noti_ramp_up = 1000,
+	.noti_ramp_down = 1000,
+	.noti_delay_on = 2000,
+	.noti_delay_off = 2000,
 };
 #endif
 /* end of LED FADE */
@@ -616,11 +616,10 @@ static struct max77854_rgb_platform_data
 					"brightness_ratio_b_low in dt\n", __func__);
 		}
 		else {
-			brightness_ratio_g_low = (int)temp;
+			brightness_ratio_b_low = (int)temp;
 		}
-		pr_info("leds-max77854-rgb: %s, brightness_ratio_g_low = %x\n",
-				__func__, brightness_ratio_g_low);
-		
+		pr_info("leds-max77854-rgb: %s, brightness_ratio_b_low = %x\n",
+				__func__, brightness_ratio_b_low);
 	}
 	return pdata;
 }
@@ -685,8 +684,9 @@ static ssize_t store_max77854_rgb_brightness(struct device *dev,
 
 	led_lowpower_mode = 0;
 
-//	if (brightness > LED_MAX_CURRENT)
-	brightness = LED_MAX_CURRENT;
+	if (brightness > LED_MAX_CURRENT)
+		brightness = LED_MAX_CURRENT;
+
 /* LED FADE */
 	max_brightness = (led_lowpower_mode) ? leds_control.current_low : leds_control.current_high;
 	brightness = (brightness * max_brightness) / LED_MAX_CURRENT;
@@ -769,6 +769,7 @@ static ssize_t store_max77854_rgb_pattern(struct device *dev,
 	max77854_rgb_reset(dev);
 	if (mode == PATTERN_OFF)
 		return count;
+
 /* LED FADE */
 	if (!check_restrictions())
 		return count;
@@ -816,12 +817,17 @@ static ssize_t store_max77854_rgb_pattern(struct device *dev,
 			max77854_rgb_blink(dev, 3000, 5000);
 		}
 /* END LED FADE */
-
+		if (led_enable_fade) {
+			max77854_rgb_ramp(dev, led_fade_time_up, led_fade_time_down);
+			max77854_rgb_blink(dev, led_fade_time_up, 5000);
+		} else {
+			max77854_rgb_blink(dev, 500, 5000);
+		}
 		max77854_rgb_set_state(&max77854_rgb->led[BLUE], led_dynamic_current, LED_BLINK);
 		break;
 	case LOW_BATTERY:
-//		max77854_rgb_blink(dev, 500, 5000);
-/* LED CONTROL		if (led_enable_fade) {
+//		max77854_rgb_blink(dev, 500, 5000); ---- changes
+		if (led_enable_fade) {
 			max77854_rgb_ramp(dev, led_fade_time_up, led_fade_time_down);
 			max77854_rgb_blink(dev, led_fade_time_up, 5000);
 		} else {
@@ -847,14 +853,13 @@ static ssize_t store_max77854_rgb_pattern(struct device *dev,
 		} else {
 			max77854_rgb_ramp(dev, 800, 800);
 			max77854_rgb_blink(dev, 200, 200);
-		} /* added LEDs */
+		} /* added LEDs old */
 /* LED FADE */
 		if (leds_control.noti_ramp_control == 1) {
 			max77854_rgb_ramp(dev, leds_control.noti_ramp_up, leds_control.noti_ramp_down);
 		}
 		max77854_rgb_blink(dev, leds_control.noti_delay_on, leds_control.noti_delay_off);
 /* END LED FADE */
-
 		max77854_rgb_set_state(&max77854_rgb->led[BLUE], led_dynamic_current, LED_ALWAYS_ON);
 		max77854_rgb_set_state(&max77854_rgb->led[GREEN], led_dynamic_current, LED_BLINK);
 		break;
@@ -948,7 +953,6 @@ static ssize_t store_max77854_rgb_blink(struct device *dev,
 			if (led_b_brightness == 0)
 				led_b_brightness = 1;
 		}
-
 	}
 
 	if (led_r_brightness) {
@@ -964,7 +968,7 @@ static ssize_t store_max77854_rgb_blink(struct device *dev,
 	/*Set LED blink mode*/
 /* added LEDs */
 //	if (led_enable_fade && delay_on_time > 0)
-//		max77854_rgb_ramp(dev, led_fade_time_up, led_fade_time_down); /* end */
+//		max77854_rgb_ramp(dev, led_fade_time_up, led_fade_time_down); /* end old */
 /* LED FADE */
 	if (leds_control.noti_ramp_control == 1)
 		max77854_rgb_ramp(dev, leds_control.noti_ramp_up, leds_control.noti_ramp_down);
@@ -1129,9 +1133,8 @@ static ssize_t led_blink_store(struct device *dev,
 	pr_info("leds-max77854-rgb: %s\n", __func__);
 	return count;
 }
-
-/* added LEDs */
-/* static ssize_t led_fade_show(struct device *dev,
+/* old LEDS
+static ssize_t led_fade_show(struct device *dev,
 			struct device_attribute *attr, char *buf)
 {
 	int ret;
@@ -1198,8 +1201,7 @@ static ssize_t led_fade_time_down_store(struct device *dev,
 		led_fade_time_down = val;
 
 	return count;
-} */
-/* end */
+} old LEDs */
 
 /* added LED FADE */
 static ssize_t led_fade_show(struct device *dev,
@@ -1400,7 +1402,6 @@ static DEVICE_ATTR(blink, 0640, NULL, led_blink_store);
 /* end */
 
 /* LED FADE */
-
 static DEVICE_ATTR(led_fade, 0664, led_fade_show, led_fade_store);
 static DEVICE_ATTR(led_fade_time_up, 0664, led_fade_time_up_show, led_fade_time_up_store);
 static DEVICE_ATTR(led_fade_time_down, 0664, led_fade_time_down_show, led_fade_time_down_store);
@@ -1411,6 +1412,7 @@ static DEVICE_ATTR(led_block_leds_time_stop, 0664, led_block_leds_time_stop_show
 /* end */
 
 #ifdef SEC_LED_SPECIFIC
+
 /* LED FADE */
 static ssize_t show_leds_property(struct device *dev,
 				  struct device_attribute *attr, char *buf);
@@ -1553,7 +1555,7 @@ static struct attribute *sec_led_attributes[] = {
 	&dev_attr_led_blink.attr,
 	&dev_attr_led_brightness.attr,
 	&dev_attr_led_lowpower.attr,
-/* added LEDs */
+/* added LEDs older */
 //	&dev_attr_led_fade.attr,
 //	&dev_attr_led_fade_time_up.attr,
 //	&dev_attr_led_fade_time_down.attr,
@@ -1567,7 +1569,6 @@ static struct attribute *sec_led_attributes[] = {
 	&dev_attr_led_block_leds_time_start.attr,
 	&dev_attr_led_block_leds_time_stop.attr,
 /* END LED FADE */
-
 	NULL,
 };
 
@@ -1655,6 +1656,7 @@ static int max77854_rgb_probe(struct platform_device *pdev)
 /* end */
 
 	platform_set_drvdata(pdev, max77854_rgb);
+
 #if 0
 #if defined(CONFIG_LEDS_USE_ED28) && defined(CONFIG_SEC_FACTORY)
 	if( lcdtype == 0 && jig_status == false) {
