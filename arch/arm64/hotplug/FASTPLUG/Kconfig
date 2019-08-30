@@ -1,0 +1,6 @@
+config FAST_HOTPLUG
+	bool "Enable fast hotplug"
+	default n
+	help
+	  Kernel based core control.
+	  

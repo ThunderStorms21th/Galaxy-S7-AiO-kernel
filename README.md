@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ThundeRStormS "Galaxy S7 (SM-G930F/FD) All in One"
 # for TW Pie & Oreo, AOSP LOS16 & Treble kernel.
 

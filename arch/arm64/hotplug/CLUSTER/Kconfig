@@ -1,0 +1,7 @@
+config CLUSTER_HOTPLUG
+	bool "Enable cluster-hotplug cpu hotplug driver"
+        depends on HOTPLUG_CPU
+	default n
+	help
+	  Generic Cluster-hotplug cpu hotplug driver for ARM SOCs big.little
+
