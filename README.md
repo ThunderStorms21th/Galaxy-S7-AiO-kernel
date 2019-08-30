@@ -1,5 +1,5 @@
-# ThundeRStormS "Galaxy S7 (SM-G930F/FD) All in One kernel"
-#      for TW PIe & Oreo, AOSP LOS16 & Treble
+# ThundeRStormS "Galaxy S7 (SM-G930F/FD) All in One"
+# for TW PIe & Oreo, AOSP LOS16 & Treble kernel
 
 # Kernel for Samsung Galaxy S7
 Helping you compile kernels
