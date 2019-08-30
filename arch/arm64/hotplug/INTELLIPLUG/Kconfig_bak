@@ -1,7 +1,0 @@
-config INTELLI_HOTPLUG
-	   bool "Hotplug for ThunderStormS"
-	   depends on MSM_RUN_QUEUE_STATS
-	   default y
-	   help
-		 This enables kernel based multi core control. Best Choice for ThunderStormS
-

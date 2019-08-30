@@ -1,1 +1,0 @@
-obj-$(CONFIG_TOUCHSCREEN_FTS8)	+= fts_ts.o fts_fwu.o

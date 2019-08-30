@@ -1,9 +1,0 @@
-config AIO_HOTPLUG
-	bool "All in One HotPlug"
-	depends on SMP && HOTPLUG_CPU
-	default n
-	help
-	  an All in One HotPlug for Traditional Quad-Core SoCs and 
-	  Hexa/Octa-Core big.LITTLE SoCs.
-
-
