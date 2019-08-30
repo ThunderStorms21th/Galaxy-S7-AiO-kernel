@@ -10,7 +10,7 @@ Kernel Project by Team ThunderStorms
 
 - The Linux Kernel Archive for the Linux Patches <https://www.kernel.org/>
 - Samsung Open Source Release Center for the Source code <http://opensource.samsung.com/>
-- @ananjaser1211 for a Treble kernel source
+- @ananjaser1211 @Kill-Switch for a Treble kernel source
 - @Arianoxx for a PIE kernel source
 - @morogoku, @Tkkg1994, @Noxxxious, @farovitus, and @mwilky for help, codes and commits
 - Project: Exynos-Linux-Stable for updated ELS Linux source codes <https://github.com/exynos-linux-stable>
