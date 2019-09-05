@@ -1635,4 +1635,3 @@ static inline void account_reset_rq(struct rq *rq)
 #define arch_scale_freq_invariant()     (false)
 #endif
 /* END */
-

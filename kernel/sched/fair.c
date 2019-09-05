@@ -3061,7 +3061,7 @@ static void check_spread(struct cfs_rq *cfs_rq, struct sched_entity *se)
 		schedstat_inc(cfs_rq, nr_spread_over);
 #endif
 }
-
+/* Archpower added */
 static unsigned int Lgentle_fair_sleepers = 0;	// 1-on, 0 - off
 static unsigned int Larch_power = 0;		// 1-on, 0 - off
 
@@ -3074,7 +3074,7 @@ void relay_ap(unsigned int ap)
 {
 	Larch_power = ap;
 }
-
+/* end */
 static void
 place_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int initial)
 {
@@ -3098,7 +3098,7 @@ place_entity(struct cfs_rq *cfs_rq, struct sched_entity *se, int initial)
 		 * for a gentler effect of sleepers:
 		 */
 //		if (sched_feat(GENTLE_FAIR_SLEEPERS))
-		if (Lgentle_fair_sleepers)
+		if (Lgentle_fair_sleepers)	// gentle fair sleepers added for edit
 			thresh >>= 1;
 
 		vruntime -= thresh;
@@ -7359,7 +7359,7 @@ static void update_cpu_capacity(struct sched_domain *sd, int cpu)
 	struct sched_group *sdg = sd->groups;
 
 //	if (sched_feat(ARCH_CAPACITY))
-	if (Larch_power)
+	if (Larch_power) //added archpower
 		capacity *= arch_scale_cpu_capacity(sd, cpu);
 	else
 		capacity *= default_scale_cpu_capacity(sd, cpu);
@@ -7369,7 +7369,7 @@ static void update_cpu_capacity(struct sched_domain *sd, int cpu)
 	sdg->sgc->capacity_orig = capacity;
 
 //	if (sched_feat(ARCH_CAPACITY))
-	if (Larch_power)
+	if (Larch_power) //added archpower
 		capacity *= arch_scale_freq_capacity(sd, cpu);
 	else
 		capacity *= default_scale_capacity(sd, cpu);
