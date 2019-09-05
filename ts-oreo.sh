@@ -32,6 +32,9 @@ export ANDROID_MAJOR_VERSION=o
 export PLATFORM_VERSION=8.0.0
 export ANDROID_VERSION=80000
 export CURRENT_ANDROID_MAJOR_VERSION=o
+KBUILD_CFLAGS += -DANDROID_VERSION=80000
+KBUILD_CFLAGS += -DANDROID_MAJOR_VERSION=o
+export BUILD_PLATFORM_VERSION=8.0.0
 
 RDIR=$(pwd)
 OUTDIR=$RDIR/arch/$ARCH/boot
@@ -46,7 +49,7 @@ DEFCONFIG=ts-o-kernel_defconfig
 DEFCONFIG_S7EDGE=hero2lte_defconfig
 DEFCONFIG_S7FLAT=herolte_defconfig
 
-export K_VERSION="v2.4T"
+export K_VERSION="v2.4"
 export K_BASE="S5CSF1"
 export K_NAME="ThundeRStormS-Kernel"
 export REVISION="RC"
@@ -187,7 +190,7 @@ FUNC_BUILD_FLASHABLES()
 {
 	cd $RDIR/builds
 	mkdir temp2
-	cp -rf zip/common/. temp2
+	cp -rf zip-o/common/. temp2
     	mv *.img temp2/
 	cd temp2
 	echo ""
