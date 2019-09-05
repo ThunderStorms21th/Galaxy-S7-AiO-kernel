@@ -1,0 +1,198 @@
+ui_print("*******************************************************************");
+ui_print("                        ThunderStorm Kernel Oreo                   ");
+ui_print("                         For Samsung Galaxy S7                     ");
+ui_print("                Developed by ThundeRStormS Team                    ");
+ui_print("                                    TS Team                        ");
+ui_print("*******************************************************************");
+set_progress(0.01);
+
+# Thanks to @MoRoGoKu for oryginal script
+
+# Copy scripts
+package_extract_dir("ts", "/tmp/ts");
+package_extract_dir("tsk", "/tmp/tsk");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp/ts");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp/tsk");
+
+# Mounting partitions
+ui_print(" ");
+ui_print("@Mounting partitions...");
+ifelse(is_mounted("/system"), unmount("/system"));
+ifelse(is_mounted("/data"), unmount("/data"));
+run_program("/sbin/mount", "/system");
+run_program("/sbin/mount", "/data");
+
+# Run install script
+run_program("/tmp/ts/install_script.sh");
+
+ui_print(" ");
+ui_print("@ThundeRStormS - System Patching...");
+package_extract_dir("ts/system", "/system");
+run_program("/tmp/ts/del_wakelock.sh");  
+run_program("/tmp/ts/tskernel.sh");
+
+####################################################
+# OTHER OPTIONS
+####################################################
+
+# Private mode
+if file_getprop("/tmp/aroma/menu.prop", "chk9") == "1" then
+	ui_print(" ");
+	ui_print("@Fix for Private Mode...");
+	run_program("/tmp/ts/privatemode.sh");
+	package_extract_dir("ts/private_mode", "/system");
+endif;
+
+# ThunderTweaks
+if file_getprop("/tmp/aroma/menu.prop", "chk3") == "1" then
+	ui_print(" ");
+	ui_print("@Installing ThunderTweaks App...");
+	delete_recursive("/system/app/com.moro.mtweaks*");
+	delete_recursive("/system/priv-app/com.moro.mtweaks*");
+	delete_recursive("/data/app/com.moro.mtweaks*");
+	delete_recursive("/data/data/com.moro.mtweaks*");
+	delete_recursive("/data/app/com.thunder.thundertweaks*");
+	delete_recursive("/data/data/com.thunder.thundertweaks*");
+	delete_recursive("/data/app/com.hades.hKtweaks*");
+	delete_recursive("/data/data/com.hades.hKtweaks*");
+	run_program("/tmp/ts/ts_clean.sh", "com.moro.mtweaks", "-as");
+	run_program("/tmp/ts/ts_clean.sh", "com.thunder.thundertweaks", "-as");
+	run_program("/tmp/ts/ts_clean.sh", "com.hades.hKtweaks", "-as");
+	package_extract_dir("apps/com.thunder.thundertweaks-1", "/data/app/com.thunder.thundertweaks-1");
+endif;
+
+# TS kernel Profiles
+if file_getprop("/tmp/aroma/menu.prop", "chk6") == "1" then
+	ui_print(" ");
+	ui_print("@Install ThundeRStormS kernel Profiles...");
+	run_program("/tmp/ts/tskernel2.sh");
+	package_extract_dir("ts/profiles", "/data/media/0/Spectrum/profiles/");
+	package_extract_dir("ts/profiles", "/sdcard/Spectrum/profiles/");
+	package_extract_dir("ts/profiles", "/storage/emulated/0/Spectrum/profiles/");
+endif;
+
+# TS swap off
+if file_getprop("/tmp/aroma/menu.prop", "chk4") == "1" then
+	ui_print(" ");
+	ui_print("@Installing ThundeRStormS VNSWAP OFF...");
+	package_extract_dir("ts/swapoff", "/system/etc/init.d");
+	package_extract_dir("/tmp/ts/swapoff", "/system/etc/init.d");
+	package_extract_dir("ts/system1", "/system");
+endif;
+
+# Patch for deodexed and ported roms
+if file_getprop("/tmp/aroma/menu.prop", "chk10") == "1" then
+	
+	ui_print("@Patching system for ported and deodexed roms");
+	ui_print(" ");
+	package_extract_dir("tsk", "/tmp/tsk");
+	run_program("/sbin/busybox", "unzip", "/tmp/tsk/TS-kernel-deodexed-v1.1.zip", "META-INF/com/google/android/*", "-d", "/tmp/tsk");
+	run_program("/sbin/sh", "/tmp/tsk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/tsk/TS-kernel-deodexed-v1.1.zip");
+	delete_recursive("/tmp/tsk");
+	run_program("/sbin/busybox", "unzip", "/tmp/tsk/TS-kernel-deodexed-v1.2.zip", "META-INF/com/google/android/*", "-d", "/tmp/tsk");
+	run_program("/sbin/sh", "/tmp/tsk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/tsk/TS-kernel-deodexed-v1.2.zip");
+	delete_recursive("/tmp/tsk");
+endif;
+
+ui_print(" ");
+ui_print("@Setting Permissions...");
+set_metadata("/system/vendor/lib/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib64/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib/egl/libGLES_mali.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib64/egl/libGLES_mali.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/priv-app/PersonalPageService", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+
+set_metadata("/system/bin/logd", "uid", 1036, "gid", 1036, "mode", 0550, "capabilities", 0x440000040, "selabel", "u:object_r:logd_exec:s0");
+
+####################################################
+# ROOT
+####################################################
+set_progress(0.60);
+
+
+ui_print(" ");
+ui_print("@Root");
+
+# Without Root
+if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt1" then
+
+	ui_print("-- Without Root");
+	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
+		ui_print("-- Clear root data...");
+		run_program("/tmp/ts/clean_supersu.sh");
+		run_program("/tmp/ts/clean_magisk.sh");
+		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.supersu", "-asd");
+		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.suhide", "-asd");
+		run_program("/tmp/ts/ts_clean.sh", "com.topjohnwu.magisk", "-asd");
+	endif;
+endif;
+
+# Magisk Root
+if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt2" then
+show_progress(0.85, "-19000");
+	
+	# Clean opposite kernel
+	run_program("/tmp/ts/clean_supersu.sh");
+	run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.supersu", "-asd");
+	run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.suhide", "-asd");
+
+	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
+		ui_print("-- Clearing root data...");
+		run_program("/tmp/ts/clean_magisk.sh");
+		run_program("/tmp/ts/ts_clean.sh", "com.topjohnwu.magisk", "-asd");
+	endif;
+		
+	ui_print("-- Rooting with Magisk Manager...");
+	ui_print(" ");
+	package_extract_dir("magisk", "/tmp/ts/magisk");
+	run_program("/sbin/busybox", "unzip", "/tmp/ts/magisk/magisk.zip", "META-INF/com/google/android/*", "-d", "/tmp/ts/magisk");
+	run_program("/sbin/sh", "/tmp/ts/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/ts/magisk/magisk.zip");
+	delete_recursive("/tmp/ts/magisk");
+endif;
+
+# SuperSU Root
+if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt3" then
+show_progress(0.85, "-34000");
+	
+	# Clean opposite kernel
+	run_program("/tmp/ts/clean_magisk.sh");
+	run_program("/tmp/ts/ts_clean.sh", "com.topjohnwu.magisk", "-asd");
+
+	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
+		ui_print("-- Clearing root data...");
+		run_program("/tmp/ts/clean_supersu.sh");
+		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.supersu", "-asd");
+		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.suhide", "-asd");
+	endif;	
+
+	run_program("/tmp/ts/supersu.sh");
+	
+	ui_print("-- Rooting with SuperSU...");
+	package_extract_dir("supersu", "/tmp/ts/supersu");
+	run_program("/sbin/busybox", "unzip", "/tmp/ts/supersu/supersu.zip", "META-INF/com/google/android/*", "-d", "/tmp/ts/supersu");
+	run_program("/sbin/sh", "/tmp/supersu/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/ts/supersu/supersu.zip");
+	delete_recursive("/tmp/ts/supersu");
+
+	ui_print(" ");
+	ui_print("-- Installing Suhide...");
+	package_extract_dir("suhide", "/tmp/ts/suhide");
+	run_program("/sbin/busybox", "unzip", "/tmp/ts/suhide/suhide.zip", "META-INF/com/google/android/*", "-d", "/tmp/ts/suhide");
+	run_program("/sbin/sh", "/tmp/ts/suhide/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/ts/suhide/suhide.zip");
+	delete_recursive("/tmp/ts/suhide");
+endif;
+
+#####################################################
+
+# ui_print(" ");
+# ui_print("-- Unmounting Partition...");
+delete_recursive("/tmp");
+ifelse(is_mounted("/system"), unmount("/system"));
+
+set_progress(1.00);
+show_progress(1.00, "-1000");
+ui_print(" ");
+ui_print("*******************************************************************");
+ui_print("***  The ThundeRStormS kernel and mods are installed  ***");
+ui_print("*******************************************************************");
+ui_print(" ");
+

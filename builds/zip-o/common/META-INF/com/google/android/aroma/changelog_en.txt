@@ -1,0 +1,435 @@
+	
+<b>KERNEL INFORMATION:</b>
+
+	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
+	VERSION	: <b><#selectbg_g>v2.4</#></b>
+	DATE	: <b><#selectbg_g>05/08/2019</#></b>
+	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
+
+<#53a6f4><b>ONLY FOR Galaxy S7/S7Edge|stock odex/deodexed roms|</b></#>
+
+
+<b>CHANGELOG:</b>
+
+--------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O-v2.4 : 05.09.2019</#></b></u>
+<*>Updated Ramdisk G930FXXS5CSF1 </*>
+<*>Updated Sources G930FXXS5CSF1 </*>
+<*>Linux updated to 3.18.140 </*>
+<*>Some Changes in Aroma by @MissACCA </*>
+<*>Spectrum Profiles Updated </*>
+<*>Improvements for IRQ PM suspend mode </*>
+<*>Support LKM Deamon, LKM is disabled </*>
+<*>Fix for Early SF </*>
+<*>Some fixes in source code of kernel </*>
+<*>Some Changes in Aroma by @MissACCA </*>
+<*>New Aroma theme by @Tagdu17 & @nalas </*>
+<*>New splash screen by @nalas </*>
+<*>Added CPU Boost for each core </*>
+<*>Two New Cpu Gov has been added </*>
+   -MiniMax
+   -Userspace
+<*>Spectrum Profiles Updated </*>
+<*>ThunderTweaks v1.0.3.3 </*>
+<*>Magisk 19.3 </*>
+<*>Better Stability and RAM Management </*>
+<*>Rest like in TS-OREO v2.3</*>
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O-v2.3 : 14.07.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU5ESD2</*>
+<*>Support odexed / deodexed roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>ThunderTweaks 1.0.3</*>
+<*>Camera Samsung fix by MoroGoku</*>
+<*>Added Archpower support - default is off</*>
+<*>Added Dynamic Fsync and Powersuspend</*>
+<*>Magisk 19.3 official</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>Linux 3.18.91 Samsung</*>
+<*>CPU big : 2600/208 MHZ</*>
+<*>CPU little : 1586/130 MHZ</*>
+<*>Added Fingerprint Boost - default is off</*>
+<*>Added Input Boost CPU - default is off</*>
+<*>Added NEW I/O schedulers : MAPLE & ANXIETY</*>
+<*>Added NEW CPU governors and some updates</*>
+<*>Added NEW TWRP recovery v3.3.0-0 by AJ's</*>
+<*>Added NEW CPU hotplugs : Alucard, ZEN Decision, AiO
+ and AutoSMP, CLUSTER, BLU, Intelli, Fast, Thunderbolt,
+ Mako,Lazy, MSM, MSM Sleeper</*>
+   This is not full supported by MTWeaks for now, so You
+   can see no full parameters to set. MTweaks will support
+   it in the future.
+   For now MSM, MSM Sleeper, Lazy and Intelli plugs are
+   not stable so they are disabled.
+<*>Added Fingerprint Boost - default OFF</*>
+   This is not full supported by MTWeaks for now, so You
+   can see no parameters to set. MTweaks will support it
+   in the future.
+<*>Fixed bug in AutoSMP and AiO hotplug for Exynos 8890</*>
+<*>LED control with FADE</*>
+<*>IRIS service off</*>
+<*>Support 10 Spectrum Profiles</*>
+<*>Updated Moro Sound to v2.1.1</*>
+<*>Added TTL support for IP</*>
+<*>Added Fingerprint Boost default ON</*>
+<*>VNSwap - default is turned ON.</*>
+<*>VNSwap - added script for disable it in Aroma.</*>
+<*>ZRAM - default is turned OFF, file set max at 4.0GB</*>
+   Now ZRAM is editable via script in Init.d folder.
+<*>3 cores down if screen is off</*>
+<*>No load high freq CPU is usage is lower then 5%</*>
+<*>Support Gestures to Weakup</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>Fix for SCSI drivers and maybe deepsleep drain</*>
+<*>Rest like in TS-OREO v2.2</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v2.2 : 1.05.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESC7</*>
+<*>Support odexed, deodexed and ported roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.14.0</*>
+<*>Moro Sound Drivers 2.1</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.137 ELS</*>
+<*>Added LEDs & Fade control - fixed</*>
+<*>Lower voltage table for both CPU for lower power consumpion</*>
+<*>Added GPU OC to 806MHz</*>
+<*>Added Battery Store controls</*>
+<*>Added Boeffla wakelocks blocker</*>
+<*>Added some CPU governors</*>
+<*>Added NEW CPU hotplugs : Alucard, ZEN Decision, AiO and
+   AutoSMP, CLUSTER </*>
+   This is not full supported by MTWeaks for now, so You
+   can see no full parameters to set. MTweaks will support
+   it in the future.
+<*>Added Fingerprint Boost</*>
+   This is not full supported by MTWeaks for now, so You
+   can see no parameters to set. MTweaks will support it
+   in the future.
+<*>Added OC GPU to 806 MHz</*>
+<*>ZRAM - default is turned OFF, file set max at 2.5GB</*>
+<*>Added lower values of CPU min freq's</*>
+<*>4 Big Cores toggle support</*>
+<*>3 Big cores down if screen is off</*>
+<*>Added Fingerprint Boost</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v2.1</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v2.1 : 26.04.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESC7</*>
+<*>Support odexed, deodexed and ported roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.14.0</*>
+<*>Moro Sound Drivers 2.1</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.137 ELS</*>
+<*>Added LEDs & Fade control - fixed</*>
+<*>Lower voltage table for both CPU for lower power consumpion</*>
+<*>Added GPU OC to 806MHz</*>
+<*>Added Battery Store controls</*>
+<*>Added Boeffla wakelocks blocker</*>
+<*>Added some CPU governors</*>
+<*>Added OC GPU to 806 MHz</*>
+<*>Added lower values of CPU min freq's</*>
+<*>3 Big cores down if screen is off</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v2.0</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v2.0 : 16.04.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESC7</*>
+<*>Support odexed, deodexed and ported roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.14.0</*>
+<*>Moro Sound Drivers 2.1</*>
+<*>Removed SmartPack-Kernel Menager v7.5</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.137 ELS</*>
+<*>Removed Finger Boost</*>
+<*>Removed Input Touch Boost</*>
+<*>Added LEDs & Fade control</*>
+<*>Lower voltage table for both CPU for lower power consumpion</*>
+<*>Added GPU OC to 806MHz</*>
+<*>Added Battery Store controls</*>
+<*>Added Boeffla wakelocks blocker</*>
+<*>Added lower values of CPU min freq's</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v1.9</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.9 : 12.04.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESC7</*>
+<*>Support odexed, deodexed and ported roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.14.0</*>
+<*>Moro Sound Drivers 2.1</*>
+<*>SmartPack-Kernel Menager v7.5</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.137 ELS</*>
+<*>FingerBoost is off</*>
+<*>Added lower values of CPU min freq's</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v1.8</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.8 : 23.03.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESC1</*>
+<*>Support odexed, deodexed and ported roms</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.13</*>
+<*>SmartPack-Kernel Menager v7.5</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.136 ELS</*>
+<*>SELinux : permissive</*>
+<*>Added Input Touch Boost</*>
+<*>Added GPU OC to 806MHz</*>
+<*>Added Battery controls</*>
+<*>Added Boeffla wakelocks blocker</*>
+<*>Added Fingerprint boost - default turned ON</*>
+  | MTweaks no support it-only can change via bash script|
+<*>Changes in hotplug freq's v1.0</*>
+<*>Added new CPU governors + chill gov</*>
+  | zzmove works only in Big CPU |
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v1.7</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.7 : 13.03.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESBB</*>
+<*>Support deodexed and ported roms | not sure 100% works</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.13</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.136 ELS</*>
+<*>SELinux : permissive</*>
+<*>Added CPU BOOST drivers - default off</*>
+<*>Added new CPU governors | zzmove works only in Big CPU |</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Back GPU Voltage control</*>
+<*>Fix: No heat and no lags</*>
+<*>Fix: some policy CPU and added CPU boost</*>
+<*>The rest like in previous version v1.6</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.6 : 6.03.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXS4ESBB</*>
+<*>Support deodexed and ported roms | not sure 100% works</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.13</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.136 ELS</*>
+<*>SELinux : permissive</*>
+<*>Added Moro Sound Drivers</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Dynamic Stune Boost v2</*>
+<*>Fix: No heat and no lags</*>
+<*>Fix: some policy CPU and added CPU boost</*>
+<*>The rest like in previous version v1.5</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.5 : 1.03.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ESA2</*>
+<*>Support deodexed and ported roms | not sure 100% works</*>
+<*>Flat and Edge versions</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.13</*>
+<*>Magisk 18.1 Unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.136 ELS</*>
+<*>SELinux : permissive</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Unlocked big CPU 4 cores to 2600MHz</*>
+<*>Big CPU max at 2080MHz</*>
+<*>Little CPU max at 1378MHz</*>
+<*>Fix: No heat and no lags</*>
+<*>Added support for F2FS patition</*>
+<*>Added Wireguard support</*>
+<*>Added Dynamic Fsync and Powersuspend mode</*>
+<*>Added TS profiles for Game, Balanced(TS), Battery(TS), Performance</*>
+<*>VM, VNSWAP : some settings v1.3</*>
+<*>Some changes in initial settings & Input Boost Little CPU</*>
+<*>Removed GPU voltage control</*>
+<*>Removed Battery and Led control</*>
+<*>Support Battery Store control</*>
+<*>Added Fsync and CRC control | default are off</*>
+<*>The rest like in previous version v1.4.2</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.4.2 : 23.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ESA2</*>
+<*>Flat and Edge versions</*>
+<*>Fix: No heat and no lags</*>
+<*>Some changes in initial settings</*>
+<*>The rest like in previous version v1.4.1</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.4.1 : 22.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ESA2</*>
+<*>Flat and Edge versions</*>
+<*>Fix: No heat and no lags</*>
+<*>The rest like in previous version v1.4</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.4 : 20.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ESA2</*>
+<*>Flat and Edge versions</*>
+<*>Rebuilt source</*>
+<*>Added Voltage control for CPU and GPU</*>
+<*>VM, VNSWAP : some settings v1.2</*>
+<*>MTweaks 2.12.6</*>
+<*>Added some CPU govs and I/O scheds</*>
+<*>Magisk 18.1 official</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>Linux 3.18.134 ELS</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fixed drain battery</*>
+<*>SELinux Permissive</*>
+<*>Fixed random reboots</*>
+<*>Added Fsync and CRC control | default are off</*>
+<*>Added Battery and LED control</*>
+<*>HMP settings for more stability</*>
+<*>PWM Flicker Free default Turn OFF</*>
+<*>Some initial settings : clean codes</*>
+<*>Fixed kernel panic</*>
+<*>Fix clocksource ABS from 32bit to 64bit</*>
+<*>Added LED and Battery control</*>
+<*>The rest like in previous version v1.3</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.3 : 10.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ERL3</*>
+<*>Flat and Edge versions</*>
+<*>Almost stock kernel features</*>
+<*>VM, VNSWAP : some settings v1.1</*>
+<*>MTweaks 2.12.6</*>
+<*>Magisk 18.1 unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>Linux 3.18.134 ELS</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fixed drain battery</*>
+<*>SELinux Permissive</*>
+<*>HMP settings for more stability</*>
+<*>PWM Flicker Free default Turn ON</*>
+<*>The rest like in previous version v1.2</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.2 : 7.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ERL3</*>
+<*>Flat and Edge versions</*>
+<*>Almost stock kernel features</*>
+<*>VM, VNSWAP : some settings v1.1</*>
+<*>MTweaks 2.12.6</*>
+<*>Magisk 18.1 unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>Linux 3.18.133 ELS</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fixed drain battery</*>
+<*>SELinux Permissive</*>
+<*>Added PWM Flicker Free</*>
+<*>The rest like in previous version v1.1</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.1 : 6.02.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ERL3</*>
+<*>Flat and Edge versions</*>
+<*>Almost stock kernel features</*>
+<*>VM, VNSWAP : some settings v1.1</*>
+<*>MTweaks 2.12.6</*>
+<*>Magisk 18.1 unofficial</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>Linux 3.18.133 ELS</*>
+<*>GPU Freq: 112-650MHz Stock</*>
+<*>Added GPU throttling</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Fixed drain battery</*>
+<*>HMP settings : 880/340 and some freq chcnages</*>
+<*>SELinux Permissive</*>
+<*>Added ArchPower</*>
+<*>The rest like in previous version</*>
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-O v1.0 : 30.01.2019</#></b></u>
+<*>Samsung sources G930FXXU3ERL3</*>
+<*>Samsung ramdisk G930FXXU3ERL3</*>
+<*>Almost stock kernel features</*>
+<*>VM, VNSWAP : some settings v1.0</*>
+<*>Fixed Private Mode (Stock ROMS) by MoRoGoKu</*>
+<*>MTweaks 2.12.6</*>
+<*>Magisk 18.1</*>
+<*>Knox 0x0 & SafetyNet with SuperSU and Magisk</*>
+<*>SuperSU 2.82SR5 + SuHide v1.09</*>
+<*>Linux 3.18.133 ELS</*>
+<*>SELinux : permissive</*>
+<*>Unlocked big CPU 4 cores to 2600MHz</*>
+<*>CPU Freq range : Higher Freq 2600/1586 MHz and Low Freq at 416/338 MHz</*>
+<*>CPU Freq setup : Higher Freq 2080/1586 MHz and Low Freq at 416/338 MHz</*>
+<*>GPU Freq: 260-650MHz Stock</*>
+<*>100% stable, NO RANDOM REBOOTS</*>
+<*>compiler : aarch64-linux-android-4.9</*>
+<*>Spectrum and profiles not supported</*>
+<*>Wireguard VPN not supported</*>
+<*>Fixed drain battery</*>
+<*>Some CPU governors </*>
+<*>Some of IO Shedulers</*>
+<*>HMP settings : 800/300 and some freq chcnages</*>
+<*>USB charge to 800MHz in normall mode</*>
+<*>USB charge to 900MHz in fast mode</*>
+<*>Added VENO, VEGAS to TCP</*>
+<*>Added CONSERVATIVE GOV for edit</*>
+<*>Added CONSERVATIVE, POWERSAVE and ONDEMAND GOVs</*>
+<*>SELinux Permissive</*>
+<*>INITIAL RELEASE</*>
+----------------------------------------------------------------------------
+

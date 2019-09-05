@@ -1,0 +1,115 @@
+ui_print("*******************************************************************");
+ui_print("                      ThunderStorm Kernel Treble                   ");
+ui_print("                         For Samsung Galaxy S7                     ");
+ui_print("                Developed by ThundeRStormS Team                    ");
+ui_print("                                    TS Team                        ");
+ui_print("*******************************************************************");
+set_progress(0.01);
+
+# Thanks to @MoRoGoKu for oryginal script
+
+# Copy scripts
+package_extract_dir("ts", "/tmp/ts");
+package_extract_dir("tsk", "/tmp/tsk");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp/ts");
+set_perm_recursive(0, 0, 0777, 0777, "/tmp/tsk");
+
+ui_print(" ");
+ui_print("@Mounting partitions...");
+
+ifelse(is_mounted("/system"), unmount("/system"));
+ifelse(is_mounted("/data"), unmount("/data"));
+run_program("/sbin/mount", "/system");
+run_program("/sbin/mount", "/data");
+
+# Run install script
+run_program("/tmp/ts/install_script.sh");
+
+ui_print(" ");
+ui_print("@ThundeRStormS - System Patching...");
+package_extract_dir("ts/system", "/system");
+
+# TS swap off
+if file_getprop("/tmp/aroma/menu.prop", "chk4") == "1" then
+	ui_print(" ");
+	ui_print("@Installing ThundeRStormS VNSWAP OFF...");
+	package_extract_dir("ts/swapoff", "/system/etc/init.d");
+	package_extract_dir("/tmp/ts/swapoff", "/system/etc/init.d");
+	package_extract_dir("ts/system1", "/system");
+endif;
+
+run_program("/tmp/ts/tskernel.sh");
+
+ui_print(" ");
+ui_print("@Setting Permissions...");
+set_metadata("/system/vendor/lib/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/vendor/lib64/libsecure_storage.so", "uid", 0, "gid", 2000, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata_recursive("/system/priv-app/PersonalPageService", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/bin/logd", "uid", 1036, "gid", 1036, "mode", 0550, "capabilities", 0x440000040, "selabel", "u:object_r:logd_exec:s0");
+
+#--PERMISSION
+ui_print("-- Fixing permission...");
+package_extract_file("ts/fix_permissions.sh", "/tmp/ts/fix_permissions.sh");
+set_perm(0, 0, 0777, "/tmp/ts/fix_permissions.sh");
+run_program("/tmp/ts/fix_permissions.sh");
+
+#################################################
+# ROOT
+####################################################
+set_progress(0.55);
+
+ui_print(" ");
+ui_print("@Root");
+
+# Without Root
+if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt1" then
+
+	ui_print("-- Without Root");
+	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
+		ui_print("-- Clear root data...");
+		run_program("/tmp/ts/clean_supersu.sh");
+		run_program("/tmp/ts/clean_magisk.sh");
+		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.supersu", "-asd");
+		run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.suhide", "-asd");
+		run_program("/tmp/ts/ts_clean.sh", "com.topjohnwu.magisk", "-asd");
+	endif;
+endif;
+
+# Magisk Root
+if file_getprop("/tmp/aroma/menu.prop", "group1") == "opt2" then
+show_progress(0.60, "-30000");
+	
+	# Clean opposite kernel
+	run_program("/tmp/ts/clean_supersu.sh");
+	run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.supersu", "-asd");
+	run_program("/tmp/ts/ts_clean.sh", "eu.chainfire.suhide", "-asd");
+
+	if file_getprop("/tmp/aroma/menu.prop", "chk7") == "1" then
+		ui_print("-- Clearing root data...");
+		run_program("/tmp/ts/clean_magisk.sh");
+		run_program("/tmp/ts/ts_clean.sh", "com.topjohnwu.magisk", "-asd");
+	endif;
+		
+	ui_print("-- Rooting with Magisk Manager...");
+	ui_print(" ");
+	package_extract_dir("magisk", "/tmp/magisk");
+	run_program("/sbin/busybox", "unzip", "/tmp/magisk/magisk.zip", "META-INF/com/google/android/*", "-d", "/tmp/magisk");
+	run_program("/sbin/sh", "/tmp/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/magisk/magisk.zip");
+	delete_recursive("/tmp/magisk");
+endif;
+
+#####################################################
+
+# ui_print(" ");
+# ui_print("-- Unmounting Partition...");
+delete_recursive("/tmp");
+ifelse(is_mounted("/system"), unmount("/system"));
+
+set_progress(1.00);
+show_progress(1.00, "-1000");
+ui_print(" ");
+ui_print("*******************************************************************");
+ui_print("***  The ThundeRStormS kernel and mods are installed  ***");
+ui_print("*******************************************************************");
+ui_print(" ");
+

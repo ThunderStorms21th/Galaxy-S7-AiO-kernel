@@ -1,0 +1,166 @@
+#########
+#
+# LICENSE:
+# Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
+# Initializing Rom Information
+# Thanks to MoRoGoKu (original script)
+#
+
+#########################################################################################
+
+# Initialization
+#
+# Configuration
+ini_set("dp",				"8");
+ini_set("force_colorspace", "rgba");
+
+# Splash
+# splash(2000,"splash/splash");
+
+##
+# Show Animated Splash
+#
+anisplash(
+  #-- Number of Loop
+    2,
+  
+  #-- Frame [ Image, duration in millisecond ]
+    	"splash/1", 200,
+	"splash/3", 50,
+	"splash/2", 50,
+	"splash/3", 50,
+	"splash/1", 300,
+	"splash/3", 50,
+	"splash/2", 50,
+	"splash/3", 50,
+	"splash/1", 200,
+	"splash/3", 50,
+	"splash/2", 50
+);
+
+# Fonts
+fontresload( "0", "ttf/Prototype.ttf;", "12" );
+fontresload( "1", "ttf/Prototype.ttf;", "14" );
+
+# Theme
+theme("ts");
+
+
+#########################################################################################
+# INITALIZE OPTIONS
+#########################################################################################
+
+###
+# English version
+# 
+
+	loadlang("langs/en.lang");
+	setvar("changelog", "changelog_en.txt");
+        setvar("licence", "licence.txt");
+
+
+###
+# Term of use
+# 
+agreebox(
+    "TERMS OF USE",
+    "          Please read carefuly the Terms of use!!!",
+    "@licence",
+    resread(getvar("licence")),
+    "I agree with the above Terms of Use",
+    "Please check the agreement..."
+);
+
+###
+# Changelog
+#
+
+textbox(
+	"<~changelog.title>",
+	"<~changelog.desc>",
+	"@welcome",
+	resread(getvar("changelog"))
+);
+
+
+###
+# Installation
+#
+
+form(
+	"<~menu.title>",
+	"<~menu.desc>",
+	"@personalize",
+	"menu.prop",
+
+	"group1",     "<b><~menu.group1></b>",  "",                     	"group",
+	  "opt1",     "<b><~menu.1></b>",       "<~menu.1desc>",         	"select",
+	  "opt2",     "<b><~menu.2></b>",       "<~menu.2desc>",         	"select.selected",
+#	  "opt3",     "<b><~menu.5></b>",       "<~menu.5desc>",         	"select",
+	"group2",     "<b><~menu.group2></b>",  "",                     	"group",
+	  "chk3",     "<b><~menu.3></b>",       "<~menu.3desc>",		"check.checked",
+	  "chk6",     "<b><~menu.6></b>",       "<~menu.6desc>",		"check.checked",
+#	  "chk8",     "<b><~menu.8></b>",       "<~menu.8desc>",		"check",
+#	  "chk5",     "<b><~menu.5></b>",       "<~menu.5desc>",		"check",
+#	  "chk9",     "<b><~menu.9></b>",       "<~menu.9desc>",		"check",
+#	  "chk11",    "<b><~menu.11></b>",      "<~menu.11desc>",		"check",
+	  "chk4",     "<b><~menu.4></b>",       "<~menu.4desc>",		"check",
+#	  "chk10",    "<b><~menu.10></b>",      "<~menu.10desc>",		"check",
+	  "chk7",     "<b><~menu.7></b>",       "<~menu.7desc>",		"check"
+);
+
+
+#########################################################################################
+# Confirmation
+#
+
+viewbox(
+	"<~confirm.1>",
+	"\n\n<~confirm.2>\n\n"+
+	"<~confirm.3>",
+	"@flashing"
+);
+
+
+#########################################################################################
+# Installation
+#
+
+setvar("retstatus",
+	install(
+		"<~inst.1>",
+		"<b>"+ini_get("rom_name")+"</b>\n"+
+		"<~inst.2>",	
+		"@install",	
+		"<~inst.3>\n"+
+		"<~inst.4>"
+	)
+);
+
+
+#########################################################################################
+# Final
+#
+
+
+#set Next text fo Finish
+ini_set("text_next", "<~text_finish>");
+
+
+viewbox(
+	"",
+	"<#selectbg_g><b><~final.1></b></#>\n\n"+
+	"<~final.2>\n\n"+
+	"<~final.4>",
+	"@welcome"
+);
+
+
+
+
+
+;
+
+
+
+
