@@ -32,6 +32,9 @@ export ANDROID_MAJOR_VERSION=p
 export PLATFORM_VERSION=9.0.0
 export ANDROID_VERSION=90000
 export CURRENT_ANDROID_MAJOR_VERSION=p
+KBUILD_CFLAGS += -DANDROID_VERSION=90000
+KBUILD_CFLAGS += -DANDROID_MAJOR_VERSION=p
+export BUILD_PLATFORM_VERSION=9.0.0
 
 RDIR=$(pwd)
 OUTDIR=$RDIR/arch/$ARCH/boot
@@ -159,6 +162,7 @@ FUNC_BUILD_RAMDISK()
 	case $MODEL in
 	G935)
 		echo "Ramdisk for G935"
+		sed -i 's/8.0.0/9.0.0/g' split_img/boot.img-osversion
 		;;
 	G930)
 		echo "Ramdisk for G930"
@@ -167,6 +171,8 @@ FUNC_BUILD_RAMDISK()
 
 		sed -i 's/G935/G930/g' ramdisk/default.prop
 		sed -i 's/hero2/hero/g' ramdisk/default.prop
+		sed -i 's/8.0.0/9.0.0/g' split_img/boot.img-osversion
+		sed -i 's/G935/G930/g' ramdisk/sepolicy_version
 		;;
 	esac
 
@@ -185,7 +191,7 @@ FUNC_BUILD_FLASHABLES()
 {
 	cd $RDIR/builds
 	mkdir temp2
-	cp -rf zip/common/. temp2
+	cp -rf zip-p/common/. temp2
     	mv *.img temp2/
 	cd temp2
 	echo ""
