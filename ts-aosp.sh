@@ -32,6 +32,9 @@ export ANDROID_MAJOR_VERSION=o
 export PLATFORM_VERSION=8.0.0
 export ANDROID_VERSION=80000
 export CURRENT_ANDROID_MAJOR_VERSION=o
+KBUILD_CFLAGS += -DANDROID_VERSION=90000
+KBUILD_CFLAGS += -DANDROID_MAJOR_VERSION=p
+export BUILD_PLATFORM_VERSION=9.0.0
 
 RDIR=$(pwd)
 OUTDIR=$RDIR/arch/$ARCH/boot
@@ -185,7 +188,7 @@ FUNC_BUILD_FLASHABLES()
 {
 	cd $RDIR/builds
 	mkdir temp2
-	cp -rf zip/common/. temp2
+	cp -rf zip-a/common/. temp2
     	mv *.img temp2/
 	cd temp2
 	echo ""
