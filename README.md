@@ -13,6 +13,7 @@ Kernel Project by Team ThunderStorms
 - @ananjaser1211 @Kill-Switch for a Treble kernel source
 - @Arianoxx for a PIE kernel source
 - @morogoku, @Tkkg1994, @Noxxxious, @farovitus, and @mwilky for help, codes and commits
+- @Tetsuo_Osaka for ideas and kernel commits
 - Project: Exynos-Linux-Stable for updated ELS Linux source codes <https://github.com/exynos-linux-stable>
 - @osm0sis for Android Image Kitchen and anykernel2 <https://forum.xda-developers.com/showthread.php?t=2073775>
 
