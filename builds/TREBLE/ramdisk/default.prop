@@ -1,1 +1,100 @@
-system/etc/prop.default
+#
+# ADDITIONAL_DEFAULT_PROPERTIES
+#
+ro.actionable_compatible_property.enabled=false
+ro.secure=0
+security.perf_harden=1
+ro.allow.mock.location=0
+ro.debuggable=1
+tombstoned.max_tombstone_count=50
+dalvik.vm.image-dex2oat-Xms=64m
+dalvik.vm.image-dex2oat-Xmx=64m
+dalvik.vm.dex2oat-Xms=64m
+dalvik.vm.dex2oat-Xmx=512m
+dalvik.vm.usejit=true
+dalvik.vm.usejitprofiles=true
+dalvik.vm.dexopt.secondary=true
+dalvik.vm.appimageformat=lz4
+pm.dexopt.first-boot=quicken
+pm.dexopt.boot=verify
+pm.dexopt.install=speed-profile
+pm.dexopt.bg-dexopt=speed-profile
+pm.dexopt.ab-ota=speed-profile
+pm.dexopt.inactive=verify
+pm.dexopt.shared=speed
+dalvik.vm.dex2oat-minidebuginfo=true
+debug.atrace.tags.enableflags=0
+ro.com.google.clientidbase=android-samsung
+keyguard.no_require_sim=true
+ro.build.selinux=1
+ro.config.notification_sound=Argon.ogg
+ro.config.alarm_alert=Hassium.ogg
+persist.sys.dun.override=0
+ro.adb.secure=0
+ro.storage_manager.enabled=true
+media.recorder.show_manufacturer_and_model=true
+ro.config.ringtone=Orion.ogg
+net.tethering.noprovisioning=true
+ro.vndk.version=28
+ro.vndk.lite=true
+ro.zygote=zygote64_32
+ro.logd.size.stats=64K
+log.tag.stats_log=I
+
+# MISC
+debug.enabler=false
+# was 1
+pm.sleep_mode=1
+power.saving.mode=1
+ro.ril.disable.power.collapse=0
+ro.ril.power_collapse=1
+persist.cust.tel_eons=1
+ro.fast.dormancy=1
+ro.ril.fast_dormancy.rule=1
+ro.semc.enable.fast_dormancy=1
+ro.config.hw_power_saving=true
+dalvik.vm.checkjni=false
+ro.ril.sensor.sleep.control=1
+ro.ril.disable.power.collapse=1
+ro.config.hw_quickpoweron=true
+persist.sys.shutdown.mode=hibernate
+ro.config.nocheckin=1
+ro.wifi.hotspotUI=1
+ro.tether.denied=false
+debug.kill.allocating_task=0
+power_supply.wakeup=enable
+ro.config.hw_fast_dormancy=1
+ro.config.hw_power_saving=1
+ring.delay=0
+fingerprint.unlock=1
+persist.sys.purgeable_assets=1
+ro.allow.mock.location=0
+# persist.sys.usb.config=none
+
+# LKMD
+ro.lmk.low=1001
+ro.lmk.medium=800
+ro.lmk.critical=0
+ro.lmk.critical_upgrade=false
+ro.lmk.upgrade_pressure=100
+ro.lmk.downgrade_pressure=100
+ro.lmk.kill_heaviest_task=true
+ro.lmk.kill_timeout_ms=100
+ro.lmk.use_minfree_levels=true
+
+# Early SF configuration
+debug.sf.early_phase_offset_ns=500000
+debug.sf.early_app_phase_offset_ns=500000
+debug.sf.early_gl_phase_offset_ns=3000000
+debug.sf.early_gl_app_phase_offset_ns=15000000
+
+#
+# BOOTIMAGE_BUILD_PROPERTIES
+#
+ro.bootimage.build.date=Wed Feb 13 17:57:51 UTC 2019
+ro.bootimage.build.date.utc=1550080671
+ro.bootimage.build.fingerprint=samsung/hero2ltexx/hero2lte:8.0.0/R16NW/G935FXXU2ERD5:user/release-keys
+persist.sys.usb.config=none
+
+# import original default.prop
+import /system/etc/prop.default
