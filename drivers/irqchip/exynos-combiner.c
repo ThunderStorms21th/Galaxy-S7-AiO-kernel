@@ -13,6 +13,7 @@
 #include <linux/init.h>
 #include <linux/io.h>
 #include <linux/slab.h>
+#include <linux/syscore_ops.h>
 #include <linux/irqdomain.h>
 #include <linux/irqchip/chained_irq.h>
 #include <linux/interrupt.h>
@@ -34,9 +35,15 @@ struct combiner_chip_data {
 	unsigned int irq_mask;
 	void __iomem *base;
 	unsigned int parent_irq;
+#ifdef CONFIG_PM
+	u32 pm_save;
+#endif
+
 };
 
+static struct combiner_chip_data *combiner_data;
 static struct irq_domain *combiner_irq_domain;
+static unsigned int max_nr = 20;
 
 static inline void __iomem *combiner_base(struct irq_data *data)
 {
@@ -51,6 +58,7 @@ static void combiner_mask_irq(struct irq_data *data)
 	u32 mask = 1 << (data->hwirq % 32);
 
 	__raw_writel(mask, combiner_base(data) + COMBINER_ENABLE_CLEAR);
+//	writel_relaxed(mask, combiner_base(data) + COMBINER_ENABLE_CLEAR);
 }
 
 static void combiner_unmask_irq(struct irq_data *data)
@@ -58,6 +66,7 @@ static void combiner_unmask_irq(struct irq_data *data)
 	u32 mask = 1 << (data->hwirq % 32);
 
 	__raw_writel(mask, combiner_base(data) + COMBINER_ENABLE_SET);
+//	writel_relaxed(mask, combiner_base(data) + COMBINER_ENABLE_CLEAR);
 }
 
 static void combiner_handle_cascade_irq(unsigned int irq, struct irq_desc *desc)
@@ -71,6 +80,7 @@ static void combiner_handle_cascade_irq(unsigned int irq, struct irq_desc *desc)
 
 	spin_lock(&irq_controller_lock);
 	status = __raw_readl(chip_data->base + COMBINER_INT_STATUS);
+//	status = readl_relaxed(chip_data->base + COMBINER_INT_STATUS);
 	spin_unlock(&irq_controller_lock);
 	status &= chip_data->irq_mask;
 
@@ -132,6 +142,7 @@ static void __init combiner_init_one(struct combiner_chip_data *combiner_data,
 
 	/* Disable all interrupts */
 	__raw_writel(combiner_data->irq_mask, base + COMBINER_ENABLE_CLEAR);
+//	writel_relaxed(combiner_data->irq_mask, base + COMBINER_ENABLE_CLEAR);
 }
 
 static int combiner_irq_domain_xlate(struct irq_domain *d,
@@ -141,6 +152,7 @@ static int combiner_irq_domain_xlate(struct irq_domain *d,
 				     unsigned int *out_type)
 {
 	if (d->of_node != controller)
+//	if (irq_domain_get_of_node(d) != controller)
 		return -EINVAL;
 
 	if (intsize < 2)
@@ -163,19 +175,21 @@ static int combiner_irq_domain_map(struct irq_domain *d, unsigned int irq,
 
 	return 0;
 }
-
-static struct irq_domain_ops combiner_irq_domain_ops = {
+// added
+// static struct irq_domain_ops combiner_irq_domain_ops = {
+static const struct irq_domain_ops combiner_irq_domain_ops = {
 	.xlate	= combiner_irq_domain_xlate,
 	.map	= combiner_irq_domain_map,
 };
 
 static void __init combiner_init(void __iomem *combiner_base,
-				 struct device_node *np,
-				 unsigned int max_nr)
+				 struct device_node *np)
+//				 struct device_node *np,
+//				 unsigned int max_nr)
 {
 	int i, irq;
 	unsigned int nr_irq;
-	struct combiner_chip_data *combiner_data;
+//	struct combiner_chip_data *combiner_data;
 
 	nr_irq = max_nr * IRQ_IN_COMBINER;
 
@@ -200,12 +214,61 @@ static void __init combiner_init(void __iomem *combiner_base,
 		combiner_cascade_irq(&combiner_data[i], irq);
 	}
 }
+/* added IRQ PM fix */
+#ifdef CONFIG_PM
 
+/**
+ * combiner_suspend - save interrupt combiner state before suspend
+ *
+ * Save the interrupt enable set register for all combiner groups since
+ * the state is lost when the system enters into a sleep state.
+ *
+ */
+static int combiner_suspend(void)
+{
+	int i;
+
+	for (i = 0; i < max_nr; i++)
+		combiner_data[i].pm_save =
+			__raw_readl(combiner_data[i].base + COMBINER_ENABLE_SET);
+
+	return 0;
+}
+
+/**
+ * combiner_resume - restore interrupt combiner state after resume
+ *
+ * Restore the interrupt enable set register for all combiner groups since
+ * the state is lost when the system enters into a sleep state on suspend.
+ *
+ */
+static void combiner_resume(void)
+{
+	int i;
+
+	for (i = 0; i < max_nr; i++) {
+		__raw_writel(combiner_data[i].irq_mask,
+			     combiner_data[i].base + COMBINER_ENABLE_CLEAR);
+		__raw_writel(combiner_data[i].pm_save,
+			     combiner_data[i].base + COMBINER_ENABLE_SET);
+	}
+}
+
+#else
+#define combiner_suspend	NULL
+#define combiner_resume		NULL
+#endif
+
+static struct syscore_ops combiner_syscore_ops = {
+	.suspend	= combiner_suspend,
+	.resume		= combiner_resume,
+};
+/* end */
 static int __init combiner_of_init(struct device_node *np,
 				   struct device_node *parent)
 {
 	void __iomem *combiner_base;
-	unsigned int max_nr = 20;
+//	unsigned int max_nr = 20;
 
 	combiner_base = of_iomap(np, 0);
 	if (!combiner_base) {
@@ -219,8 +282,10 @@ static int __init combiner_of_init(struct device_node *np,
 			__func__, max_nr);
 	}
 
-	combiner_init(combiner_base, np, max_nr);
+//	combiner_init(combiner_base, np, max_nr);
+	combiner_init(combiner_base, np);		// IRQ PM fix
 
+	register_syscore_ops(&combiner_syscore_ops);	// IRQ PM fix
 	return 0;
 }
 IRQCHIP_DECLARE(exynos4210_combiner, "samsung,exynos4210-combiner",
