@@ -61,6 +61,10 @@ core-$(CONFIG_NET) += arch/arm64/net/
 core-$(CONFIG_KVM) += arch/arm64/kvm/
 core-$(CONFIG_XEN) += arch/arm64/xen/
 core-$(CONFIG_CRYPTO) += arch/arm64/crypto/
+libs-y		:= arch/arm64/lib/ $(libs-y)
+libs-y		+= $(LIBGCC)
+libs-$(CONFIG_EFI_STUB) += drivers/firmware/efi/libstub/
+
 # HotPlugs #
 obj-y		:= intelli_hotplug.o autosmp.o cluster_plug.o lazyplug.o aio_hotplug.o msm_zen_decision.o msm_sleeper.o 
 core-$(CONFIG_INTELLI_HOTPLUG)	+= arch/arm64/hotplug/INTELLIPLUG/
@@ -80,15 +84,6 @@ core-$(CONFIG_AIO_HOTPLUG)	+= arch/arm64/hotplug/AIO_PLUG/
 core-$(CONFIG_HIMA_HOTPLUG)	+= arch/arm64/hotplug/HIMA_PLUG/
 core-$(CONFIG_LAZYPLUG)		+= arch/arm64/hotplug/LAZYPLUG/
 core-$(CONFIG_ARM_AUTO_HOTPLUG)		+= arch/arm64/hotplug/KTAUTO/
-
-CFLAGS_intelli_plug.o := -Wno-implicit-function-declaration
-CFLAGS_msm_sleeper.o := -Wno-implicit-function-declaration
-CFLAGS_lazyplug.o := -Wno-implicit-function-declaration
-CFLAGS_auto_hotplug.o := -Wno-implicit-function-declaration
-
-libs-y		:= arch/arm64/lib/ $(libs-y)
-libs-y		+= $(LIBGCC)
-libs-$(CONFIG_EFI_STUB) += drivers/firmware/efi/libstub/
 
 # Default target when executing plain make
 ifeq ($(CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE),y)

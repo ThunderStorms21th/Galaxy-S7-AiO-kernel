@@ -73,7 +73,6 @@ config ARM64
 	select PERF_USE_VMALLOC
 	select POWER_RESET
 	select POWER_SUPPLY
-	select RTC_LIB
 	select SPARSE_IRQ
 	select SYSCTL_EXCEPTION_TRACE
 	select HAVE_CONTEXT_TRACKING
@@ -303,6 +302,7 @@ config PCI_SYSCALL
 
 source "drivers/pci/Kconfig"
 source "drivers/pci/pcie/Kconfig"
+source "drivers/pci/hotplug/Kconfig"
 
 endmenu
 
@@ -752,7 +752,6 @@ config FORCE_MAX_ZONEORDER
 
 config UNMAP_KERNEL_AT_EL0
 	bool "Unmap kernel when running in userspace (aka \"KAISER\")" if EXPERT
-#	default y
 	help
 	  Speculation attacks against some high-performance processors can
 	  be used to bypass MMU permission checks and leak kernel data to
@@ -851,7 +850,6 @@ menu "ARMv8.1 architectural features"
 
 config ARM64_PAN
 	bool "Enable support for Privileged Access Never (PAN)"
-#	default y
 	help
 	 Privileged Access Never (PAN; part of the ARMv8.1 Extensions)
 	 prevents the kernel or hypervisor from accessing user-space (EL0)
@@ -867,7 +865,6 @@ endmenu
 
 config ARM64_UAO
 	bool "Enable support for User Access Override (UAO)"
-#	default y
 	help
 	  User Access Override (UAO; part of the ARMv8.2 Extensions)
 	  causes the 'unprivileged' variant of the load/store instructions to
@@ -996,10 +993,9 @@ config SYSVIPC_COMPAT
 	depends on COMPAT && SYSVIPC
 
 config KEYS_COMPAT
-	def_bool y if COMPAT && KEYS
-	help
-	  This option enables support for a 32-bit keyctl syscall callback function under
-	  a 64-bit kernel.
+	def_bool y
+	depends on COMPAT && KEYS
+
 endmenu
 
 menu "Power management options"
@@ -1136,8 +1132,6 @@ endif
 
 source "lib/Kconfig"
 
-source "arch/arm64/mm/Kconfig"
-
 source "arch/arm64/hotplug/ALUCARD/Kconfig"
 
 source "arch/arm64/hotplug/BRICKED/Kconfig"
@@ -1171,5 +1165,3 @@ source "arch/arm64/hotplug/HIMA_PLUG/Kconfig"
 source "arch/arm64/hotplug/LAZYPLUG/Kconfig"
 
 source "arch/arm64/hotplug/KTAUTO/Kconfig"
-
-

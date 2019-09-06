@@ -71,12 +71,8 @@
 
 		freq_tab_count = <3>;
 
-/*		freq_clip_max_0 = <1872000>;
+		freq_clip_max_0 = <1872000>;
 		freq_clip_max_1 = <1352000>;
-		freq_clip_max_2 = <728000>; */
-
-		freq_clip_max_0 = <1664000>;
-		freq_clip_max_1 = <1144000>;
 		freq_clip_max_2 = <728000>;
 
 		cooling_level_0 = <76>;
@@ -126,16 +122,10 @@
 
 		freq_tab_count = <5>;
 
-/*		freq_clip_max_0 = <1482000>;
+		freq_clip_max_0 = <1482000>;
 		freq_clip_max_1 = <1378000>;
 		freq_clip_max_2 = <1170000>;
 		freq_clip_max_3 = <1066000>;
-		freq_clip_max_4 = <442000>; */
-
-		freq_clip_max_0 = <1378000>;
-		freq_clip_max_1 = <1170000>;
-		freq_clip_max_2 = <1066000>;
-		freq_clip_max_3 = <962000>;
 		freq_clip_max_4 = <442000>;
 
 		cooling_level_0 = <76>;
@@ -183,19 +173,12 @@
 
 		freq_tab_count = <6>;
 
-/*		freq_clip_max_0 = <600000>;
+		freq_clip_max_0 = <600000>;
 		freq_clip_max_1 = <600000>;
 		freq_clip_max_2 = <546000>;
 		freq_clip_max_3 = <419000>;
 		freq_clip_max_4 = <260000>;
-		freq_clip_max_5 = <260000>; */
-
-		freq_clip_max_0 = <600000>;
-		freq_clip_max_1 = <546000>;
-		freq_clip_max_2 = <419000>;
-		freq_clip_max_3 = <338000>;
-		freq_clip_max_4 = <260000>;
-		freq_clip_max_5 = <112000>;
+		freq_clip_max_5 = <260000>;
 
 		cooling_level_0 = <76>;
 		cooling_level_1 = <81>;
@@ -301,12 +284,8 @@
 
 		freq_tab_count = <3>;
 
-/*		freq_clip_max_0 = <1872000>;
+		freq_clip_max_0 = <1872000>;
 		freq_clip_max_1 = <1352000>;
-		freq_clip_max_2 = <728000>; */
-
-		freq_clip_max_0 = <1664000>;
-		freq_clip_max_1 = <1144000>;
 		freq_clip_max_2 = <728000>;
 
 		cooling_level_0 = <76>;
@@ -504,7 +483,7 @@
 				buck2_reg: BUCK2 {
 					regulator-name = "vdd_mngs";
 					regulator-min-microvolt = <500000>;
-					regulator-max-microvolt = <1575000>; /* was 1300000 */
+					regulator-max-microvolt = <1300000>;
 					regulator-always-on;
 					regulator-ramp-delay = <12000>;
 					regulator-initial-mode = <1>;
@@ -513,7 +492,7 @@
 				buck3_reg: BUCK3 {
 					regulator-name = "vdd_apollo";
 					regulator-min-microvolt = <500000>;
-					regulator-max-microvolt = <1475000>; /* was 1200000 */
+					regulator-max-microvolt = <1200000>;
 					regulator-always-on;
 					regulator-ramp-delay = <12000>;
 					regulator-initial-mode = <1>;
