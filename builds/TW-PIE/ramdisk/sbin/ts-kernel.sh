@@ -84,65 +84,6 @@ echo "0" > /sys/class/lcd/panel/smart_on
 # Kernel Panic off
 echo "0" > /proc/sys/kernel/panic
 
-# Stock CPU Settings
-# echo 'interactive' > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo "2288000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-echo "312000" > /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
-echo "1586000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-echo "234000" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo "858000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq
-echo "1248000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
-echo "19000 1066000:30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay
-echo "60000 1248000:70000 1664000:25000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-echo "78 962000:85" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
-echo "80 1040000:81 1352000:87 1664000:90" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
-echo "88" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load
-echo "92" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
-echo "40000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-echo "40000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-echo "30000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate
-echo "30000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
-echo "20000" > /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack
-echo "20000" > /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack
-
-# HMP settings
-echo "524" > /sys/kernel/hmp/up_threshold
-echo "214" > /sys/kernel/hmp/down_threshold
-echo "1040000" > /sys/kernel/hmp/down_compensation_high_freq
-echo "858000" > /sys/kernel/hmp/down_compensation_mid_freq
-echo "754000" > /sys/kernel/hmp/down_compensation_low_freq
-
-# Stock GPU Settings
-echo "650" > /sys/devices/14ac0000.mali/max_clock
-echo "112" > /sys/devices/14ac0000.mali/min_clock
-echo "419" /sys/devices/14ac0000.mali/highspeed_clock
-echo "1" /sys/devices/14ac0000.mali/highspeed_delay
-echo "90" /sys/devices/14ac0000.mali/highspeed_load
-
-# I/O sched settings
-echo 'cfq' > /sys/block/sda/queue/scheduler
-echo "512" > /sys/block/sda/queue/read_ahead_kb
-echo 'bfq' > /sys/block/mmcblk0/queue/scheduler
-echo "768" > /sys/block/mmcblk0/queue/read_ahead_kb
-echo "0" > /sys/block/sda/queue/iostats
-echo "0" > /sys/block/mmcblk0/queue/iostats
-echo "1" > /sys/block/sda/queue/rq_affinity
-echo "1" > /sys/block/mmcblk0/queue/rq_affinity
-echo "256" > /sys/block/sda/queue/nr_requests
-echo "256" > /sys/block/mmcblk0/queue/nr_requests
-
-# LMK
-echo "18432,23040,27648,32256,56064,81152" > /sys/module/lowmemorykiller/parameters/minfree
-# echo "18920,23552,32256,42472,65536,102400" > /sys/module/lowmemorykiller/parameters/minfree
-
-# SSWAP and Entropy
-echo "150" > /proc/sys/vm/swappiness
-echo "640" > /proc/sys/kernel/random/write_wakeup_threshold
-echo "64" > /proc/sys/kernel/random/read_wakeup_threshold
-echo "1000" > /proc/sys/vm/dirty_expire_centisecs
-echo "2000" > /proc/sys/vm/dirty_writeback_centisecs
-echo "50" > /proc/sys/vm/vfs_cache_pressure
-
 # ZRAM assigns size limit to virtual ram disk
 # echo "4096M" > /sys/block/zram0/disksize
 # echo "1" > /sys/block/zram0/reset
@@ -164,7 +105,6 @@ echo "50" > /proc/sys/vm/vfs_cache_pressure
 echo "0" > /sys/kernel/fp_boost/enabled
 
 # Tweaks: Internet Speed
-echo 'bic' > /proc/sys/net/ipv4/tcp_congestion_control
 echo "0" > /proc/sys/net/ipv4/tcp_timestamps
 echo "1" > /proc/sys/net/ipv4/tcp_tw_reuse
 echo "1" > /proc/sys/net/ipv4/tcp_sack

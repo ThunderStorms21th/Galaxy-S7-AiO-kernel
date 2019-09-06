@@ -40,6 +40,54 @@ ro.vndk.lite=true
 ro.zygote=zygote64_32
 ro.logd.size.stats=64K
 log.tag.stats_log=I
+
+# MISC
+debug.enabler=false
+# was 1
+pm.sleep_mode=1
+power.saving.mode=1
+ro.ril.disable.power.collapse=0
+ro.ril.power_collapse=1
+persist.cust.tel_eons=1
+ro.fast.dormancy=1
+ro.ril.fast_dormancy.rule=1
+ro.semc.enable.fast_dormancy=1
+ro.config.hw_power_saving=true
+dalvik.vm.checkjni=false
+ro.ril.sensor.sleep.control=1
+ro.ril.disable.power.collapse=1
+ro.config.hw_quickpoweron=true
+persist.sys.shutdown.mode=hibernate
+ro.config.nocheckin=1
+ro.wifi.hotspotUI=1
+ro.tether.denied=false
+debug.kill.allocating_task=0
+power_supply.wakeup=enable
+ro.config.hw_fast_dormancy=1
+ro.config.hw_power_saving=1
+ring.delay=0
+fingerprint.unlock=1
+persist.sys.purgeable_assets=1
+ro.allow.mock.location=0
+# persist.sys.usb.config=none
+
+# LKMD
+ro.lmk.low=1001
+ro.lmk.medium=800
+ro.lmk.critical=0
+ro.lmk.critical_upgrade=false
+ro.lmk.upgrade_pressure=100
+ro.lmk.downgrade_pressure=100
+ro.lmk.kill_heaviest_task=true
+ro.lmk.kill_timeout_ms=100
+ro.lmk.use_minfree_levels=true
+
+# Early SF configuration
+debug.sf.early_phase_offset_ns=500000
+debug.sf.early_app_phase_offset_ns=500000
+debug.sf.early_gl_phase_offset_ns=3000000
+debug.sf.early_gl_app_phase_offset_ns=15000000
+
 #
 # BOOTIMAGE_BUILD_PROPERTIES
 #

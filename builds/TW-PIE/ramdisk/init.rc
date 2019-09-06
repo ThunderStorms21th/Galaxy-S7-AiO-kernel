@@ -12,8 +12,8 @@ import /init.usb.configfs.rc
 import /init.${ro.zygote}.rc
 import /init.container.rc
 import /init.services.rc
-import /init.ts.rc
 import /init.spectrum.rc
+import /init.ts.rc
 
 on early-init
     # Set init and its forked children's oom_adj.
@@ -56,6 +56,9 @@ on init
 
     # Backward compatibility.
     symlink /sys/kernel/debug /d
+
+    # Link /odm to /system/odm for devices without a odm partition.
+    symlink /system/odm /odm
 
     # Link /vendor to /system/vendor for devices without a vendor partition.
     symlink /system/vendor /vendor
