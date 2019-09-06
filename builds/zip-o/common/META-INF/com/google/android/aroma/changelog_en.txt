@@ -3,32 +3,28 @@
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Oreo</#></b>	
 	VERSION	: <b><#selectbg_g>v2.4</#></b>
-	DATE	: <b><#selectbg_g>05/08/2019</#></b>
+	DATE	: <b><#selectbg_g>06/08/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
-<#53a6f4><b>ONLY FOR Galaxy S7/S7Edge|stock odex/deodexed roms|</b></#>
+<#53a6f4><b>Only For Galaxy S7/S7Edge|Stock Odex/Deodexed Roms|</b></#>
 
 
 <b>CHANGELOG:</b>
 
 --------------------------------------------------------------------------
-<u><b><#selectbg_g>FBT-Kernel-O-v2.4 : 05.09.2019</#></b></u>
+<u><b><#selectbg_g>FBT-Kernel-O-v2.4 : 06.09.2019</#></b></u>
 <*>Updated Ramdisk G930FXXS5CSF1 </*>
 <*>Updated Sources G930FXXS5CSF1 </*>
 <*>Linux updated to 3.18.140 </*>
 <*>Some Changes in Aroma by @MissACCA </*>
-<*>Spectrum Profiles Updated </*>
 <*>Improvements for IRQ PM suspend mode </*>
 <*>Support LKM Deamon, LKM is disabled </*>
-<*>Fix for Early SF </*>
-<*>Some fixes in source code of kernel </*>
+<*>F2FS, CIFS, NFS Support</*>
+<*>Fixed some wrong codes in Sources</*>
 <*>Some Changes in Aroma by @MissACCA </*>
 <*>New Aroma theme by @Tagdu17 & @nalas </*>
 <*>New splash screen by @nalas </*>
 <*>Added CPU Boost for each core </*>
-<*>Two New Cpu Gov has been added </*>
-   -MiniMax
-   -Userspace
 <*>Spectrum Profiles Updated </*>
 <*>ThunderTweaks v1.0.3.3 </*>
 <*>Magisk 19.3 </*>

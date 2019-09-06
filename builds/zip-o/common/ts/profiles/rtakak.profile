@@ -1,4 +1,4 @@
-# TS rtakak Spectrum Profile v7 With AutoSMP
+# TS|rtakak Spectrum Profile v7 With AutoSMP
 
   # Little CPU
   
@@ -190,7 +190,6 @@ echo 0 > /sys/kernel/autosmp/conf/scroff_single_core;
 
    # WiFi
    setprop wifi.supplicant_scan_interval 500
-
 
    # Boeffla wakelocks
    write /sys/devices/virtual/misc/boeffla_wakelock_blocker/wakelock_blocker 'wlan_rx_wake;wlan_wake;wlan_ctrl_wake;wlan_txfl_wake;BT_bt_wake;BT_host_wake;mmc0_detect;nfc_wake_lock;rmnet0;GPSD;umts_ipc0'
