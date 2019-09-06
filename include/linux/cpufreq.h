@@ -290,7 +290,7 @@ struct cpufreq_driver {
 
 	/* optional */
 	unsigned int (*getavg)	(struct cpufreq_policy *policy,
-				 unsigned int cpu);
+				 unsigned int cpu); // fix for some CPU govs and hotplugs
 	int	(*bios_limit)	(int cpu, unsigned int *limit);
 
 	int	(*exit)		(struct cpufreq_policy *policy);
@@ -881,7 +881,7 @@ static inline bool policy_has_boost_freq(struct cpufreq_policy *policy)
 {
 	return false;
 }
-/* adn of adds */
+/* edn of adds */
 #endif
 /* the following funtion is for cpufreq core use only */
 struct cpufreq_frequency_table *cpufreq_frequency_get_table(unsigned int cpu);
