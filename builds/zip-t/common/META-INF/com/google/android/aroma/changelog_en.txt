@@ -3,33 +3,29 @@
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Treble</#></b>	
 	VERSION	: <b><#selectbg_g>v1.0</#></b>
-	DATE	: <b><#selectbg_g>05/09/2019</#></b>
+	DATE	: <b><#selectbg_g>06/09/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
-<#53a6f4><b> ONLY FOR Galaxy S7/S7Edge | treble roms |</b></#>
+<#53a6f4><b> Only For Galaxy S7/S7Edge </b></#>
 
 
 <b>CHANGELOG:</b>
 
 ---------------------------------------------------------------------------
-<u><b><#selectbg_g>FBT-Kernel-T-v1.0 : 05.09.2019</#></b></u>
-<*>Updated Ramdisk G930FXXS5CSF1 </*>
-<*>Updated Sources G930FXXS5CSF1 </*>
-<*>Linux updated to 3.18.140 </*>
-<*>Some Changes in Aroma by @MissACCA </*>
-<*>New Aroma theme by @Tagdu17 & @nalas </*>
-<*>Improvements for IRQ PM suspend mode </*>
-<*>Support LKM Deamon, LKM is disabled </*>
-<*>Fix for Early SF </*>
-<*>New splash screen by @nalas </*>
+<u><b><#selectbg_g>FBT-Kernel-T-v1.0 : 06.09.2019</#></b></u>
+<*>Full Treble Support </*>
+<*>F2FS ,NFS ,CIFS Support</*>
+<*>SdCard Fixed</*>
+<*>Offline Charging</*>
 <*>Added CPU Boost for each core </*>
-<*>Two New Cpu Gov has been added </*>
-   -MiniMax
-   -Userspace
+<*>Two New CPU gov
+    1) MiniMax
+    2) UserSpace
+<*>Some Changes in Aroma by @MissACCA
 <*>Spectrum Profiles Updated </*>
-<*>ThunderTweaks v1.0.3.3 </*>
+<*>ThunderTweaks v1.0.3.3</*>
 <*>Magisk 19.4 </*>
-<*>Better Stability and RAM Management </*>
-<*>Rest like in TS-PIE v2.0</*>
+<*>Fixed some wrong codes and Links </*>
+<*>Initial Release </*>
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
