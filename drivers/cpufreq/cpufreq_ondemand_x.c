@@ -45,9 +45,9 @@
 #define DEF_SAMPLING_DOWN_FACTOR		(1)
 #define DEF_SAMPLING_RATE			(20000)
 
-#define DEF_SYNC_FREQUENCY			(1248000)
-#define DEF_OPTIMAL_FREQUENCY			(1560000)
-#define DEF_OPTIMAL_MAX_FREQ			(1768000)
+#define DEF_SYNC_FREQUENCY			(1267200)
+#define DEF_OPTIMAL_FREQUENCY			(1574400)
+#define DEF_OPTIMAL_MAX_FREQ			(1728000)
 
 /* Kernel tunabble controls */
 #define MICRO_FREQUENCY_MIN_SAMPLE_RATE		(10000)
@@ -111,7 +111,6 @@ struct cpu_dbs_info_s {
 	wait_queue_head_t sync_wq;
 };
 static DEFINE_PER_CPU(struct cpu_dbs_info_s, od_cpu_dbs_info);
-static DEFINE_PER_CPU(struct cpu_dbs_info_s, cpuinfo);
 
 static inline void dbs_timer_init(struct cpu_dbs_info_s *dbs_info);
 static inline void dbs_timer_exit(struct cpu_dbs_info_s *dbs_info);

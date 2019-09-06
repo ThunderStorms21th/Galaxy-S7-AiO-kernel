@@ -48,7 +48,7 @@
 #define MIN_FREQUENCY_UP_THRESHOLD		(11)
 #define MAX_FREQUENCY_UP_THRESHOLD		(100)
 #define DEF_SAMPLING_RATE			(40000)
-#define MIN_SAMPLING_RATE			(30000)
+#define MIN_SAMPLING_RATE			(10000)
 
 #define DEF_FREQ_STEP				(55)
 /* for multiple freq_step */
@@ -110,7 +110,6 @@ static struct workqueue_struct *dbs_wq;
 
 static struct dbs_tuners {
 	unsigned int sampling_rate;
-	unsigned int min_sampling_rate; // fix for editable
 	unsigned int up_threshold;
 	unsigned int down_differential;
 	unsigned int sampling_down_factor;
@@ -155,7 +154,6 @@ static ssize_t show_##file_name						\
 	return sprintf(buf, "%u\n", dbs_tuners_ins.object);		\
 }
 show_one(sampling_rate, sampling_rate);
-show_one(min_sampling_rate, min_sampling_rate); // added for fix editable
 show_one(up_threshold, up_threshold);
 show_one(sampling_down_factor, sampling_down_factor);
 show_one(down_differential, down_differential);

@@ -68,8 +68,7 @@ static int __cpufreq_governor(struct cpufreq_policy *policy,
 static unsigned int __cpufreq_get(unsigned int cpu);
 static void handle_update(struct work_struct *work);
 
-// added for samsung gov
-
+/* added for samsung CPU governor */
 static DEFINE_PER_CPU(int, cpufreq_policy_cpu);
 static DEFINE_PER_CPU(struct rw_semaphore, cpu_policy_rwsem);
 
@@ -109,7 +108,7 @@ void unlock_policy_rwsem_write(int cpu)
 	up_write(&per_cpu(cpu_policy_rwsem, policy_cpu));
 }
 EXPORT_SYMBOL_GPL(unlock_policy_rwsem_write);
-// end
+/* end */
 
 /**
  * Two notifier lists: the "policy" list is involved in the
@@ -476,6 +475,7 @@ void cpufreq_notify_utilization(struct cpufreq_policy *policy,
 	if (policy)
 		policy->util = util;
 }
+
 
 /*********************************************************************
  *                          SYSFS INTERFACE                          *
@@ -1673,29 +1673,7 @@ static void cpufreq_out_of_sync(unsigned int cpu, unsigned int old_freq,
 
 	cpufreq_freq_transition_begin(policy, &freqs);
 	cpufreq_freq_transition_end(policy, &freqs, 0);
-
 }
-
-/**
- * cpufreq_quick_get_util - get the CPU utilization from policy->util
- * @cpu: CPU number
- * added
- * This is the last known util, without actually getting it from the driver.
- * Return value will be same as what is shown in util in sysfs.
- */
-unsigned int cpufreq_quick_get_util(unsigned int cpu)
-{
-	struct cpufreq_policy *policy = cpufreq_cpu_get(cpu);
-	unsigned int ret_util = 0;
-
-	if (policy) {
-		ret_util = policy->util;
-		cpufreq_cpu_put(policy);
-	}
-
-	return ret_util;
-}
-EXPORT_SYMBOL(cpufreq_quick_get_util);
 
 /**
  * cpufreq_quick_get - get the CPU frequency (in kHz) from policy->cur
@@ -1926,7 +1904,6 @@ void *cpufreq_get_driver_data(void)
 	return NULL;
 }
 EXPORT_SYMBOL_GPL(cpufreq_get_driver_data);
-
 
 /*********************************************************************
  *                     NOTIFIER LISTS INTERFACE                      *
@@ -2178,7 +2155,7 @@ int cpufreq_driver_target(struct cpufreq_policy *policy,
 }
 EXPORT_SYMBOL_GPL(cpufreq_driver_target);
 
-// added to adaptative
+/* added to adaptative */
 int __cpufreq_driver_getavg(struct cpufreq_policy *policy, unsigned int cpu)
 {
 	if (cpufreq_disabled())
@@ -2190,6 +2167,7 @@ int __cpufreq_driver_getavg(struct cpufreq_policy *policy, unsigned int cpu)
 	return cpufreq_driver->getavg(policy, cpu);
 }
 EXPORT_SYMBOL_GPL(__cpufreq_driver_getavg);
+/* end */
 
 /*
  * when "event" is CPUFREQ_GOV_LIMITS

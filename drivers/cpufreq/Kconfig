@@ -789,7 +789,6 @@ config CPU_FREQ_DEFAULT_GOV_THUNDERSTORMS
 	  you to get a full dynamic cpu frequency capable system by simply
 	  loading your cpufreq low-level hardware driver, using the
 	  'thunderstorms' governor for latency-sensitive workloads.
-
 endchoice
 
 config CPU_FREQ_GOV_ABYSSPLUG

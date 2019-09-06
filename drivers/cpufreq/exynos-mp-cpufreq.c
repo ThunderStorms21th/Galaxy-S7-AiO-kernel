@@ -26,7 +26,7 @@
 #include <linux/reboot.h>
 #include <linux/delay.h>
 #include <linux/cpu.h>
-#include <linux/ipa.h> /* added voltage */
+#include <linux/ipa.h>			 /* added voltage */
 #include <linux/pm_qos.h>
 #include <linux/kobject.h>
 #include <linux/sysfs.h>
@@ -36,7 +36,7 @@
 #include <linux/of.h>
 #include <linux/apm-exynos.h>
 
-#include <linux/sysfs_helpers.h> /* added voltage */
+#include <linux/sysfs_helpers.h>	 /* added voltage */
 
 #include <asm/smp_plat.h>
 #include <asm/cputype.h>
@@ -1475,18 +1475,20 @@ static ssize_t show_cpufreq_max_limit(struct kobject *kobj,
 
 	return nsize;
 }
-// static void enable_nonboot_cluster_cpus(void)
-void enable_nonboot_cluster_cpus(void)
+
+static void enable_nonboot_cluster_cpus(void) 	// oryginal
+// void enable_nonboot_cluster_cpus(void)	// added
 {
 	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CPUS);
 }
-// static void disable_nonboot_cluster_cpus(void)
-void disable_nonboot_cluster_cpus(void)
+
+static void disable_nonboot_cluster_cpus(void) 	// oryginal
+// void disable_nonboot_cluster_cpus(void)	// added
 {
-//	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST1_CPUS);
-//	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST0_CPUS); // added
-	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST1_CPUS + 1); // big cpu 3 cores down when screen is off
-	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST0_CPUS + 1); // little cpu - 3 cores down when screen is off
+//	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST1_CPUS); 	// oryginal
+//	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST0_CPUS); 	// added
+	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST1_CPUS + 1); 	// big cpu 3 cores down when screen is off
+	pm_qos_update_request(&cpufreq_cpu_hotplug_max_request, NR_CLUST0_CPUS + 1); 	// little cpu - 3 cores down when screen is off
 }
 
 static ssize_t store_cpufreq_max_limit(struct kobject *kobj, struct attribute *attr,
@@ -1626,7 +1628,6 @@ inline ssize_t store_core_freq(const char *buf, size_t count,
 
 	return count;
 }
-
 /* added voltage */
 static size_t get_freq_table_size(struct cpufreq_frequency_table *freq_table)
 {
@@ -1696,7 +1697,7 @@ static ssize_t store_volt_table(struct kobject *kobj, struct attribute *attr,
 	if (tokens == 2 && target > 0) {
 		if ((rest = t[1] % CL_VOLT_STEP) != 0)
 			t[1] += CL_VOLT_STEP - rest;
-
+		
 		sanitize_min_max(t[1], CL_MIN_VOLT(cluster), CL_MAX_VOLT(cluster));
 		exynos_info[cluster]->volt_table[target] = t[1];
 	} else {
@@ -1706,7 +1707,7 @@ static ssize_t store_volt_table(struct kobject *kobj, struct attribute *attr,
 
 			if ((rest = t[i] % CL_VOLT_STEP) != 0)
 				t[i] += CL_VOLT_STEP - rest;
-
+			
 			sanitize_min_max(t[i], CL_MIN_VOLT(cluster), CL_MAX_VOLT(cluster));
 			exynos_info[cluster]->volt_table[i + invalid_offset] = t[i];
 		}
@@ -1749,7 +1750,6 @@ static ssize_t store_cluster1_max_freq(struct kobject *kobj, struct attribute *a
 {
 	return store_core_freq(buf, count, CL_ONE, true);
 }
-
 /* added voltage */
 static ssize_t show_cluster1_volt_table(struct kobject *kobj,
 				struct attribute *attr, char *buf)
@@ -1763,7 +1763,6 @@ static ssize_t store_cluster1_volt_table(struct kobject *kobj, struct attribute 
 	return store_volt_table(kobj, attr, buf, count, CL_ONE);
 }
 /* end of add */
-
 static ssize_t show_cluster0_freq_table(struct kobject *kobj,
 			     struct attribute *attr, char *buf)
 {
@@ -1793,14 +1792,26 @@ static ssize_t store_cluster0_max_freq(struct kobject *kobj, struct attribute *a
 {
 	return store_core_freq(buf, count, CL_ZERO, true);
 }
+/* added voltage */
+static ssize_t show_cluster0_volt_table(struct kobject *kobj,
+				struct attribute *attr, char *buf)
+{
+	return show_volt_table(kobj, attr, buf, CL_ZERO);
+}
 
-/*Toggle 4 cores max freq by Moro */
+static ssize_t store_cluster0_volt_table(struct kobject *kobj, struct attribute *attr,
+					const char *buf, size_t count)
+{
+	return store_volt_table(kobj, attr, buf, count, CL_ZERO);
+}
+
 static ssize_t show_cluster1_all_cores_max_freq(struct kobject *kobj,
 				struct attribute *attr, char *buf)
 {
 	return sprintf(buf, "%d\n", cluster1_all_cores);
 }
-
+/* end of add */
+/*Toggle 4 cores max freq by Moro */
 static ssize_t store_cluster1_all_cores_max_freq(struct kobject *kobj, struct attribute *attr,
 					const char *buf, size_t count)
 {
@@ -1830,40 +1841,26 @@ static ssize_t store_cluster1_all_cores_max_freq(struct kobject *kobj, struct at
 }
 /* end */
 
-/* added voltage */
-static ssize_t show_cluster0_volt_table(struct kobject *kobj,
-				struct attribute *attr, char *buf)
-{
-	return show_volt_table(kobj, attr, buf, CL_ZERO);
-}
-
-static ssize_t store_cluster0_volt_table(struct kobject *kobj, struct attribute *attr,
-					const char *buf, size_t count)
-{
-	return store_volt_table(kobj, attr, buf, count, CL_ZERO);
-}
-/* end of add */
-
 define_one_global_ro(cluster1_freq_table);
 define_one_global_rw(cluster1_min_freq);
 define_one_global_rw(cluster1_max_freq);
-define_one_global_rw(cluster1_all_cores_max_freq); /* added Toggle 4 cores */
-define_one_global_rw(cluster1_volt_table); /* added voltage */
+define_one_global_rw(cluster1_volt_table);		/* added voltage */
+define_one_global_rw(cluster1_all_cores_max_freq);	/* added Toggle 4 cores */
 define_one_global_ro(cluster0_freq_table);
 define_one_global_rw(cluster0_min_freq);
 define_one_global_rw(cluster0_max_freq);
-define_one_global_rw(cluster0_volt_table); /* added voltage */
+define_one_global_rw(cluster0_volt_table);		/* added voltage */
 
 static struct attribute *mp_attributes[] = {
 	&cluster1_freq_table.attr,
 	&cluster1_min_freq.attr,
 	&cluster1_max_freq.attr,
-	&cluster1_volt_table.attr, /* added voltage */
-	&cluster1_all_cores_max_freq.attr, /* added Toggle 4 cores */
+	&cluster1_volt_table.attr,			/* added voltage */
+	&cluster1_all_cores_max_freq.attr,		/* added Toggle 4 cores */
 	&cluster0_freq_table.attr,
 	&cluster0_min_freq.attr,
 	&cluster0_max_freq.attr,
-	&cluster0_volt_table.attr, /* added voltage */
+	&cluster0_volt_table.attr,			/* added voltage */
 	NULL
 };
 
@@ -2069,10 +2066,10 @@ static int exynos_cluster0_min_qos_handler(struct notifier_block *b, unsigned lo
 	threshold_freq = cpufreq_interactive_get_hispeed_freq(0);
 	if (!threshold_freq)
 		threshold_freq = 1000000;	/* 1.0GHz */
-#elif defined(CONFIG_CPU_FREQ_GOV_CAFACTIVE) /* added voltage */
+#elif defined(CONFIG_CPU_FREQ_GOV_CAFACTIVE)
 	threshold_freq = cpufreq_cafactive_get_hispeed_freq(0);
 	if (!threshold_freq)
-		threshold_freq = 1000000;	/* 1.0GHz end of add*/
+		threshold_freq = 1000000;	/* 1.0GHz */
 //#elif defined(CONFIG_CPU_FREQ_GOV_DYNAMIC_INTERACTIVE) /* added fix */
 //	threshold_freq = cpufreq_dynamic_interactive_get_hispeed_freq(0);
 //	if (!threshold_freq)
@@ -2638,8 +2635,7 @@ static int exynos_mp_cpufreq_parse_dt(struct device_node *np, cluster_type cl)
 		return -ENODEV;
 	}
 
-	moro_np = np;
-/* toggles 4 cores max freq */
+	moro_np = np;	/* toggles 4 cores max freq */
 
 	if (of_property_read_u32(np,(cl ? "cl1_idx_num" : "cl0_idx_num"),
 				&ptr->max_idx_num))
@@ -2691,7 +2687,7 @@ static int exynos_mp_cpufreq_parse_dt(struct device_node *np, cluster_type cl)
 				* (NR_CLUST1_CPUS + 1), GFP_KERNEL);
 //		ret = of_property_read_u32_array(np, "cl1_max_support_idx_table",
 //				(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
-// added toggles 4 cores max freq by Moro
+/* added toggles 4 cores max freq by Moro */
 		if (cluster1_all_cores) {
 			ret = of_property_read_u32_array(np, "cl1_full_max_support_idx_table",
 					(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
@@ -2699,7 +2695,7 @@ static int exynos_mp_cpufreq_parse_dt(struct device_node *np, cluster_type cl)
 			ret = of_property_read_u32_array(np, "cl1_max_support_idx_table",
 					(unsigned int *)ptr->max_support_idx_table, NR_CLUST1_CPUS + 1);
 		}
- /* end */
+/* end */
 		if (ret < 0)
 			return -ENODEV;
 
@@ -2951,7 +2947,7 @@ static int __init exynos_mp_cpufreq_init(void)
 
 	return platform_driver_register(&exynos_mp_cpufreq_driver);
 }
-// #ifdef CONFIG_CPU_FREQ_DEFAULT_GOV_INTERACTIVE
+/* added fix for CAFACTIVE and THUNDERSTORM */
 #if defined(CONFIG_CPU_FREQ_DEFAULT_GOV_INTERACTIVE) || defined(CONFIG_CPU_FREQ_DEFAULT_GOV_CAFACTIVE) || defined(CONFIG_CPU_FREQ_DEFAULT_GOV_THUNDERSTORM)
 device_initcall(exynos_mp_cpufreq_init);
 #else

@@ -150,7 +150,6 @@ struct cpu_dbs_info_s {
 	struct mutex timer_mutex;
 };
 static DEFINE_PER_CPU(struct cpu_dbs_info_s, id_cpu_dbs_info);
-static DEFINE_PER_CPU(struct cpu_dbs_info_s, cpuinfo);
 
 static inline void dbs_timer_init(struct cpu_dbs_info_s *dbs_info);
 static inline void dbs_timer_exit(struct cpu_dbs_info_s *dbs_info);
