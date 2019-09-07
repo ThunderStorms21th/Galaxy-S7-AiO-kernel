@@ -1956,6 +1956,12 @@ void inode_dio_done(struct inode *inode)
 }
 EXPORT_SYMBOL(inode_dio_done);
 
+void inode_nohighmem(struct inode *inode)
+{
+	mapping_set_gfp_mask(inode->i_mapping, GFP_USER);
+}
+EXPORT_SYMBOL(inode_nohighmem);
+
 /*
  * inode_set_flags - atomically set some inode flags
  *
@@ -1987,8 +1993,4 @@ void inode_set_flags(struct inode *inode, unsigned int flags,
 }
 EXPORT_SYMBOL(inode_set_flags);
 
-void inode_nohighmem(struct inode *inode)
-{
-	mapping_set_gfp_mask(inode->i_mapping, GFP_USER);
-}
-EXPORT_SYMBOL(inode_nohighmem);
+
