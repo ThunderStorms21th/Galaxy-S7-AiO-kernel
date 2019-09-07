@@ -2885,6 +2885,9 @@ static inline bool dir_emit_dots(struct file *file, struct dir_context *ctx)
 	}
 	return true;
 }
+
+extern void inode_nohighmem(struct inode *inode);
+
 static inline bool dir_relax(struct inode *inode)
 {
 	mutex_unlock(&inode->i_mutex);
@@ -2892,6 +2895,5 @@ static inline bool dir_relax(struct inode *inode)
 	return !IS_DEADDIR(inode);
 }
 
-extern void inode_nohighmem(struct inode *inode);
 
 #endif /* _LINUX_FS_H */
