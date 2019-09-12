@@ -1896,15 +1896,6 @@ on property:security.ucm_ese_applet_installed=1
     start esecomm
     setprop security.ucm_ese_applet_installed 0
 
-# [ Wi-Fi init
-service wlandutservice /system/bin/wlandutservice
-    class main
-    user system
-    group system wifi net_raw net_admin inet
-    disabled
-    oneshot
-# ] Wi-Fi init
-
 # IO stats Deamon
 service iod /system/bin/iod
     user system
