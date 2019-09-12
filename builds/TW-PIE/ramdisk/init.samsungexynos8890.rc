@@ -2,7 +2,6 @@ import init.samsungexynos8890.usb.rc
 import init.baseband.rc
 import init.carrier.rc
 import init.wifi.rc
-import init.gps.rc
 import init.fac.rc
 import init.exynos8890_fac.rc
 import init.remove_recovery.rc
