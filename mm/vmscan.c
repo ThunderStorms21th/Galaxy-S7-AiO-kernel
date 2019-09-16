@@ -46,11 +46,11 @@
 #include <linux/oom.h>
 #include <linux/prefetch.h>
 #include <linux/printk.h>
-<<<<<<< HEAD
+
 #include <linux/debugfs.h>
-=======
+
 #include <linux/simple_lmk.h>
->>>>>>> 178a83609863... simple_lmk: Introduce Simple Low Memory Killer for Android
+
 
 #include <asm/tlbflush.h>
 #include <asm/div64.h>
@@ -3545,9 +3545,9 @@ static void kswapd_try_to_sleep(pg_data_t *pgdat, int order, int classzone_idx)
 	prepare_to_wait(&pgdat->kswapd_wait, &wait, TASK_INTERRUPTIBLE);
 
 	/* Try to sleep for a short interval */
-<<<<<<< HEAD
+
 	if (prepare_kswapd_sleep(pgdat, order, remaining, classzone_idx)) {
-=======
+
 	if (prepare_kswapd_sleep(pgdat, order, remaining,
 						balanced_classzone_idx)) {
 		simple_lmk_stop_reclaim();
@@ -3565,7 +3565,7 @@ static void kswapd_try_to_sleep(pg_data_t *pgdat, int order, int classzone_idx)
 		 */
 		wakeup_kcompactd(pgdat, order, classzone_idx);
 
->>>>>>> 178a83609863... simple_lmk: Introduce Simple Low Memory Killer for Android
+
 		remaining = schedule_timeout(HZ/10);
 		finish_wait(&pgdat->kswapd_wait, &wait);
 		prepare_to_wait(&pgdat->kswapd_wait, &wait, TASK_INTERRUPTIBLE);
@@ -3575,13 +3575,13 @@ static void kswapd_try_to_sleep(pg_data_t *pgdat, int order, int classzone_idx)
 	 * After a short sleep, check if it was a premature sleep. If not, then
 	 * go fully to sleep until explicitly woken up.
 	 */
-<<<<<<< HEAD
+
 	if (prepare_kswapd_sleep(pgdat, order, remaining, classzone_idx)) {
-=======
+
 	if (prepare_kswapd_sleep(pgdat, order, remaining,
 						balanced_classzone_idx)) {
 		simple_lmk_stop_reclaim();
->>>>>>> 178a83609863... simple_lmk: Introduce Simple Low Memory Killer for Android
+
 		trace_mm_vmscan_kswapd_sleep(pgdat->node_id);
 
 		/*
