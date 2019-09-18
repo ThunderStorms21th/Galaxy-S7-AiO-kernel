@@ -1,4 +1,4 @@
-# Thunderstorms - Shariq v3
+#  Thunderstorms - Shariq v3
 
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor thunderstorm
@@ -29,7 +29,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/param_index
    write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/param_index 0
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/boostpulse_duration
-   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/boostpulse_duration 40000
+   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/boostpulse_duration 80000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/down_low_load_threshold
    write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/down_low_load_threshold 25
 
@@ -123,15 +123,15 @@
    write /sys/devices/14ac0000.mali/highspeed_delay 1
 
    # IO Scheduler
-   write /sys/block/sda/queue/scheduler zen
-   write /sys/block/sda/queue/read_ahead_kb 1024
-   write /sys/block/mmcblk0/queue/scheduler zen
-   write /sys/block/mmcblk0/queue/read_ahead_kb 1024
+   write /sys/block/sda/queue/scheduler sioplus
+   write /sys/block/sda/queue/read_ahead_kb 128
+   write /sys/block/mmcblk0/queue/scheduler sioplus
+   write /sys/block/mmcblk0/queue/read_ahead_kb 128
    write /sys/block/sda/queue/iostats 0
    write /sys/block/mmcblk0/queue/iostats 0
    write /sys/block/sda/queue/rq_affinity 1
    write /sys/block/mmcblk0/queue/rq_affinity 1
-   write /sys/block/sda/queue/nr_requests 256
+   write /sys/block/sda/queue/nr_requests 128
    write /sys/block/mmcblk0/queue/nr_requests 256
 
    # Wakelocks
@@ -153,11 +153,8 @@
    write /proc/sys/net/ipv4/tcp_congestion_control bic
 
    # SWAP
-   write /proc/sys/vm/swappiness 120
+   write /proc/sys/vm/swappiness 110
    write /proc/sys/vm/vfs_cache_pressure 45
-
-   # LMK
-   write /sys/module/lowmemorykiller/parameters/minfree "19388,29082,38776,48460,58164,87246"
 
    # WiFi
    setprop wifi.supplicant_scan_interval 550
