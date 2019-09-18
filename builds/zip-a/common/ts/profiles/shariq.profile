@@ -1,4 +1,4 @@
-#  Thunderstorms - Shariq v3
+#  Thunderstorms - Shariq v4
 
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor thunderstorm
@@ -39,7 +39,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq 208000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
-   write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 1872000
+   write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 1664000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 98
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay
@@ -47,7 +47,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate 20000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/hispeed_freq
-   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/hispeed_freq 1248000
+   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/hispeed_freq 1040000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_slack
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_slack 20000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/target_loads
@@ -153,7 +153,7 @@
    write /proc/sys/net/ipv4/tcp_congestion_control bic
 
    # SWAP
-   write /proc/sys/vm/swappiness 110
+   write /proc/sys/vm/swappiness 100
    write /proc/sys/vm/vfs_cache_pressure 45
 
    # WiFi
