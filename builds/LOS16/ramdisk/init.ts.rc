@@ -158,7 +158,7 @@ on boot
     write /sys/kernel/sched/arch_power 0
     write /proc/sys/net/ipv4/tcp_congestion_control bic
     write /sys/module/sync/parameters/fsync_enabled 1
-    write /sys/kernel/dyn_fsync/Dyn_fsync_active 1
+    write /sys/kernel/dyn_fsync/Dyn_fsync_active 0
     write /sys/kernel/sched/gentle_fair_sleepers 0
     write /sys/kernel/power_suspend/power_suspend_mode 2
     #write /sys/kernel/power_suspend/power_suspend_mode 1

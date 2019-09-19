@@ -121,7 +121,7 @@
 
    # Misc
    write /sys/module/sync/parameters/fsync_enabled 1
-   write /sys/kernel/dyn_fsync/Dyn_fsync_active 1
+   write /sys/kernel/dyn_fsync/Dyn_fsync_active 0
    write /sys/kernel/sched/gentle_fair_sleepers 0
    write /sys/kernel/sched/arch_power 0
    write /sys/kernel/power_suspend/power_suspend_mode 2
