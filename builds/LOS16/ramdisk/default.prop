@@ -5,6 +5,7 @@ ro.actionable_compatible_property.enabled=false
 ro.secure=0
 security.perf_harden=1
 ro.allow.mock.location=0
+ro.adb.secure=0
 ro.debuggable=1
 tombstoned.max_tombstone_count=50
 dalvik.vm.image-dex2oat-Xms=64m
@@ -30,7 +31,6 @@ ro.build.selinux=1
 ro.config.notification_sound=Argon.ogg
 ro.config.alarm_alert=Hassium.ogg
 persist.sys.dun.override=0
-ro.adb.secure=0
 ro.storage_manager.enabled=true
 media.recorder.show_manufacturer_and_model=true
 ro.config.ringtone=Orion.ogg
@@ -55,7 +55,6 @@ ro.semc.enable.fast_dormancy=1
 ro.config.hw_power_saving=true
 dalvik.vm.checkjni=false
 ro.ril.sensor.sleep.control=1
-ro.ril.disable.power.collapse=1
 ro.config.hw_quickpoweron=true
 persist.sys.shutdown.mode=hibernate
 ro.config.nocheckin=1
@@ -68,19 +67,7 @@ ro.config.hw_power_saving=1
 ring.delay=0
 fingerprint.unlock=1
 persist.sys.purgeable_assets=1
-ro.allow.mock.location=0
 # persist.sys.usb.config=none
-
-# LKMD
-ro.lmk.low=1001
-ro.lmk.medium=800
-ro.lmk.critical=0
-ro.lmk.critical_upgrade=false
-ro.lmk.upgrade_pressure=100
-ro.lmk.downgrade_pressure=100
-ro.lmk.kill_heaviest_task=true
-ro.lmk.kill_timeout_ms=100
-ro.lmk.use_minfree_levels=true
 
 # Early SF configuration
 debug.sf.early_phase_offset_ns=500000

@@ -56,7 +56,3 @@ on property:persist.spectrum.profile=9
 on property:persist.spectrum.profile=10
    exec u:r:init:s0 root root -- /sbin/spa ankit
 
-
-
-
-

@@ -9,7 +9,6 @@ on property:sys.boot_completed=1
 	stop proca
 	stop secure_storage
 	stop irisd
-        start zipalign
 
 service kernelinit /sbin/ts-kernel.sh
     class late_start
@@ -18,8 +17,3 @@ service kernelinit /sbin/ts-kernel.sh
     oneshot
     disabled
 
-service zipalign /sbin/zipalign.sh
-    user root
-    seclabel u:r:init:s0
-    oneshot
-    disabled
