@@ -654,7 +654,7 @@ KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
 else
 KBUILD_CFLAGS	+= -O2
 KBUILD_CFLAGS   += -Ofast -ffast-math -funsafe-math-optimizations
-KBUILD_CFLAGS   += -mtune=exynos-m1.cortex-a53 -mcpu=exynos-m1.cortex-a53
+KBUILD_CFLAGS   += -mtune=exynos-m1.cortex-a53+crc+crypto -mcpu=exynos-m1.cortex-a53
 endif
 
 # Tell gcc to never replace conditional load with a non-conditional one
