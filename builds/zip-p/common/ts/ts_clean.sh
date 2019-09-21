@@ -35,7 +35,7 @@
 
 
 # Busybox 
-BB=/sbin/busybox;
+BB=/sbin/busybox
 
 
 # Prepare packages.xml
