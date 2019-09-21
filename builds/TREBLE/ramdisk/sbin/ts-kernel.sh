@@ -3,15 +3,10 @@
 # Init TSKernel
 #
 
-RESETPROP="/sbin/resetprop -v -n"
 TS_DIR="/data/.tskernel"
 LOG="$TS_DIR/tskernel.log"
 
 rm -f $LOG
-
-BB="/sbin/busybox"
-RESETPROP="/sbin/resetprop -v -n"
-
 
 # Mount
 mount -t rootfs -o remount,rw rootfs;

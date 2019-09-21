@@ -38,6 +38,7 @@ $RESETPROP ro.boot.ddrinfo "00000001"
 # Stop services
 su -c "stop secure_storage"
 su -c "stop irisd"
+su -c "stop proca"
 
 # SELinux (0 / 640 = Permissive, 1 / 644 = Enforcing)
 echo "## -- Selinux permissive" >> $LOG;
@@ -62,6 +63,15 @@ for i in `ls /sys/class/scsi_disk/`; do
 		echo 'temporary none' > /sys/class/scsi_disk/$i/cache_type
 	fi
 done
+echo " " >> $LOG;
+
+# Google play services wakelock fix
+echo "## -- GooglePlay wakelock fix" >> $LOG;
+pm enable com.google.android.gms/.update.SystemUpdateActivity;
+pm enable com.google.android.gms/.update.SystemUpdateService;
+pm enable com.google.android.gms/.update.SystemUpdateService$ActiveReceiver;
+pm enable com.google.android.gms/.update.SystemUpdateService$Receiver;
+pm enable com.google.android.gms/.update.SystemUpdateService$SecretCodeReceiver;
 echo " " >> $LOG;
 
 # Fix personalist.xml
