@@ -14,6 +14,7 @@ import /init.${ro.zygote}.rc
 import /init.container.rc
 import /init.wifi.rc
 import /init.spectrum.rc
+import /init.debug.addition.rc
 import /init.services.rc
 import /init.ts.rc
 

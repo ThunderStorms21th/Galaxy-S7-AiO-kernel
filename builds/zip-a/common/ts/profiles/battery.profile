@@ -7,7 +7,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1378000
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load
-   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load 97
+   write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/go_hispeed_load 95
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay
    write /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/above_hispeed_delay "65000 650000:30000 754000:30000 962000:20000"
    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/thunderstorm/timer_rate
@@ -41,7 +41,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq
    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq 1872000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load
-   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 98
+   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 96
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay "80000 728000:30000 1040000:30000 1248000:30000"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate
@@ -87,7 +87,7 @@
 
    # HMP
    chmod 0664 /sys/kernel/hmp/up_threshold
-   write /sys/kernel/hmp/up_threshold 750
+   write /sys/kernel/hmp/up_threshold 700
    chmod 0664 /sys/kernel/hmp/down_threshold
    write /sys/kernel/hmp/down_threshold 250
    chmod 0664 /sys/kernel/hmp/down_compensation_high_freq
@@ -118,28 +118,28 @@
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_clock
    write /sys/devices/14ac0000.mali/highspeed_clock 338
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_load
-   write /sys/devices/14ac0000.mali/highspeed_load 90
+   write /sys/devices/14ac0000.mali/highspeed_load 92
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_delay
    write /sys/devices/14ac0000.mali/highspeed_delay 1
 
    # IO Scheduler
    write /sys/block/sda/queue/scheduler row
-   write /sys/block/sda/queue/read_ahead_kb 512
+   write /sys/block/sda/queue/read_ahead_kb 384
    write /sys/block/mmcblk0/queue/scheduler bfq
-   write /sys/block/mmcblk0/queue/read_ahead_kb 768
+   write /sys/block/mmcblk0/queue/read_ahead_kb 512
    write /sys/block/sda/queue/iostats 0
    write /sys/block/mmcblk0/queue/iostats 0
    write /sys/block/sda/queue/rq_affinity 1
    write /sys/block/mmcblk0/queue/rq_affinity 1
-   write /sys/block/sda/queue/nr_requests 256
+   write /sys/block/sda/queue/nr_requests 128
    write /sys/block/mmcblk0/queue/nr_requests 128
 
    # Wakelocks
    write /sys/module/wakeup/parameters/enable_sensorhub_wl 0
    write /sys/module/wakeup/parameters/enable_ssp_wl 0
    write /sys/module/wakeup/parameters/enable_bcmdhd4359_wl 0
-   write /sys/module/wakeup/parameters/enable_bluedroid_timer_wl 0
-   write /sys/module/wakeup/parameters/enable_wlan_wake_wl 0
+   write /sys/module/wakeup/parameters/enable_bluedroid_timer_wl 1
+   write /sys/module/wakeup/parameters/enable_wlan_wake_wl 1
    write /sys/module/sec_battery/parameters/wl_polling 3
    write /sys/module/sec_nfc/parameters/wl_nfc 1
 
@@ -147,7 +147,7 @@
    write /sys/module/sync/parameters/fsync_enabled 1
    write /sys/kernel/dyn_fsync/Dyn_fsync_active 0
    write /sys/kernel/sched/gentle_fair_sleepers 0
-   write /sys/kernel/sched/arch_power 0
+   write /sys/kernel/sched/arch_power 1
    write /sys/kernel/power_suspend/power_suspend_mode 3
    #write /sys/kernel/power_suspend/power_suspend_mode 1
    #write /sys/kernel/power_suspend/power_suspend_state 1
@@ -155,11 +155,11 @@
    write /proc/sys/net/ipv4/tcp_congestion_control westwood
 
    # SWAP
-   write /proc/sys/vm/swappiness 70
-   write /proc/sys/vm/vfs_cache_pressure 70
+   write /proc/sys/vm/swappiness 80
+   write /proc/sys/vm/vfs_cache_pressure 90
 
    # LMK
-   write /sys/module/lowmemorykiller/parameters/minfree "18920,23552,32256,42472,65536,92400"
+   write /sys/module/lowmemorykiller/parameters/minfree "18920,23552,32256,42472,65536,82400"
 
    # WiFi
    setprop wifi.supplicant_scan_interval 500

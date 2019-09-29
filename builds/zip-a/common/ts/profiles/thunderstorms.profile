@@ -43,7 +43,7 @@
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/go_hispeed_load 93
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay "60000 832000:30000 1040000:30000 1248000:25000"
+   write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/above_hispeed_delay "50000 832000:30000 1040000:30000 1248000:25000"
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate
    write /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/timer_rate 30000
    chmod 0664 /sys/devices/system/cpu/cpu4/cpufreq/thunderstorm/hispeed_freq
@@ -81,7 +81,7 @@
 
    # HMP
    chmod 0664 /sys/kernel/hmp/up_threshold
-   write /sys/kernel/hmp/up_threshold 700
+   write /sys/kernel/hmp/up_threshold 600
    chmod 0664 /sys/kernel/hmp/down_threshold
    write /sys/kernel/hmp/down_threshold 250
    chmod 0664 /sys/kernel/hmp/down_compensation_high_freq
@@ -112,15 +112,15 @@
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_clock
    write /sys/devices/14ac0000.mali/highspeed_clock 419
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_load
-   write /sys/devices/14ac0000.mali/highspeed_load 90
+   write /sys/devices/14ac0000.mali/highspeed_load 92
    chmod 0664 /sys/devices/14ac0000.mali/highspeed_delay
    write /sys/devices/14ac0000.mali/highspeed_delay 1
 
    # IO Scheduler
    write /sys/block/sda/queue/scheduler row
-   write /sys/block/sda/queue/read_ahead_kb 512
+   write /sys/block/sda/queue/read_ahead_kb 384
    write /sys/block/mmcblk0/queue/scheduler row
-   write /sys/block/mmcblk0/queue/read_ahead_kb 1024
+   write /sys/block/mmcblk0/queue/read_ahead_kb 512
    write /sys/block/sda/queue/iostats 0
    write /sys/block/mmcblk0/queue/iostats 0
    write /sys/block/sda/queue/rq_affinity 1
@@ -141,29 +141,29 @@
    write /sys/module/sync/parameters/fsync_enabled 1
    write /sys/kernel/dyn_fsync/Dyn_fsync_active 0
    write /sys/kernel/sched/gentle_fair_sleepers 0
-   write /sys/kernel/sched/arch_power 0
-   write /sys/kernel/power_suspend/power_suspend_mode 2
+   write /sys/kernel/sched/arch_power 1
+   write /sys/kernel/power_suspend/power_suspend_mode 3
    #write /sys/kernel/power_suspend/power_suspend_mode 1
    #write /sys/kernel/power_suspend/power_suspend_state 1
 
    write /proc/sys/net/ipv4/tcp_congestion_control bic
 
    # SWAP
-   write /proc/sys/vm/swappiness 130
-   write /proc/sys/vm/vfs_cache_pressure 50
+   write /proc/sys/vm/swappiness 100
+   write /proc/sys/vm/vfs_cache_pressure 90
 
    # LMK
-   write /sys/module/lowmemorykiller/parameters/minfree "19432,24040,28648,35256,56064,94152"
+   write /sys/module/lowmemorykiller/parameters/minfree "19432,24040,28648,35256,56064,84152"
 
    # WiFi
    setprop wifi.supplicant_scan_interval 500
 
    ## AutoSMP Hotplug settings | bc - big core , lc - little core
-   echo 30 > /sys/kernel/autosmp/conf/cpufreq_down_bc;
+   echo 20 > /sys/kernel/autosmp/conf/cpufreq_down_bc;
    # range 0 to 100
-   echo 30 > /sys/kernel/autosmp/conf/cpufreq_down_lc;
+   echo 20 > /sys/kernel/autosmp/conf/cpufreq_down_lc;
    # range 0 to 100
-   echo 60 > /sys/kernel/autosmp/conf/cpufreq_up_bc;
+   echo 65 > /sys/kernel/autosmp/conf/cpufreq_up_bc;
    # range 0 to 100
    echo 65 > /sys/kernel/autosmp/conf/cpufreq_up_lc;
    # range 0 to 100
@@ -171,7 +171,7 @@
    # max cycles 0 to 8
    echo 1 > /sys/kernel/autosmp/conf/cycle_up;
    # max cycyles 0 to 8
-   echo 60 > /sys/kernel/autosmp/conf/delay;
+   echo 80 > /sys/kernel/autosmp/conf/delay;
    # range 0 to 500ms
    echo 4 > /sys/kernel/autosmp/conf/max_cpus_bc;
    # max cores ON  - 1 to 4
@@ -179,7 +179,7 @@
    # max cores ON  - 1 to 4
    echo 1 > /sys/kernel/autosmp/conf/min_cpus_bc;
    # min cores OFF - 1 to 4
-   echo 2 > /sys/kernel/autosmp/conf/min_cpus_lc;
+   echo 1 > /sys/kernel/autosmp/conf/min_cpus_lc;
    # min cores OFF - 1 to 4
    echo 0 > /sys/kernel/autosmp/conf/scroff_single_core;
    # 1- enable, 0 - disable

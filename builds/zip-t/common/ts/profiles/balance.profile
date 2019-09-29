@@ -20,7 +20,7 @@
    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "75 962000:85"
    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 50000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode 0
    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
@@ -42,7 +42,7 @@
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 93
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "60000 1248000:75000 1664000:30000"
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "50000 1248000:75000 1664000:30000"
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 30000
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
@@ -52,7 +52,7 @@
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "80 1040000:81 1352000:87 1664000:90"
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 50000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode 0
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
@@ -100,7 +100,7 @@
    chmod 0644 /sys/devices/14ac0000.mali/highspeed_clock
    write /sys/devices/14ac0000.mali/highspeed_clock 419
    chmod 0644 /sys/devices/14ac0000.mali/highspeed_load
-   write /sys/devices/14ac0000.mali/highspeed_load 95
+   write /sys/devices/14ac0000.mali/highspeed_load 93
    chmod 0644 /sys/devices/14ac0000.mali/highspeed_delay
    write /sys/devices/14ac0000.mali/highspeed_delay 1
    write /sys/devices/14ac0000.mali/throttling1 600
@@ -121,7 +121,7 @@
    write /sys/block/sda/queue/scheduler cfq
    write /sys/block/sda/queue/read_ahead_kb 384
    write /sys/block/mmcblk0/queue/scheduler cfq
-   write /sys/block/mmcblk0/queue/read_ahead_kb 640
+   write /sys/block/mmcblk0/queue/read_ahead_kb 512
 
    # Wakelocks
    write /sys/module/wakeup/parameters/enable_sensorhub_wl 0
@@ -141,9 +141,9 @@
    write /proc/sys/net/ipv4/tcp_congestion_control bic
 
    # LMK
-   write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,56064,81152"
-   write /proc/sys/vm/vfs_cache_pressure 80
-   write /proc/sys/vm/swappiness 120
+   write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,56064,76152"
+   write /proc/sys/vm/vfs_cache_pressure 90
+   write /proc/sys/vm/swappiness 100
 
 
 

@@ -124,9 +124,9 @@
 
    # IO Scheduler
    write /sys/block/sda/queue/scheduler row
-   write /sys/block/sda/queue/read_ahead_kb 640
+   write /sys/block/sda/queue/read_ahead_kb 384
    write /sys/block/mmcblk0/queue/scheduler row
-   write /sys/block/mmcblk0/queue/read_ahead_kb 1024
+   write /sys/block/mmcblk0/queue/read_ahead_kb 512
    write /sys/block/sda/queue/iostats 0
    write /sys/block/mmcblk0/queue/iostats 0
    write /sys/block/sda/queue/rq_affinity 1
@@ -147,19 +147,19 @@
    write /sys/module/sync/parameters/fsync_enabled 1
    write /sys/kernel/dyn_fsync/Dyn_fsync_active 0
    write /sys/kernel/sched/gentle_fair_sleepers 0
-   write /sys/kernel/sched/arch_power 0
-   write /sys/kernel/power_suspend/power_suspend_mode 2
+   write /sys/kernel/sched/arch_power 1
+   write /sys/kernel/power_suspend/power_suspend_mode 3
    #write /sys/kernel/power_suspend/power_suspend_mode 1
    #write /sys/kernel/power_suspend/power_suspend_state 1
 
    write /proc/sys/net/ipv4/tcp_congestion_control westwood
 
    # SWAP
-   write /proc/sys/vm/swappiness 130
-   write /proc/sys/vm/vfs_cache_pressure 50
+   write /proc/sys/vm/swappiness 100
+   write /proc/sys/vm/vfs_cache_pressure 90
 
    # LMK
-   write /sys/module/lowmemorykiller/parameters/minfree "18920,23552,32256,42472,65536,102400"
+   write /sys/module/lowmemorykiller/parameters/minfree "18920,23552,32256,42472,65536,82400"
 
    # WiFi
    setprop wifi.supplicant_scan_interval 500
