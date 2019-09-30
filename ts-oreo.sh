@@ -49,7 +49,7 @@ DEFCONFIG=ts-o-kernel_defconfig
 DEFCONFIG_S7EDGE=hero2lte_defconfig
 DEFCONFIG_S7FLAT=herolte_defconfig
 
-export K_VERSION="v2.4"
+export K_VERSION="v2.5"
 export K_BASE="S5CSF1"
 export K_NAME="ThundeRStormS-Kernel"
 export REVISION="RC"
