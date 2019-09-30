@@ -17,6 +17,7 @@
 <*>Sources G930FXXS5CSF1 </*>
 <*>Linux 3.18.140 </*>
 <*>Spectrum Profiles Updated </*>
+<*>Fixed load spectrum profile at boot - thx to Moro </*>
 <*>Improvements and updateds in Linux source </*>
    -crypto, drivers, f2fs, arm64,lib and kernel,
    -block: cfq, deadline, bfq,
