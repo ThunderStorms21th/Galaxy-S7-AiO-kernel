@@ -3,7 +3,7 @@
 
 	NAME	: <b><#selectbg_g>ThundeRStormS-Kernel-Treble</#></b>	
 	VERSION	: <b><#selectbg_g>v1.0</#></b>
-	DATE	: <b><#selectbg_g>06/09/2019</#></b>
+	DATE	: <b><#selectbg_g>01/10/2019</#></b>
 	AUTHOR	: <b><#selectbg_g>ThundeRStormS Team</#></b>
 
 <#53a6f4><b> Only For Galaxy S7/S7Edge </b></#>
@@ -11,7 +11,25 @@
 
 <b>CHANGELOG:</b>
 
----------------------------------------------------------------------------
+-------------------------------------------------------------------------
+<u><b><#selectbg_g>FBT-Kernel-T-v1.1 : 01.10.2019</#></b></u>
+<*>Full Treble Support </*>
+<*>Ramdisk G930FXXS5CSF1 </*>
+<*>Sources G930FXXS5CSF1 </*>
+<*>Linux 3.18.140 </*>
+<*>Spectrum Profiles Updated </*>
+<*>Improvements and updateds in Linux source </*>
+   -crypto, drivers, f2fs, arm64,lib and kernel,
+   -block: cfq, deadline, bfq,
+   -ramdisk: initial settings, abd, mtp,
+   -mm, fs, RCU, HZ, linux
+<*>Support LKM, LKM Deamon is disabled </*>
+<*>F2FS, CIFS, NFS  Support</*>
+<*>ThunderTweaks v1.0.3.4 </*>
+<*>Magisk 19.4 Offcial</*>
+<*>Better Stability and RAM Management </*>
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 <u><b><#selectbg_g>FBT-Kernel-T-v1.0 : 06.09.2019</#></b></u>
 <*>Full Treble Support </*>
 <*>F2FS ,NFS ,CIFS Support</*>

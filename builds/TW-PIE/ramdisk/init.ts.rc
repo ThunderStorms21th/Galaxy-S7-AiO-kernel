@@ -34,7 +34,7 @@ on boot
 #   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "75 1170000:85"
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "75 962000:85"
    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
+   write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 45000
    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/mode 0
    chmod 0644 /sys/devices/system/cpu/cpu0/cpufreq/interactive/boost
@@ -57,7 +57,7 @@ on boot
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 93
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay
 #   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "65000 1248000:79000 1664000:19000"
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "50000 1248000:75000 1664000:30000"
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay "55000 1248000:75000 1664000:30000"
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 30000
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq
@@ -67,7 +67,7 @@ on boot
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "80 1040000:81 1352000:87 1664000:90"
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time
-   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
+   write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 45000
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode
    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/mode 0
    chmod 0644 /sys/devices/system/cpu/cpu4/cpufreq/interactive/boost
@@ -155,7 +155,7 @@ on boot
 
     # Misc settings
     write /sys/kernel/sched/arch_power 0
-    write /proc/sys/net/ipv4/tcp_congestion_control bic
+    write /proc/sys/net/ipv4/tcp_congestion_control westwood
     write /sys/module/sync/parameters/fsync_enabled 1
     write /sys/kernel/dyn_fsync/Dyn_fsync_active 0
     write /sys/kernel/sched/gentle_fair_sleepers 0
@@ -169,7 +169,7 @@ on boot
     # LMK
     write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,56064,76152"
     write /proc/sys/vm/vfs_cache_pressure 90
-    write /proc/sys/vm/swappiness 100
+    write /proc/sys/vm/swappiness 120
 
     # WiFi
     setprop wifi.supplicant_scan_interval 500
