@@ -4,7 +4,7 @@
 ro.actionable_compatible_property.enabled=false
 ro.secure=0
 security.perf_harden=1
-ro.adb.secure=0
+ro.adb.secure=1
 ro.allow.mock.location=0
 ro.adb.debug_secure=0
 ro.debuggable=1
